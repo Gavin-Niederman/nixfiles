@@ -12,10 +12,18 @@
                     description = "Enable rust build tools";
                 };
             };
+            java = {
+                enable = mkOption {
+                    type = types.bool;
+                    default = true;
+                    description = "Enable java build tools";
+                };
+            };
         };
-        config = mkIf cfg.rust.enable {
-            environment.systemPackages = with pkgs; [
-                rustup
-            ];
+        config = {
+            environment.systemPackages = with pkgs;
+                (if cfg.rust.enable then [ rustup ] else [])
+                ++ 
+                (if cfg.java.enable then [ jdk ] else []);
         };
     }
