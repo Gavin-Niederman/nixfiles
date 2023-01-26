@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/build-tools.nix
+      ./modules/sound.nix
     ];
 
   # Bootloader.
@@ -77,7 +78,6 @@
 
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -121,11 +121,13 @@
     unzip
     plasma-theme-switcher
     gimp
+    direnv
   ];
 
   programs.steam.enable = true;
   programs.fish.enable = true;
   programs.starship.enable = true;
+  programs.dconf.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
