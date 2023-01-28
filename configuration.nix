@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./modules/build-tools.nix
       ./modules/sound.nix
+      ./modules/creatives.nix
     ];
 
   # Bootloader.
