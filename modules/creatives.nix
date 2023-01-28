@@ -12,6 +12,13 @@
                     description = "Enable image editing tools";
                 };
             };
+            modeling = {
+                enable = mkOption {
+                    type = types.bool;
+                    default = true;
+                    description = "Enable modeling tools";
+                };
+            };
             video-creation = {
                 enable = mkOption {
                     type = types.bool;
@@ -24,6 +31,8 @@
             environment.systemPackages = with pkgs;
                 (if cfg.image-editing.enable then [ gimp inkscape ] else [ ])
                 ++
-                (if cfg.video-creation.enable then [ obs-studio davinci-resolve ] else [ ]);
+                (if cfg.video-creation.enable then [ obs-studio davinci-resolve ] else [ ])
+                ++
+                (if cfg.modeling.enable then [ blender ] else [ ]);
         };
     }
