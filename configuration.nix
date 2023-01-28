@@ -11,6 +11,7 @@
       ./modules/build-tools.nix
       ./modules/sound.nix
       ./modules/creatives.nix
+      ./modules/desktop-env.nix
     ];
 
   # Bootloader.
@@ -49,9 +50,7 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  gavin.desktop-env.gnome.enable = true;
 
   # Configure dispay settings
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -80,6 +79,7 @@
   # Enable sound with pipewire.
   sound.enable = true;
   security.rtkit.enable = true;
+  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -123,6 +123,8 @@
     plasma-theme-switcher
     gimp
     direnv
+    protontricks
+    winetricks
   ];
 
   programs.steam.enable = true;
