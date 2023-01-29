@@ -20,6 +20,19 @@
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.supportedFilesystems = [ "ntfs" ];
 
+
+  fileSystems."/mnt/hdd" = 
+    { device = "/dev/disk/by-uuid/4E66CF3466CF1C19";
+      fsType = "ntfs";
+    };
+
+  swapDevices = [
+    {
+      device = "/var/swap";
+      size = 16384;
+    }
+   ];
+
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
