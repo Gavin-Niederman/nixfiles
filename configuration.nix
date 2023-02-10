@@ -22,9 +22,9 @@
 
 
   fileSystems."/mnt/hdd" = 
-    { device = "/dev/disk/by-uuid/4E66CF3466CF1C19";
-      fsType = "ntfs";
-    };
+  { device = "/dev/disk/by-uuid/A8D07624D075F940";
+    fsType = "ntfs";
+  };
 
   swapDevices = [
     {
@@ -77,6 +77,7 @@
   Option         "TripleBuffer" "on"
   '';
   hardware.nvidia.powerManagement.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   security.sudo.wheelNeedsPassword = false;
 
