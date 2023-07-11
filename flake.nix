@@ -16,34 +16,15 @@
   };
 
   outputs = { self, nixpkgs, home-manager, hyprland, ... }@attrs:
-  # let 
-  #   nixosModules.default = import ./modules/nixos;
-
-  #   defaultModules = [
-  #     {
-  #       nixpkgs = {
-  #         config = {
-  #           allowUnfree = true;
-  #         };
-  #       };
-  #     }
-  #     nixosModules.default
-  #     hyprland.nixosModules.default
-  #     home-manager.nixosModules.home-manager
-  #     {
-  #       home-manager.sharedModules = [
-  #         hyprland.homeManagerModules.default
-  #       ];
-  #     }
-  #   ];
-
-  #   in 
-    rec {
+    let 
+      nixosModules.default = import ./modules/nixos;
+      homeModules.default = import ./modules/home;
+    in rec {
       nixosConfigurations = {
           patria = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = attrs;
-            modules = [ ./hosts/patria/configuration.nix ]; # ++ defaultModules;
+            modules = [ ./hosts/patria/configuration.nix ] ++ [ nixosModules.default ];
           };
         };
 
@@ -51,8 +32,13 @@
         "gavin@patria" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = attrs;
-          modules = [ ./home-manager/default.nix ]; # ++ defaultModules;
+          modules = [ homeModules.default ];
         };
       };
+
+      home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+        };
   };
 }
