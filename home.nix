@@ -47,10 +47,6 @@
 
       userEmail = "gavinniederman@gmail.com";
       userName = "Gavin-Niederman";
-
-      extraConfig = ''
-      init.
-      ''
     };
 
     gtk = {
