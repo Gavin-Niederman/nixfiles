@@ -23,9 +23,13 @@
         environment.systemPackages = with pkgs; [
             webcord-vencord
             gnome.nautilus
+
             swaylock
             swayidle
+
             swww
+
+            pamixer
         ];
     };
 }
