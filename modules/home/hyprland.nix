@@ -33,52 +33,57 @@
                 env = CLUTTER_BACKEND, wayland
 
                 input {
-                kb_layout = us
+                    kb_layout = us
 
-                follow_mouse = 1
+                    follow_mouse = 1
                 }
 
                 misc {
-                disable_hyprland_logo = true
-                disable_splash_rendering = true
+                    disable_hyprland_logo = true
+                    disable_splash_rendering = true
                 }
 
                 general {
-                gaps_in = 8
-                gaps_out = 15
+                    gaps_in = 8
+                    gaps_out = 15
 
-                border_size = 3
+                    border_size = 3
 
-                col.active_border = rgba(E15197FF) rgba(FE7B72FF) 45deg
-                col.inactive_border = rgba(4D5652FF)
+                    col.active_border = rgba(E15197FF) rgba(FE7B72FF) 45deg
+                    col.inactive_border = rgba(4D5652FF)
 
-                layout = dwindle
+                    layout = dwindle
+                }
+
+                dwindle {
+                    pseudotile = true
+                    preserve_split = true
                 }
 
                 decoration {
-                rounding = 7.5
-                
-                blur = yes
-                blur_size = 3
-                blur_passes = 1
+                    rounding = 7.5
+                    
+                    blur = yes
+                    blur_size = 3
+                    blur_passes = 1
 
-                drop_shadow = yes
-                shadow_range = 10
-                shadow_render_power = 3
+                    drop_shadow = yes
+                    shadow_range = 10
+                    shadow_render_power = 3
                 }
 
                 animations {
-                enabled = yes
+                    enabled = yes
 
-                bezier = speedUpOvershot, 0.35, 0, 0.15, 1.15
-                bezier = overshot, 0, 0.34, 0.75, 1.10
+                    bezier = speedUpOvershot, 0.35, 0, 0.15, 1.15
+                    bezier = overshot, 0, 0.34, 0.75, 1.10
 
-                animation = windows, 1, 3, speedUpOvershot
-                animation = windowsOut, 1, 3, default, popin 80%
-                animation = border, 1, 8, default
-                animation = borderangle, 1, 3, default
-                animation = fade, 1, 7, default
-                animation = workspaces, 1, 7, overshot
+                    animation = windows, 1, 3, speedUpOvershot
+                    animation = windowsOut, 1, 3, default, popin 80%
+                    animation = border, 1, 8, default
+                    animation = borderangle, 1, 3, default
+                    animation = fade, 1, 7, default
+                    animation = workspaces, 1, 7, overshot
                 }
 
                 $mainMod = SUPER
@@ -91,6 +96,8 @@
 
                 bindm = $mainMod, mouse:272, movewindow
                 bindm = $mainMod, mouse:273, resizewindow
+
+                bind = $mainMod, S, togglesplit,
 
                 bind = , XF86AudioMute, exec, pamixer --toggle-mute
                 bind = , XF86AudioRaiseVolume, exec, pamixer -i 5
@@ -117,6 +124,11 @@
                 bind = $mainMod SHIFT, 8, movetoworkspace, 8
                 bind = $mainMod SHIFT, 9, movetoworkspace, 9
                 bind = $mainMod SHIFT, 0, movetoworkspace, 10
+
+                bind = $mainMod, J, movefocus, l
+                bind = $mainMod, L, movefocus, r
+                bind = $mainMod, I, movefocus, u
+                bind = $mainMod, K, movefocus, d
             '';
         };
     };

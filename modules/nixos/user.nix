@@ -10,13 +10,6 @@
         shell = pkgs.nushell;
     };
 
-    users.users.nixosvmtest = {
-      isSystemUser = true ;
-      initialPassword = "test";
-      group = "nixosvmtest";
-    };
-    users.groups.nixosvmtest = {};
-
     security.sudo.wheelNeedsPassword = false;
 
     services.gnome.gnome-keyring.enable = true;
