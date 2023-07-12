@@ -2,20 +2,17 @@
   description = "My Nixos configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }@attrs:
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }:
     let 
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -23,22 +20,29 @@
       nixosConfigurations = {
           patria = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = attrs;
-            modules = [ ./hosts/patria/configuration.nix ] ++ [ nixosModules.default ];
+            modules = [ 
+              ./hosts/patria/configuration.nix 
+              nixosModules.default
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.sharedModules = [
+                  hyprland.homeManagerModules.default
+                ];
+              }
+            ];
           };
         };
 
       homeConfigurations = {
         "gavin@patria" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = attrs;
-          modules = [ homeModules.default ];
+          modules = [
+            homeModules.default
+            hyprland.homeManagerModules.default
+            
+            {wayland.windowManager.hyprland.enable = true;}
+          ];
         };
       };
-
-      home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-        };
   };
 }

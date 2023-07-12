@@ -2,8 +2,10 @@
 
 {
     imports = [
-        ./hyprland.nix
+        ./desktop.nix
         ./user.nix
         ./nix.nix
+        ./development.nix
+        ./shell.nix
     ];
 }

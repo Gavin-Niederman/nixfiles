@@ -24,5 +24,7 @@
             };
             timeout = 5;
         };
+
+        nixpkgs.config.allowUnfree = true;
     };
 }

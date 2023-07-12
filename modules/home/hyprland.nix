@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
-    config = {
-        hyprland.windowManager.hyprland = {
+   config = {
+        wayland.windowManager.hyprland = {
             enable = true;
             recommendedEnvironment = true;
 
