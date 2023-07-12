@@ -18,29 +18,18 @@
       homeModules.default = import ./modules/home;
     in rec {
       nixosConfigurations = {
-          patria = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [ 
-              ./hosts/patria/configuration.nix 
-              nixosModules.default
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.sharedModules = [
-                  hyprland.homeManagerModules.default
-                ];
-              }
-            ];
-          };
-        };
-
-      homeConfigurations = {
-        "gavin@patria" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [
-            homeModules.default
-            hyprland.homeManagerModules.default
-            
-            {wayland.windowManager.hyprland.enable = true;}
+        patria = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ 
+            ./hosts/patria/configuration.nix 
+            nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.sharedModules = [
+                hyprland.homeManagerModules.default
+                homeModules.default
+              ];
+            }
           ];
         };
       };

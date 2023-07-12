@@ -37,7 +37,6 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      sharedModules = [ ../home ];
 
       users = lib.attrsets.genAttrs [ "gavin" ] (_: { });
     };

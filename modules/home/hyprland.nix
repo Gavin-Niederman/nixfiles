@@ -8,7 +8,7 @@
             extraConfig = ''
                 exec-once = ${pkgs.swww}/bin/swww init
                 exec-once = ${pkgs.swww}/bin/swww img -t wipe /home/gavin/bg.png
-                exec-once = ${pkgs.swayidle}/bin/swayidle timeout 300 "${pkgs.swaylock}/bin/swaylock -fF & systemctl suspend"
+                exec-once = ${pkgs.swayidle}/bin/swayidle timeout 600 "${pkgs.swaylock}/bin/swaylock -fF & systemctl suspend"
 
                 monitor = HDMI-A-1, 1920x1080@60, 0x180, 1
                 monitor = DP-1, 1920x1080@60, 4480x1260, 1          
