@@ -24,7 +24,7 @@
             webcord-vencord
             gnome.nautilus
 
-            swaylock
+            swaylock-effects
             swayidle
 
             swww

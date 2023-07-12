@@ -1,6 +1,5 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
-
     config = {
         programs.firefox.enable = true;
         programs.fuzzel.enable = true;
@@ -35,5 +34,4 @@
 
         home.stateVersion = "23.11";
     };
-
 }
