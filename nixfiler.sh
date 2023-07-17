@@ -1,3 +1,6 @@
+rm -rf /etc/nixos
+mkdir /etc/nixos
+
 for folder in $(find .  -mindepth 1 -type d | grep -v "git")
 do
     echo "creating dir ${folder/"."/"/etc/nixos"}"
