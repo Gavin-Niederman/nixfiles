@@ -8,7 +8,7 @@
         system.stateVersion = "23.11";
 
         networking = {
-            hostName = "patria";
+            hostName = "patriam";
             networkmanager.enable = true;
         };
 

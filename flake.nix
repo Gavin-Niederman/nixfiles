@@ -16,21 +16,31 @@
     let 
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
+
+      defaultModules = [
+        nixosModules.default
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.sharedModules = [
+            hyprland.homeManagerModules.default
+            homeModules.default
+          ];
+        }
+      ];
+
+      system = { system, modules, ... }: nixpkgs.lib.nixosSystem {
+        modules = modules ++ defaultModules;
+        system = system;
+      };
     in rec {
       nixosConfigurations = {
-        patria = nixpkgs.lib.nixosSystem {
+        patriam = system {
           system = "x86_64-linux";
-          modules = [ 
-            ./hosts/patria/configuration.nix 
-            nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.sharedModules = [
-                hyprland.homeManagerModules.default
-                homeModules.default
-              ];
-            }
-          ];
+          modules = [ ./hosts/patriam/configuration.nix ];
+        };
+        puerum = system {
+          system = "x86_64-linux";
+          modules = [ ./hosts/puerum/configuration.nix ];
         };
       };
   };
