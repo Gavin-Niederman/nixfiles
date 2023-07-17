@@ -1,0 +1,22 @@
+$purple-0: #A11B5C;
+$purple-1: #E15197;
+$pink-0: #E63462;
+$pink-1: #FF668F;
+$orange-0: #FE5F55;
+$orange-1: #FE7B72;
+$bg-0: #303633;
+$bg-1: #3A413D;
+$bg-2: #434C47;
+$fg-0: #D4D9D6;
+$fg-1: #738279;
+
+* {
+    all: unset;
+
+    color: $fg-0;
+}
+
+.bg {
+    border-radius: 0px 0px 5px 5px;
+    background-color: $bg-1;
+}

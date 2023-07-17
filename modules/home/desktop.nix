@@ -7,6 +7,8 @@
 
         services.easyeffects.enable = true;
 
+        fonts.fontconfig.enable = true;
+
         programs.eww = {
             enable = true;
             package = pkgs.eww-wayland;

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
     config = {
@@ -8,6 +8,8 @@
             enable = true;
             xwayland.enable = true;
         };
+
+        programs.steam.enable = true;
 
         nix.settings = {
             substituters = [ "https://hyprland.cachix.org" ];
@@ -30,6 +32,15 @@
             swww
 
             pamixer
+            wine-wayland
+        ];
+
+        fonts.fonts = with pkgs; [
+            noto-fonts
+            noto-fonts-emoji
+            liberation_ttf
+            fira-code
+            fira-code-symbols
         ];
     };
 }
