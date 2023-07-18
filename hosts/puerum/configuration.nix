@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }:
+
 {
     imports = [
         ./hardware-configuration.nix
@@ -25,5 +26,9 @@
         };
 
         nixpkgs.config.allowUnfree = true;
+
+        monitorConfig = ''
+            monitor = eDP-1, 1920x1080@60, 0x0, 1
+        '';
     };
 }

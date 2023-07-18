@@ -1,5 +1,12 @@
 { config, pkgs, lib, ... }:
+
 {
+  options = with lib; {
+      monitorConfig = mkOption {
+          type = types.lines;
+          default = null;
+      };
+  };
   config = {
     users.users.gavin = {
         isNormalUser = true;
@@ -30,6 +37,12 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
+
+      sharedModules = [
+        {
+          wayland.windowManager.hyprland.extraConfig = "${config.monitorConfig}";
+        }
+      ];
 
       users = lib.attrsets.genAttrs [ "gavin" ] (_: { });
     };
