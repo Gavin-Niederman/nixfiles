@@ -1,1 +1,2 @@
-; (include "")
+(include "widgets/workspaces.yuck")
+(include "widgets/clock.yuck")

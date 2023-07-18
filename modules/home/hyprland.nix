@@ -10,6 +10,7 @@
                 exec-once = ${pkgs.swww}/bin/swww init
                 exec-once = ${pkgs.swww}/bin/swww img /home/gavin/bg.png
                 exec-once = ${pkgs.swayidle}/bin/swayidle timeout 600 "${pkgs.swaylock-effects}/bin/swaylock -fF --screenshot --effect-blur 4x4 & systemctl suspend"
+                exec-once = ${pkgs.nushell}/bin/nu /home/gavin/.config/eww/scripts/launch.nu
             
                 env = XCURSOR_SIZE, 32
                 

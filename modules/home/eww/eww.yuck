@@ -1,50 +1,63 @@
-; (include "widgets/widgets.yuck")
+(include "widgets/widgets.yuck")
 
-(defwidget bar []
+(defwindow bar
+    :geometry (geometry
+            :width "100%"
+            :height "3%"
+            :anchor "top center"
+        )
+    :exclusive true
+    :focusable false
+    :class "bar"
     (box
         :class "bg"
-        "todo"
+        (box
+            :class "center"
+            :halign "center"
+            :space-evenly false
+            (clock)
+        )
     )
 )
 
-(defwindow left
-    :geometry (geometry
-        :width "100%"
-        :height "3%"
-        :anchor "top center"
-    )
-    :monitor 1
-    :stacking "fg"
-    :exclusive true
-    :focusable false
-    :class "bar"
-    (bar)
-)
+; (defwindow left
+;     :geometry (geometry
+;         :width "100%"
+;         :height "3%"
+;         :anchor "top center"
+;     )
+;     :monitor 1
+;     :stacking "fg"
+;     :exclusive true
+;     :focusable false
+;     :class "bar"
+;     (bar)
+; )
 
-(defwindow mid
-    :geometry (geometry
-        :width "100%"
-        :height "3%"
-        :anchor "top center"
-    )
-    :monitor 2
-    :stacking "fg"
-    :exclusive true
-    :focusable false
-    :class "bar"
-    (bar)
-)
+; (defwindow mid
+;     :geometry (geometry
+;         :width "100%"
+;         :height "3%"
+;         :anchor "top center"
+;     )
+;     :monitor 2
+;     :stacking "fg"
+;     :exclusive true
+;     :focusable false
+;     :class "bar"
+;     (bar)
+; )
 
-(defwindow right
-    :geometry (geometry
-        :width "100%"
-        :height "3%"
-        :anchor "top center"
-    )
-    :monitor 3
-    :stacking "fg"
-    :exclusive true
-    :focusable false
-    :class "bar"
-    (bar)
-)
+; (defwindow right
+;     :geometry (geometry
+;         :width "100%"
+;         :height "3%"
+;         :anchor "top center"
+;     )
+;     :monitor 3
+;     :stacking "fg"
+;     :exclusive true
+;     :focusable false
+;     :class "bar"
+;     (bar)
+; )

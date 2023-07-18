@@ -26,7 +26,6 @@
 
                 # Copilot
                 github.copilot
-                github.copilot-chat
 
                 # Misc
                 mkhl.direnv
