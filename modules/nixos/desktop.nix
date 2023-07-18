@@ -1,6 +1,12 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
+    options = with lib; {
+        monitorConfig = mkOption {
+            type = types.lines;
+            default = null;
+        };
+    };
     config = {
         programs.regreet.enable = true;
 
