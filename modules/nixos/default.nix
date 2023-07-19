@@ -7,5 +7,6 @@
         ./nix.nix
         ./development.nix
         ./shell.nix
+        ./monitors.nix
     ];
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   config = {
@@ -31,12 +31,6 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-
-      sharedModules = [
-        {
-          wayland.windowManager.hyprland.extraConfig = "${config.monitorConfig}";
-        }
-      ];
 
       users = lib.attrsets.genAttrs [ "gavin" ] (_: { });
     };

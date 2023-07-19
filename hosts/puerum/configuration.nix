@@ -27,8 +27,14 @@
 
         nixpkgs.config.allowUnfree = true;
 
-        monitorConfig = ''
-            monitor = eDP-1, 1920x1080@60, 0x0, 1
-        '';
+        monitors = [
+            {
+                output = "eDP-1";
+                dimensions = { x = 1920; y = 1080; };
+                refreshRate = 60;
+                offset = { x = 0; y = 0; };
+                scale = 1;
+            }
+        ];
     };
 }
