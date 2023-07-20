@@ -35,6 +35,7 @@
                 refreshRate = 60;
                 offset = { x = 0; y = 180; };
                 scale = 1;
+                workspace = 1;
             }
             {
                 output = "DP-1";
@@ -49,6 +50,7 @@
                 refreshRate = 60;
                 offset = { x = 1920; y = 0; };
                 scale = 1;
+                workspace = 2;
             }
             {
                 output = "DP-3";
@@ -56,6 +58,7 @@
                 refreshRate = 60;
                 offset = { x = 4480; y = 180; };
                 scale = 1;
+                workspace = 3;
             }
         ];
     };
