@@ -47,6 +47,23 @@
     };
 
     config = with lib; let
+        mkEwwWindow = i: m:
+            ''
+            (defwindow ${m.output}
+                :monitor ${toString i}
+                :geometry (geometry
+                    :width "100%"
+                    :height "3%"
+                    :anchor "top center"
+                )
+                :exclusive true
+                :focusable false
+                :class "bar"
+                (bar)
+            )
+            '';
+        windows = lib.imap0 mkEwwWindow config.monitors;
+
         mkHyprlandWorkspace = m:
             if (m.workspace != null) then "workspace=${m.output},${toString m.workspace}" else "";
         mkHyprlandMonitor = m:
@@ -56,6 +73,7 @@
         home-manager.sharedModules = [
             {
                 wayland.windowManager.hyprland.extraConfig = "${concatStringsSep "\n" monitors}";
+                home.file.".config/eww/eww.yuck".text = "${concatStringsSep "\n" windows}";
             }
         ];
     };

@@ -10,10 +10,25 @@
 
         fonts.fontconfig.enable = true;
 
-        programs.eww = {
-            enable = true;
-            package = pkgs.eww-wayland;
-            configDir = ./eww;
+        home.file = {
+            ".config/eww/scripts".source = ./eww/scripts;
+            ".config/eww/widgets".source = ./eww/widgets;
+            ".config/eww/eww.scss".source = ./eww/eww.scss;
+            ".config/eww/eww.yuck".text = ''
+                (include "widgets/widgets.yuck")
+
+                (defwidget bar []
+                    (box
+                        :class "bg"
+                        (box
+                            :class "center"
+                            :halign "center"
+                            :space-evenly false
+                            (clock)
+                        )
+                    )
+                )
+            '';
         };
 
         gtk = {
@@ -34,6 +49,8 @@
             enable-features=UseOzonePlatform
             ozone-platform=wayland
         '';
+
+        home.packages = [ pkgs.eww-wayland ];
 
         home.stateVersion = "23.11";
     };
