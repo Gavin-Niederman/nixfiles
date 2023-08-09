@@ -31,6 +31,23 @@
             '';
         };
 
+        home.file = {
+            ".config/ags/style.css".source = ./ags/style.css;
+            ".config/ags/config.js".text = ''
+            var config = {
+                baseIconSize: 18,
+                closeWindowDelay: {
+                    'window-name': 500, // milliseconds
+                },
+                exitOnError: false,
+                notificationPopupTimeout: 5000, // milliseconds
+                stackTraceOnError: false,
+                style: '/home/gavin/.config/ags/style.css',
+                windows: windows
+            }
+            '';
+        };
+
         gtk = {
             enable = true;
 
@@ -45,7 +62,7 @@
             };
         };
 
-        home.file.".config/electron-flags.conf".text =''
+        home.file.".config/electron-flags.conf".text = ''
             enable-features=UseOzonePlatform
             ozone-platform=wayland
         '';

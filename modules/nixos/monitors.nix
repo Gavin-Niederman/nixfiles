@@ -65,7 +65,22 @@
                 (bar)
             )
             '';
-        windows = map mkEwwWindow config.monitors;
+        ewwWindows = map mkEwwWindow config.monitors;
+
+        mkAgsWindow = m:
+            ''
+            ags.Window({
+                name: '${m.output}',
+                className: 'bar',
+                monitor: ${toString m.id},
+                anchor: ["top"],
+                exclusive: true,
+                child: {
+                    //todo
+                }
+            }),
+            '';
+        agsWindows = map mkAgsWindow config.monitors;
 
         mkHyprlandWorkspace = m:
             if (m.workspace != null) then "workspace=${m.output},${toString m.workspace}" else "";
@@ -76,7 +91,12 @@
         home-manager.sharedModules = [
             {
                 wayland.windowManager.hyprland.extraConfig = "${concatStringsSep "\n" monitors}";
-                home.file.".config/eww/eww.yuck".text = "${concatStringsSep "\n" windows}";
+                home.file.".config/eww/eww.yuck".text = "${concatStringsSep "\n" ewwWindows}";
+                home.file.".config/ags/config.js".text = ''
+                    const monitors = [
+                        ${concatStringsSep "\n" agsWindows}
+                    ];
+                '';
             }
         ];
     };
