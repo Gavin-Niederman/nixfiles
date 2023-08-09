@@ -22,6 +22,23 @@
             pulse.enable = true;
         };
 
+        services.keyd = {
+            enable = true;
+            keyboards.default.settings = {
+                main = {
+                    shift = "oneshot(shift)";
+                    meta = "oneshot(meta)";
+                    control = "oneshot(control)";
+
+                    leftalt = "oneshot(alt)";
+                    rightalt = "oneshot(altgr)";
+
+                    capslock = "overload(esc)";
+                    insert = "S-insert";
+                };
+            };
+        };
+
         environment.systemPackages = with pkgs; [
             webcord-vencord
             gnome.nautilus
@@ -35,6 +52,7 @@
             wine-wayland
 
             ags
+            watershot
         ];
 
         fonts.packages = with pkgs; [

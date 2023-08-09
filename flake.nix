@@ -2,7 +2,7 @@
   description = "My Nixos configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -12,9 +12,10 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     ags.url = "github:Aylur/ags";
+    watershot.url = "github:Kirottu/watershot";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ags, ... }:
+  outputs = { self, nixpkgs, home-manager, hyprland, ags, watershot, ... }:
     let 
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -37,6 +38,7 @@
               overlays = [
                 (final: prev: {
                   ags = ags.packages.${system}.default;
+                  watershot = watershot.packages.${system}.default;
                 })
               ];
             };

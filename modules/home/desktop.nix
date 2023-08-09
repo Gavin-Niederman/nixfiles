@@ -44,7 +44,17 @@
                 stackTraceOnError: false,
                 style: '/home/gavin/.config/ags/style.css',
                 windows: windows
-            }
+            };
+
+            const bar = {
+                type: 'box',
+                children: [clock],
+            };
+
+            const clock = {
+                type: 'label',
+                connections: [[1000, label => label.label = exec('date +%H:%M:%S')]],
+            };
             '';
         };
 

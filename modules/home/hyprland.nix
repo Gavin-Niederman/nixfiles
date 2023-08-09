@@ -55,10 +55,10 @@
                     rounding = 5
                     multisample_edges = yes
 
-                    blur {
-                        size = 3
-                        passes = 1
-                    }
+                    # blur {
+                    #     size = 3
+                    #     passes = 1
+                    # }
 
                     drop_shadow = no
                     shadow_range = 10
@@ -86,6 +86,8 @@
 
                 bind = $mainMod, Return, exec, alacritty
                 bind = $mainMod, D, exec, fuzzel
+
+                bind = , 107, exec, watershot -s | wl-copy -t image/png
 
                 bindm = $mainMod, mouse:272, movewindow
                 bindm = $mainMod, mouse:273, resizewindow

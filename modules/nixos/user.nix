@@ -7,7 +7,7 @@
         createHome = true;
         initialPassword = "gavin";
         description = "Gavin";
-        extraGroups = [ "networkmanager" "wheel" ];
+        extraGroups = [ "networkmanager" "wheel" "keyd" ];
         shell = pkgs.nushell;
     };
 

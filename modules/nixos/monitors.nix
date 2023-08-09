@@ -76,7 +76,7 @@
                 anchor: ["top"],
                 exclusive: true,
                 child: {
-                    //todo
+                    bar
                 }
             }),
             '';
