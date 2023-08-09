@@ -6,7 +6,7 @@
         programs.nushell = {
             enable = true;
             configFile.text = ''
-                let-env config = {
+                $env.config = {
                     show_banner: false,
                 }
             '';

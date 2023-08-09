@@ -10,9 +10,11 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland";
+
+    ags.url = "github:Aylur/ags";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ... }:
+  outputs = { self, nixpkgs, home-manager, hyprland, ags, ... }:
     let 
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -29,7 +31,17 @@
       ];
 
       system = { system, modules, ... }: nixpkgs.lib.nixosSystem {
-        modules = modules ++ defaultModules;
+        modules = modules ++ defaultModules ++ [
+          {
+            nixpkgs = {
+              overlays = [
+                (final: prev: {
+                  ags = ags.packages.${system}.default;
+                })
+              ];
+            };
+          }
+        ];
         system = system;
       };
     in rec {

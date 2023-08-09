@@ -38,10 +38,10 @@
                     gaps_in = 8
                     gaps_out = 15
 
-                    border_size = 3
+                    border_size = 0
 
-                    col.active_border = rgba(E15197FF) rgba(FE7B72FF) 45deg
-                    col.inactive_border = rgba(4D5652FF)
+                    # col.active_border = rgba(E15197FF) rgba(FE7B72FF) 45deg
+                    # col.inactive_border = rgba(4D5652FF)
 
                     layout = dwindle
                 }
@@ -52,13 +52,15 @@
                 }
 
                 decoration {
-                    rounding = 7.5
-                    
-                    blur = yes
-                    blur_size = 3
-                    blur_passes = 1
+                    rounding = 5
+                    multisample_edges = yes
 
-                    drop_shadow = yes
+                    blur {
+                        size = 3
+                        passes = 1
+                    }
+
+                    drop_shadow = no
                     shadow_range = 10
                     shadow_render_power = 3
                 }
@@ -90,7 +92,7 @@
 
                 bind = $mainMod, S, togglesplit,
                 bind = $mainMod, V, togglefloating,
-                bind = $mainMod, F, togglefullscreen,
+                bind = $mainMod, F, fullscreen,
 
                 bind = , XF86AudioMute, exec, pamixer --toggle-mute
                 bind = , XF86AudioRaiseVolume, exec, pamixer -i 5

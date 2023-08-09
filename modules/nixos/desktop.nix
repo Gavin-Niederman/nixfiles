@@ -33,9 +33,11 @@
 
             pamixer
             wine-wayland
+
+            ags
         ];
 
-        fonts.fonts = with pkgs; [
+        fonts.packages = with pkgs; [
             noto-fonts
             noto-fonts-emoji
             liberation_ttf
