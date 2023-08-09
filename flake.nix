@@ -16,7 +16,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, hyprland, ags, watershot, ... }:
-    let 
+    let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
 
@@ -24,16 +24,14 @@
         nixosModules.default
         home-manager.nixosModules.home-manager
         {
-          home-manager.sharedModules = [
-            hyprland.homeManagerModules.default
-            homeModules.default
-          ];
+          home-manager.sharedModules =
+            [ hyprland.homeManagerModules.default homeModules.default ];
         }
       ];
 
-      system = { system, modules, ... }: nixpkgs.lib.nixosSystem {
-        modules = modules ++ defaultModules ++ [
-          {
+      system = { system, modules, ... }:
+        nixpkgs.lib.nixosSystem {
+          modules = modules ++ defaultModules ++ [{
             nixpkgs = {
               overlays = [
                 (final: prev: {
@@ -42,10 +40,9 @@
                 })
               ];
             };
-          }
-        ];
-        system = system;
-      };
+          }];
+          system = system;
+        };
     in rec {
       nixosConfigurations = {
         patriam = system {
@@ -57,5 +54,5 @@
           modules = [ ./hosts/puerum/configuration.nix ];
         };
       };
-  };
+    };
 }

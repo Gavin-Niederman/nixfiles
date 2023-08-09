@@ -1,36 +1,35 @@
-{ config, pkgs, ... }:
-{
-    config = {
-        programs.vscode = {
-            enable = true;
+{ config, pkgs, ... }: {
+  config = {
+    programs.vscode = {
+      enable = true;
 
-            extensions = with pkgs.vscode-extensions; [
-                # Looks
-                jdinhlife.gruvbox
-                pkief.material-icon-theme
+      extensions = with pkgs.vscode-extensions; [
+        # Looks
+        jdinhlife.gruvbox
+        pkief.material-icon-theme
 
-                # Languages
-                rust-lang.rust-analyzer
-                tamasfe.even-better-toml
-                serayuzgur.crates
+        # Languages
+        rust-lang.rust-analyzer
+        tamasfe.even-better-toml
+        serayuzgur.crates
 
-                bbenoist.nix
-                brettm12345.nixfmt-vscode
+        bbenoist.nix
+        brettm12345.nixfmt-vscode
 
-                thenuprojectcontributors.vscode-nushell-lang
+        thenuprojectcontributors.vscode-nushell-lang
 
-                yzhang.markdown-all-in-one
-                marp-team.marp-vscode
+        yzhang.markdown-all-in-one
+        marp-team.marp-vscode
 
-                haskell.haskell
+        haskell.haskell
 
-                # Copilot
-                github.copilot
+        # Copilot
+        github.copilot
 
-                # Misc
-                mkhl.direnv
-                ms-vscode.live-server
-            ];
-        };
+        # Misc
+        mkhl.direnv
+        ms-vscode.live-server
+      ];
     };
+  };
 }
