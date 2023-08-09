@@ -8,7 +8,6 @@
 
             extraConfig = ''
                 exec-once = ${pkgs.swww}/bin/swww init
-                exec-once = ${pkgs.swww}/bin/swww img /home/gavin/bg.png
                 exec-once = ${pkgs.swayidle}/bin/swayidle timeout 600 "${pkgs.swaylock-effects}/bin/swaylock -fF --screenshot --effect-blur 4x4 & systemctl suspend"
                 exec-once = ${pkgs.nushell}/bin/nu /home/gavin/.config/eww/scripts/launch.nu
             
@@ -90,6 +89,8 @@
                 bindm = $mainMod, mouse:273, resizewindow
 
                 bind = $mainMod, S, togglesplit,
+                bind = $mainMod, V, togglefloating,
+                bind = $mainMod, F, togglefullscreen,
 
                 bind = , XF86AudioMute, exec, pamixer --toggle-mute
                 bind = , XF86AudioRaiseVolume, exec, pamixer -i 5

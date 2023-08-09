@@ -8,6 +8,12 @@
     config = {
         system.stateVersion = "23.11";
 
+        zramSwap = {
+            enable = true;
+            algorithm = "lz4";
+            memoryPercent = 200;
+        };
+
         networking = {
             hostName = "patriam";
             networkmanager.enable = true;
@@ -35,14 +41,16 @@
                 refreshRate = 60;
                 offset = { x = 4480; y = 1260; };
                 scale = 1;
+                id = 0;
             }
             {
                 output = "DP-2";
                 dimensions = { x = 2560; y = 1440; };
-                refreshRate = 60;
+                refreshRate = 144;
                 offset = { x = 1920; y = 0; };
                 scale = 1;
                 workspace = 2;
+                id = 1;
             }
             {
                 output = "HDMI-A-1";
@@ -51,6 +59,7 @@
                 offset = { x = 0; y = 180; };
                 scale = 1;
                 workspace = 1;
+                id = 2;
             }
             {
                 output = "DP-3";
@@ -59,6 +68,7 @@
                 offset = { x = 4480; y = 180; };
                 scale = 1;
                 workspace = 3;
+                id = 3;
             }
         ];
     };

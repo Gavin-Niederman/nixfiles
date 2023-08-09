@@ -33,6 +33,9 @@
                 scale = mkOption {
                     type = types.int;
                 };
+                id = mkOption {
+                    type = types.int;
+                };
                 workspace = mkOption {
                     type = types.nullOr types.int;
                     default = null;
@@ -47,10 +50,10 @@
     };
 
     config = with lib; let
-        mkEwwWindow = i: m:
+        mkEwwWindow = m:
             ''
             (defwindow ${m.output}
-                :monitor ${toString i}
+                :monitor ${toString m.id}
                 :geometry (geometry
                     :width "100%"
                     :height "3%"
@@ -62,7 +65,7 @@
                 (bar)
             )
             '';
-        windows = lib.imap0 mkEwwWindow config.monitors;
+        windows = map mkEwwWindow config.monitors;
 
         mkHyprlandWorkspace = m:
             if (m.workspace != null) then "workspace=${m.output},${toString m.workspace}" else "";
