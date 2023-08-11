@@ -28,13 +28,6 @@
       enable = true;
       keyboards.default.settings = {
         main = {
-          shift = "oneshot(shift)";
-          meta = "oneshot(meta)";
-          control = "oneshot(control)";
-
-          leftalt = "oneshot(alt)";
-          rightalt = "oneshot(altgr)";
-
           capslock = "overload(esc)";
           insert = "S-insert";
         };
@@ -54,7 +47,6 @@
       wine-wayland
 
       ags
-      watershot
     ];
 
     fonts.packages = with pkgs; [

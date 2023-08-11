@@ -12,10 +12,9 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     ags.url = "github:Aylur/ags";
-    watershot.url = "github:Kirottu/watershot";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ags, watershot, ... }:
+  outputs = { self, nixpkgs, home-manager, hyprland, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -36,7 +35,6 @@
               overlays = [
                 (final: prev: {
                   ags = ags.packages.${system}.default;
-                  watershot = watershot.packages.${system}.default;
                 })
               ];
             };

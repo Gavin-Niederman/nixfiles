@@ -67,8 +67,19 @@
       };
 
       iconTheme = {
-        name = "kora";
-        package = pkgs.kora-icon-theme;
+        name = "Fluent-teal";
+        package = (pkgs.fluent-icon-theme.override {
+          roundedIcons = true;
+          colorVariants = [ "teal" ];
+        });
+      };
+
+      theme = {
+        name = "Fluent-teal-Dark";
+        package = (pkgs.fluent-gtk-theme.override {
+          themeVariants = [ "teal" ];
+          tweaks = [ "blur" ];
+        });
       };
     };
 
