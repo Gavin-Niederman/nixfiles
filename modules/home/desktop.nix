@@ -58,6 +58,8 @@
       '';
     };
 
+    home.file.".config/ags".source = ./ags;
+
     gtk = {
       enable = true;
 
@@ -78,7 +80,7 @@
         name = "Fluent-teal-Dark";
         package = (pkgs.fluent-gtk-theme.override {
           themeVariants = [ "teal" ];
-          tweaks = [ "blur" ];
+          tweaks = [ "noborder" ];
         });
       };
     };

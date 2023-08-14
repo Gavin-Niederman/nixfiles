@@ -42,11 +42,19 @@
       swayidle
 
       swww
+      lz4
 
       pamixer
       wine-wayland
 
       ags
+      # watershot
+
+      (pkgs.wrapOBS {
+        plugins = with pkgs.obs-studio-plugins; [
+          wlrobs
+        ];
+      })
     ];
 
     fonts.packages = with pkgs; [

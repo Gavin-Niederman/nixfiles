@@ -87,7 +87,7 @@
         bind = $mainMod, Return, exec, alacritty
         bind = $mainMod, D, exec, fuzzel
 
-        bind = , 107, exec, grim -g $(slurp) - | wl-copy -t image/png
+        bind = , 107, exec, watershot -c
 
         bindm = $mainMod, mouse:272, movewindow
         bindm = $mainMod, mouse:273, resizewindow

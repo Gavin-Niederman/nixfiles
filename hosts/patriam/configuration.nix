@@ -36,20 +36,6 @@
       {
         output = "DP-1";
         dimensions = {
-          x = 1920;
-          y = 1080;
-        };
-        refreshRate = 60;
-        offset = {
-          x = 4480;
-          y = 1260;
-        };
-        scale = 1;
-        id = 0;
-      }
-      {
-        output = "DP-2";
-        dimensions = {
           x = 2560;
           y = 1440;
         };

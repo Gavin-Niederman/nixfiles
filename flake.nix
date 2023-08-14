@@ -12,6 +12,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     ags.url = "github:Aylur/ags";
+    # watershot.url = "github:Kirottu/watershot";
   };
 
   outputs = { self, nixpkgs, home-manager, hyprland, ags, ... }:
@@ -35,6 +36,7 @@
               overlays = [
                 (final: prev: {
                   ags = ags.packages.${system}.default;
+                  # watershot = watershot.packages.${system}.default;
                 })
               ];
             };
