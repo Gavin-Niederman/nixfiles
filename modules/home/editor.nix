@@ -30,6 +30,7 @@
 
         # Misc
         mkhl.direnv
+        ms-vsliveshare.vsliveshare
         ms-vscode.live-server
         wakatime.vscode-wakatime
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [

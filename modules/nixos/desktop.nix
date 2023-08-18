@@ -2,7 +2,17 @@
 
 {
   config = {
-    programs.regreet.enable = true;
+    services.greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command =
+            "${pkgs.greetd.tuigreet}/bin/tuigreet --time -r --remember-session --cmd Hyprland --asterisks --window-padding 2 --container-padding 3 -w 100 -g Welcome back!";
+          user = "greeter";
+        };
+        default_session = initial_session;
+      };
+    };
 
     programs.hyprland = {
       enable = true;
@@ -50,11 +60,7 @@
       ags
       # watershot
 
-      (pkgs.wrapOBS {
-        plugins = with pkgs.obs-studio-plugins; [
-          wlrobs
-        ];
-      })
+      (pkgs.wrapOBS { plugins = with pkgs.obs-studio-plugins; [ wlrobs ]; })
     ];
 
     fonts.packages = with pkgs; [
