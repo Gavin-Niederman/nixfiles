@@ -1,5 +1,27 @@
 * {
     all: unset;
 
-    color: #fff;
+    color: #D4D9D6;
+}
+
+window {
+	background-color: #303633
+}
+
+.bar {
+	margin: 10px;
+}
+
+.clock {
+	font-weight: bold;
+	font-size: 1.25rem;
+}
+
+.workspace {
+	padding: 0px 7.5px 0px 7.5px;
+	border-radius: 15%;
+}
+
+.full {
+	border-bottom: 2px solid #E63462;
 }
