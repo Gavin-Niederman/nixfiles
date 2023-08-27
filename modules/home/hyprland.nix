@@ -80,12 +80,14 @@
             animation = workspaces, 1, 7, overshot
         }
 
+        windowrulev2 = center, class:(code),floating:1
+
         $mainMod = SUPER
 
         bind = $mainMod SHIFT, Q, killactive 
         bind = $mainMod SHIFT, E, exit
 
-        bind = $mainMod, Return, exec, alacritty
+        bind = $mainMod, Return, exec, wezterm
         bind = $mainMod, D, exec, fuzzel
 
         bind = , 107, exec, watershot -c

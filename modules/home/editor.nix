@@ -25,6 +25,9 @@
         haskell.haskell
         justusadam.language-haskell
 
+        
+        ms-vscode.cpptools
+
         # Copilot
         github.copilot
 

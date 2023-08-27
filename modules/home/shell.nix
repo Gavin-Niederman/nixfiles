@@ -12,5 +12,6 @@
       '';
     };
     programs.fish.enable = true;
+    programs.wezterm.enable = true;
   };
 }
