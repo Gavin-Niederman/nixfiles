@@ -10,7 +10,7 @@ const Workspace = ({ id, full }) => Button({
     }),
     connections: [
         [
-            'clicked', () => execAsync(`hyprctl dispatch workspace ${id}`)
+            'clicked', () => execAsync(`hyprctl dispatch split-workspace ${id}`)
         ]
     ],
 })
