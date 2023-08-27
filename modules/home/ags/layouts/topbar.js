@@ -11,7 +11,7 @@ export const TopBar = (monitor) => Bar({
         className: ['topbar', 'bar'],
         startWidget: Box({
             children: [
-                Workspaces({})
+                Workspaces({monitor})
             ],
         }),
         centerWidget: Box({

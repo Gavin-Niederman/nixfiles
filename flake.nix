@@ -12,10 +12,11 @@
     hyprland.url = "github:hyprwm/Hyprland";
 
     ags.url = "github:Aylur/ags";
+    split-monitor-workspaces.url = "github:Gavin-Niederman/split-monitor-workspaces";
     # watershot.url = "github:Kirottu/watershot";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, ags, ... }:
+  outputs = { self, nixpkgs, home-manager, hyprland, split-monitor-workspaces, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -36,6 +37,7 @@
               overlays = [
                 (final: prev: {
                   ags = ags.packages.${system}.default;
+                  hyprlandPlugins.split-monitor-workspaces = split-monitor-workspaces.packages.${system}.default;
                   # watershot = watershot.packages.${system}.default;
                 })
               ];

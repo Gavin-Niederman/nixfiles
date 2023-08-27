@@ -45,7 +45,6 @@
           y = 0;
         };
         scale = 1;
-        workspace = 2;
         id = 0;
       }
       {
@@ -60,7 +59,6 @@
           y = 1260;
         };
         scale = 1;
-        workspace = 4;
         id = 1;
       }
       {
@@ -75,7 +73,6 @@
           y = 180;
         };
         scale = 1;
-        workspace = 1;
         id = 2;
       }
       {
@@ -90,7 +87,6 @@
           y = 180;
         };
         scale = 1;
-        workspace = 3;
         id = 3;
       }
     ];
