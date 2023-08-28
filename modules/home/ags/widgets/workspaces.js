@@ -24,7 +24,6 @@ export const Workspaces = ({monitor}) => Box({
                 const workspaces = Hyprland.workspaces;
                 let children = Array.from({ length: 10 }, (_, i) => {
                     try {
-                        print(i + (monitor * 10) + 1);
                         const workspace = workspaces.get(i + (monitor * 10) + 1);
                         return Workspace({ id: i + 1, full: workspace.windows > 0 });
                     } catch (err) {
