@@ -57,8 +57,9 @@
       pamixer
       wine-wayland
 
+      # Sassc is for ags theming
+      sassc
       ags
-      # watershot
 
       (pkgs.wrapOBS { plugins = with pkgs.obs-studio-plugins; [ wlrobs ]; })
     ];

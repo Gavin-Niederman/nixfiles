@@ -31,33 +31,6 @@
       '';
     };
 
-    home.file = {
-      ".config/ags/style.css".source = ./ags/style.css;
-      ".config/ags/config.js".text = ''
-        var config = {
-            baseIconSize: 18,
-            closeWindowDelay: {
-                'window-name': 500, // milliseconds
-            },
-            exitOnError: false,
-            notificationPopupTimeout: 5000, // milliseconds
-            stackTraceOnError: false,
-            style: '/home/gavin/.config/ags/style.css',
-            windows: windows
-        };
-
-        const bar = {
-            type: 'box',
-            children: [clock],
-        };
-
-        const clock = {
-            type: 'label',
-            connections: [[1000, label => label.label = exec('date +%H:%M:%S')]],
-        };
-      '';
-    };
-
     home.file.".config/ags".source = ./ags;
 
     gtk = {

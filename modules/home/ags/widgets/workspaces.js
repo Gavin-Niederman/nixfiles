@@ -3,7 +3,7 @@ const { Box, Button, Label } = ags.Widget;
 const { execAsync } = ags.Utils;
 
 const Workspace = ({ id, full }) => Button({
-    className: full ? ['workspace', 'full']: ['workspace'],
+    className: full ? ['workspace', 'full'] : ['workspace'],
     child: Label({
         className: ['workspace-label'],
         label: `${id}`,
@@ -15,7 +15,7 @@ const Workspace = ({ id, full }) => Button({
     ],
 })
 
-export const Workspaces = ({monitor}) => Box({
+export const Workspaces = ({ monitor }) => Box({
     className: ['workspaces'],
     connections: [
         [
