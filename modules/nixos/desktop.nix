@@ -38,8 +38,7 @@
       enable = true;
       keyboards.default.settings = {
         main = {
-          capslock = "overload(esc)";
-          insert = "S-insert";
+          capslock = "overload(control, esc)";
         };
       };
     };

@@ -55,7 +55,8 @@
           toString m.dimensions.y
         }@${toString m.refreshRate},${toString m.offset.x}x${
           toString m.offset.y
-        },${toString m.scale}";
+        },${toString m.scale}
+        bind=$mainMod CTRL,${toString m.id}, split-monitor, ${toString m.id}";
       monitors = filter (s: s != "") (map mkHyprlandMonitor config.monitors);
     in {
       home-manager.sharedModules = [{
