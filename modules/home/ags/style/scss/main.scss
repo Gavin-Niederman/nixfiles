@@ -26,3 +26,24 @@ window {
 		border-bottom: 3px solid #E63462;
 	}
 }
+
+trough{
+	border: 2px #fff solid;
+	background-color: #000;
+	min-height: 10px;
+	min-width:  100px;
+
+	highlight, progress{
+		background-image: linear-gradient(#fff, #000);
+		min-height: 10px;
+		min-width:  100px;
+	}
+}
+
+slider {
+	background-color: #000;
+	border-radius: 100%;
+
+	min-height: 10px;
+	min-width:  10px;
+}

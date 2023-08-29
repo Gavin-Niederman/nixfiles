@@ -1,12 +1,16 @@
-const { execAsync } = ags.Utils;
+const { exec } = ags.Utils;
 
-export async function compileScss() {
+export function compileScss() {
     const path = ags.App.configDir;
+    // We cant write to the config dir because of home manager
+    const output = '/home/gavin/.ags/style.css';
     try {
         print(`Compiling SCSS to CSS in ${path}`)
-        await execAsync(['sassc', `${path}/style/scss/main.scss`, `${path}/style.css`])
+        exec('mkdir -p /home/gavin/.ags');
+        // exec(`rm ${output}`);
+        exec(`sassc ${path}/style/scss/main.scss ${output}`)
     } catch (error) {
         print(error);
     }
-    return `${path}/style.css`;
+    return output;
 }

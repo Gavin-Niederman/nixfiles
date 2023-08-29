@@ -8,7 +8,7 @@ export const Audio = ({}) => Slider({
     min: 0,
     max: 1,
     value: 0,
-    onChange: ({ value }) => ags.Service.Audio.speaker.volume = value,
+    onChange: ({ value }) =>  { ags.Service.Audio.speaker.volume = value },
     connections: [
         [
             ags.Service.Audio,

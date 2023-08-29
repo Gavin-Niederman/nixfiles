@@ -22,6 +22,7 @@ export const TopBar = (monitor) => Bar({
             ],
         }),
         endWidget: Box({
+            halign: 'end',
             children: ags.Service.Battery.availible ? [
                 Battery({}),
                 Audio({}),
