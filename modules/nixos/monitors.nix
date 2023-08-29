@@ -23,6 +23,7 @@
           offset = mkOption { type = types.submodule vec2Module; };
           scale = mkOption { type = types.int; };
           id = mkOption { type = types.int; };
+          keybind = mkOption { type = types.str; };
         };
       };
     in {
@@ -50,13 +51,14 @@
       '';
       ewwWindows = map mkEwwWindow config.monitors;
 
-      mkHyprlandMonitor = m:
-        "monitor=${m.output},${toString m.dimensions.x}x${
+      mkHyprlandMonitor = m: ''
+        monitor=${m.output},${toString m.dimensions.x}x${
           toString m.dimensions.y
         }@${toString m.refreshRate},${toString m.offset.x}x${
           toString m.offset.y
         },${toString m.scale}
-        bind=$mainMod CTRL,${toString m.id}, split-monitor, ${toString m.id}";
+        bind=SUPER CTRL,${m.keybind},split-monitor,${toString m.id}
+        '';
       monitors = filter (s: s != "") (map mkHyprlandMonitor config.monitors);
     in {
       home-manager.sharedModules = [{
