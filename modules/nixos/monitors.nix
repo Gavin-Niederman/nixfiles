@@ -23,7 +23,7 @@
           offset = mkOption { type = types.submodule vec2Module; };
           scale = mkOption { type = types.int; };
           id = mkOption { type = types.int; };
-          keybind = mkOption { type = types.str; };
+          keybind = mkOption { type = types.nullOr (types.str); default = null; };
         };
       };
     in {
@@ -57,7 +57,7 @@
         }@${toString m.refreshRate},${toString m.offset.x}x${
           toString m.offset.y
         },${toString m.scale}
-        bind=SUPER CTRL,${m.keybind},split-monitor,${toString m.id}
+        ${optionalString (m.keybind != null) "bind=SUPER CTRL,${m.keybind},split-monitor,${toString m.id}"}
         '';
       monitors = filter (s: s != "") (map mkHyprlandMonitor config.monitors);
     in {

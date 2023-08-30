@@ -23,12 +23,33 @@ export const TopBar = (monitor) => Bar({
         }),
         endWidget: Box({
             halign: 'end',
-            children: ags.Service.Battery.availible ? [
+            children: ags.Service.Battery.available ? [
                 Battery({}),
                 Audio({}),
             ]: [
                 Audio({}),
             ],
+
+            properties: [
+                ['containsBattery', false]
+            ],
+
+            // This is required because the available property of the Battery service is sometimes false for a while even on systems with a battery
+            connections: [
+                [
+                    ags.Service.Battery,
+                    box => {
+                        if (!box.containsBattery_ && ags.Service.Battery.available) {
+                            box.children = [
+                                Battery({}),
+                                Audio({}),
+                            ];
+                            box.containsBattery_ = true;
+                        }
+                    },
+                    'changed'
+                ]
+            ]
         })
     }),
 });

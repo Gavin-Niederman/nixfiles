@@ -3,14 +3,12 @@ const { ProgressBar } = ags.Widget;
 export const Battery = ({}) => ProgressBar({
     className: ['battery'],
     vertical: false,
-    min: 0,
-    max: 100,
-    progress: ags.Service.Battery.percent,
+    value: Math.max(0, ags.Service.Battery.percent / 100),
     connections: [
         [
             ags.Service.Battery,
             progess => {
-                progess.progress = ags.Service.Battery.percent;
+                progess.value = Math.max(0, ags.Service.Battery.percent / 100);
             },
             'changed'
         ]
