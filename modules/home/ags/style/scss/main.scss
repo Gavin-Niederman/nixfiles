@@ -25,6 +25,10 @@ window {
 	&.full {
 		border-bottom: 3px solid #E63462;
 	}
+
+	&.current {
+		border-top: 3px solid #E63462;
+	}
 }
 
 trough {

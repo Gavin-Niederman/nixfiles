@@ -7,7 +7,7 @@
     system.stateVersion = "23.11";
 
     networking = {
-      hostName = "peurum";
+      hostName = "puerum";
       networkmanager.enable = true;
     };
 

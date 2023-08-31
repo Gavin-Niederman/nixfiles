@@ -61,7 +61,7 @@
         };
         scale = 1;
         id = 1;
-        keybind = "3";
+        keybind = "0";
       }
       {
         output = "HDMI-A-1";
@@ -91,7 +91,7 @@
         };
         scale = 1;
         id = 3;
-        keybind = "0";
+        keybind = "3";
       }
     ];
   };

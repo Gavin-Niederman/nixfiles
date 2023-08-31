@@ -3,6 +3,8 @@ import { Clock } from '../widgets/clock.js';
 import { Battery } from '../widgets/battery.js';
 import { Audio } from '../widgets/audio.js';
 import { Workspaces } from '../widgets/workspaces.js';
+import { Separator } from '../widgets/separator.js';
+
 const { Box, CenterBox } = ags.Widget;
 
 export const TopBar = (monitor) => Bar({
@@ -25,6 +27,7 @@ export const TopBar = (monitor) => Bar({
             halign: 'end',
             children: ags.Service.Battery.available ? [
                 Battery({}),
+                Separator({}),
                 Audio({}),
             ]: [
                 Audio({}),
@@ -42,6 +45,7 @@ export const TopBar = (monitor) => Bar({
                         if (!box.containsBattery_ && ags.Service.Battery.available) {
                             box.children = [
                                 Battery({}),
+                                Separator({}),
                                 Audio({}),
                             ];
                             box.containsBattery_ = true;
