@@ -26,6 +26,9 @@
         env = GDK_BACKEND, wayland,x11
         env = SDL_VIDEODRIVER, wayland
         env = CLUTTER_BACKEND, wayland
+        env = GTK_IM_MODULE, fcitx
+        env = QT_IM_MODULE, fcitx
+        env = XMODIFIERS, @im=fcitx
 
         input {
             kb_layout = us
