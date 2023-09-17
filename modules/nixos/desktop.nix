@@ -62,6 +62,8 @@
       sassc
       ags
 
+      grimblast
+
       (pkgs.wrapOBS { plugins = with pkgs.obs-studio-plugins; [ wlrobs ]; })
     ];
 

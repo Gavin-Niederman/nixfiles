@@ -25,6 +25,9 @@ export const TopBar = (monitor) => Bar({
         }),
         endWidget: Box({
             halign: 'end',
+            vexpand: false,
+            hexpand: true,
+            vertical: false,
             children: ags.Service.Battery.available ? [
                 Battery({}),
                 Separator({}),

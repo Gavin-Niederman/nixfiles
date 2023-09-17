@@ -30,6 +30,11 @@
       timeout = 5;
     };
 
+    hardware.opentabletdriver = {
+      enable = true;
+      daemon.enable = true;
+    };
+
     nixpkgs.config.allowUnfree = true;
 
     monitors = [

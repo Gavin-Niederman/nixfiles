@@ -1,6 +1,6 @@
 const { Label } = ags.Widget;
 
 export const Separator = ({}) => Label({
-    className: ['seperator'],
+    className: ['separator'],
     label: "·"
 });

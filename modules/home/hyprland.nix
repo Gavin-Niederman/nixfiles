@@ -96,7 +96,7 @@
         bind = $mainMod, Return, exec, wezterm
         bind = $mainMod, D, exec, fuzzel
 
-        bind = , 107, exec, watershot -c
+        bind = , 107, exec, grimblast copy area
 
         bindm = $mainMod, mouse:272, movewindow
         bindm = $mainMod, mouse:273, resizewindow
