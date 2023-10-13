@@ -6,12 +6,6 @@
   config = {
     system.stateVersion = "23.11";
 
-    zramSwap = {
-      enable = true;
-      algorithm = "lz4";
-      memoryPercent = 200;
-    };
-
     networking = {
       hostName = "patriam";
       networkmanager.enable = true;
