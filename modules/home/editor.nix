@@ -26,6 +26,10 @@
           haskell.haskell
           justusadam.language-haskell
 
+          astro-build.astro-vscode
+          bradlc.vscode-tailwindcss
+          dbaeumer.vscode-eslint
+
           ms-vscode.cpptools
 
           vadimcn.vscode-lldb
@@ -82,6 +86,8 @@
         "rust-analyzer.check.allTargets" = false;
         "workbench.settings.openDefaultKeybindings" = true;
         "window.zoomLevel" = 2;
+        "editor.cursorSmoothCaretAnimation" = "on";
+        "editor.cursorBlinking" = "smooth";
       };
     };
   };
