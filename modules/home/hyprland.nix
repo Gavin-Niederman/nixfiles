@@ -15,7 +15,7 @@
         # exec-once = ${pkgs.nushell}/bin/nu /home/gavin/.config/eww/scripts/launch.nu
         exec-once = ${pkgs.ags}/bin/ags
 
-        env = XCURSOR_SIZE, 32
+        env = XCURSOR_SIZE, 42
 
         env = MOZ_ENABLE_WAYLAND, 1
         env = NIXOS_OZONE_WL, 1

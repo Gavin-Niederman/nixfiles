@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-{
+with lib.hm.gvariant; {
   config = {
     programs.firefox.enable = true;
     programs.fuzzel.enable = true;
@@ -12,10 +12,7 @@
 
     i18n.inputMethod = {
       enabled = "fcitx5";
-      fcitx5.addons = with pkgs; [
-          fcitx5-mozc
-          fcitx5-gtk
-      ];
+      fcitx5.addons = with pkgs; [ fcitx5-mozc fcitx5-gtk ];
     };
 
     home.file = {
@@ -63,6 +60,13 @@
           themeVariants = [ "teal" ];
           tweaks = [ "noborder" ];
         });
+      };
+    };
+
+    dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        cursor-size = 42;
       };
     };
 
