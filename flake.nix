@@ -13,7 +13,10 @@
     hypr-contrib.url = "github:hyprwm/contrib";
 
     ags.url = "github:Aylur/ags";
-    split-monitor-workspaces.url = "github:Gavin-Niederman/split-monitor-workspaces";
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
     # watershot.url = "github:Kirottu/watershot";
   };
 

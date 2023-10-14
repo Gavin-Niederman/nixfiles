@@ -3,13 +3,10 @@
 {
   config = {
     programs.starship.enable = true;
+    programs.carapace.enable = true;
     programs.nushell = {
       enable = true;
-      configFile.text = ''
-        $env.config = {
-            show_banner: false,
-        }
-      '';
+      configFile.source = ./nu/config.nu;
     };
     programs.fish.enable = true;
     programs.wezterm.enable = true;

@@ -60,7 +60,6 @@
 
         decoration {
             rounding = 7
-            multisample_edges = yes
 
             # blur {
             #     size = 3

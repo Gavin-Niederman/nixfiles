@@ -71,9 +71,13 @@ with lib.hm.gvariant; {
     };
 
     home.file.".config/electron-flags.conf".text = ''
-      enable-features=UseOzonePlatform
-      ozone-platform=wayland
+      --enable-features=UseOzonePlatform
+      --ozone-platform=wayland
     '';
+
+    nixpkgs.config = {
+      allowUnfree = true;
+    };
 
     home.packages = [ pkgs.eww-wayland ];
 
