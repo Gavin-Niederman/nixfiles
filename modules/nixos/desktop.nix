@@ -62,7 +62,9 @@
       lz4
 
       pamixer
-      wine-wayland
+      pavucontrol
+
+      wineWowPackages.waylandFull
 
       # Sassc is for ags theming
       sassc
