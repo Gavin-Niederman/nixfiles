@@ -45,9 +45,15 @@
       };
     };
 
+    services.gnome.core-utilities.enable = true;
+    environment.gnome.excludePackages = with pkgs.gnome; [ 
+      epiphany
+      gnome-contacts
+      pkgs.gnome-connections
+    ];
+
     environment.systemPackages = with pkgs; [
       webcord-vencord
-      gnome.nautilus
 
       swaylock-effects
       swayidle
