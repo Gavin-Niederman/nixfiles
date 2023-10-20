@@ -98,6 +98,9 @@ format = '[ $symbol ($version) ]($style)'
 style = "bg:#9A348E"
 disabled = false
 
+[os.symbols]
+NixOS = "❄"
+
 [rust]
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'

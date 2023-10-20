@@ -79,7 +79,8 @@
           "rust" = true;
         };
         "editor.fontLigatures" = true;
-        "editor.fontFamily" = "Fira Code";
+        "editor.fontFamily" = "FiraCode Nerd Font Mono";
+        "terminal.fontFamily" = "FiraCode Nerd Font Mono";
         "git.confirmSync" = false;
         "rust-analyzer.inlayHints.chainingHints.enable" = false;
         "rust-analyzer.inlayHints.typeHints.enable" = false;
