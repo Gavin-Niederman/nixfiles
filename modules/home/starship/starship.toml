@@ -33,28 +33,34 @@ success_symbol = "[->](bold #86BBD8)"
 error_symbol = "[->](bold #FCA17D)"
 
 [c]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [directory]
+read_only = " 󰌾"
 style = "bg:#DA627D"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
 [docker_context]
+symbol = " "
 style = "bg:#06969A"
 format = '[ $symbol $context ]($style) $path'
 
 [elixir]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [elm]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [git_branch]
+symbol = " "
 style = "bg:#FCA17D"
 format = '[ $symbol $branch ]($style)'
 
@@ -63,6 +69,7 @@ style = "bg:#FCA17D"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
@@ -71,14 +78,17 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [haskell]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [java]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [julia]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
@@ -87,10 +97,12 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [nix_shell]
+symbol = " "
 style = "bg:#33658A"
 format = '[ $symbol $state ]($style)'
 
 [nodejs]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
@@ -99,13 +111,15 @@ style = "bg:#9A348E"
 disabled = false
 
 [os.symbols]
-NixOS = "❄"
+NixOS = " "
 
 [rust]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [scala]
+symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
