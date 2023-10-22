@@ -53,6 +53,8 @@
     ];
 
     environment.systemPackages = with pkgs; [
+      wl-clipboard
+
       webcord-vencord
 
       swaylock-effects

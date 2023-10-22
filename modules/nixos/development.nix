@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  config = { environment.systemPackages = with pkgs; [ rustup gcc ]; };
+  config = {
+    environment.systemPackages = with pkgs; [ rustup gcc ];
+    virtualisation.docker.enable = true;
+  };
 }

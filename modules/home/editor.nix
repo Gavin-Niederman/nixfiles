@@ -1,5 +1,51 @@
 { config, pkgs, ... }: {
   config = {
+    programs.neovim = {
+      enable = true;
+      coc.enable = true;
+      plugins = with pkgs.vimPlugins; [
+        gruvbox-nvim
+
+        # Languages
+        vim-nix
+        rust-vim
+        coc-rust-analyzer
+
+        # NerdTree
+        {
+          plugin = nerdtree;
+          config = "autocmd VimEnter * NERDTree";
+        }
+        vim-devicons
+        vim-nerdtree-syntax-highlight
+      ];
+
+      extraLuaConfig = ''
+        vim.cmd([[botright terminal]])
+        vim.cmd([[inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : CheckBackspace() ? "\<Tab>" : coc#refresh()]])
+
+        vim.o.background = "dark"
+        vim.cmd([[colorscheme gruvbox]])
+
+        if vim.g.neovide then
+          vim.g.neovide_theme = 'gruvbox'
+
+          vim.g.neovide_padding_top = 10
+          vim.g.neovide_padding_bottom = 10
+          vim.g.neovide_padding_right = 10
+          vim.g.neovide_padding_left = 10
+        end
+      '';
+    };
+
+    home.packages = [ pkgs.neovide ];
+    home.file.".config/neovide/config.toml".text = ''
+      neovim_bin = "${pkgs.neovim}/bin/nvim";
+      vsync = true;
+      idle = false;
+      frame = "none";
+    '';
+
     programs.vscode = {
       enable = true;
 
@@ -42,6 +88,8 @@
           ms-vsliveshare.vsliveshare
           ms-vscode.live-server
           wakatime.vscode-wakatime
+
+          github.vscode-github-actions
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "gruvbox-themes";

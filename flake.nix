@@ -1,4 +1,4 @@
-{
+{ 
   description = "My Nixos configuration";
 
   inputs = {
