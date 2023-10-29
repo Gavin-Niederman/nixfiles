@@ -7,7 +7,7 @@
       settings = rec {
         initial_session = {
           command =
-            "${pkgs.greetd.tuigreet}/bin/tuigreet --time -r --remember-session --cmd Hyprland --asterisks --window-padding 2 --container-padding 3 -w 100 -g Welcome back!";
+            "${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu --time -r --remember-session --cmd Hyprland --asterisks --window-padding 2 --container-padding 3 -w 100 -g Welcome back!";
           user = "greeter";
         };
         default_session = initial_session;
@@ -39,18 +39,22 @@
     services.keyd = {
       enable = true;
       keyboards.default.settings = {
-        main = {
-          capslock = "overload(control, esc)";
-        };
+        main = { capslock = "overload(control, esc)"; };
       };
     };
 
     services.gnome.core-utilities.enable = true;
-    environment.gnome.excludePackages = with pkgs.gnome; [ 
+    environment.gnome.excludePackages = with pkgs.gnome; [
       epiphany
       gnome-contacts
       pkgs.gnome-connections
     ];
+
+    programs.gnome-disks.enable = true;
+    services.gnome.sushi.enable = true;
+    services.sysprof.enable = true;
+    xdg.mime.enable = true;
+    xdg.icons.enable = true;
 
     environment.systemPackages = with pkgs; [
       wl-clipboard
