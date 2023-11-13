@@ -137,6 +137,7 @@
         "window.zoomLevel" = 2;
         "editor.cursorSmoothCaretAnimation" = "on";
         "editor.cursorBlinking" = "smooth";
+        "rust-analyzer.rustc.source" = "${"$"}{userHome}/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc/Cargo.toml";
       };
     };
   };

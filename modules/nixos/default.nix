@@ -8,5 +8,6 @@
     ./development.nix
     ./shell.nix
     ./monitors.nix
+    ./boot.nix
   ];
 }
