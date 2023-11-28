@@ -109,6 +109,12 @@
             version = "0.4.1";
             sha256 = "sha256-hRLaNcQg42EEIiFqMbtmybx7piP9PK2CWJLtvUP95lU=";
           }
+          {
+            name = "vscode-wasm";
+            publisher = "dtsvet";
+            version = "1.4.1";
+            sha256 = "sha256-zs7E3pxf4P8kb3J+5zLoAO2dvTeepuCuBJi5s354k0I=";
+          }
         ];
 
       userSettings = {
@@ -137,7 +143,6 @@
         "window.zoomLevel" = 2;
         "editor.cursorSmoothCaretAnimation" = "on";
         "editor.cursorBlinking" = "smooth";
-        "rust-analyzer.rustc.source" = "${"$"}{userHome}/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/rustc-src/rust/compiler/rustc/Cargo.toml";
       };
     };
   };
