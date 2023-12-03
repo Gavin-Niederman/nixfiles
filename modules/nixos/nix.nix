@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   config = {
@@ -17,6 +17,11 @@
           "cargo-pros.cachix.org-1:O1mgMamsjaUUT8lQqEcr2b7c/6T2IBXtNcV39F50mSk="
         ];
       };
+    };
+
+    nixpkgs.config = {
+      allowUnfree = true;
+      allowUnsupportedSystem = true;
     };
   };
 }

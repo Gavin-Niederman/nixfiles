@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ hyprland, pkgs, ... }:
 
 {
   config = {

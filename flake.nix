@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +22,7 @@
     # watershot.url = "github:Kirottu/watershot";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, hypr-contrib, split-monitor-workspaces, ags, ... }:
+  outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, hypr-contrib, split-monitor-workspaces, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -43,6 +45,8 @@
                   ags = ags.packages.${system}.default;
                   hyprlandPlugins.split-monitor-workspaces = split-monitor-workspaces.packages.${system}.default;
                   grimblast = hypr-contrib.packages.${system}.grimblast;
+
+                  OVMF-arm = nixpkgs-stable.legacyPackages.aarch64-linux.OVMF;
                   # watershot = watershot.packages.${system}.default;
                 })
               ];

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   config = {
     programs.neovim = {
       enable = true;
@@ -38,7 +38,7 @@
       '';
     };
 
-    home.packages = [ pkgs.neovide ];
+    home.packages = [ pkgs.neovide pkgs.nil ];
     home.file.".config/neovide/config.toml".text = ''
       neovim_bin = "${pkgs.neovim}/bin/nvim";
       vsync = true;
@@ -79,6 +79,8 @@
           ms-vscode.cpptools
 
           vadimcn.vscode-lldb
+
+          jnoortheen.nix-ide
 
           # Copilot
           github.copilot
@@ -143,6 +145,8 @@
         "window.zoomLevel" = 2;
         "editor.cursorSmoothCaretAnimation" = "on";
         "editor.cursorBlinking" = "smooth";
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nil";
       };
     };
   };

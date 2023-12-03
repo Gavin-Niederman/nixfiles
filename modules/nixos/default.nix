@@ -9,5 +9,6 @@
     ./shell.nix
     ./monitors.nix
     ./boot.nix
+    ./virtualization.nix
   ];
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   config = {
@@ -7,7 +7,15 @@
       createHome = true;
       initialPassword = "gavin";
       description = "Gavin";
-      extraGroups = [ "networkmanager" "wheel" "keyd" "docker" "video" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "keyd"
+        "docker"
+        "video"
+        "libvirtd"
+        "qemu-libvirtd"
+      ];
       shell = pkgs.nushell;
     };
 

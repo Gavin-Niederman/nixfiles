@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 with lib.hm.gvariant; {
   config = {
@@ -77,6 +77,7 @@ with lib.hm.gvariant; {
 
     nixpkgs.config = {
       allowUnfree = true;
+      allowUnsupportedSystem = true;
     };
 
     home.packages = [ pkgs.eww-wayland ];
