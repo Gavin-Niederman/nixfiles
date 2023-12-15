@@ -95,12 +95,12 @@
               bezier = speedUpOvershot, 0.35, 0, 0.15, 1.15
               bezier = overshot, 0, 0.34, 0.75, 1.10
 
-              animation = windows, 1, 3, speedUpOvershot
-              animation = windowsOut, 1, 3, default, popin 80%
+              animation = windows, 1, 1.5, speedUpOvershot
+              animation = windowsOut, 1, 1.5, default, popin 80%
               animation = border, 1, 8, default
               animation = borderangle, 1, 3, default
-              animation = fade, 1, 7, default
-              animation = workspaces, 1, 7, overshot
+              animation = fade, 1, 3, default
+              animation = workspaces, 1, 3, overshot
           }
 
           windowrulev2 = center, class:(code),floating:1
@@ -113,7 +113,7 @@
           bind = $mainMod, Return, exec, wezterm
           bind = $mainMod, D, exec, fuzzel
 
-          bind = , 107, exec, grimblast copy area
+          bind = , 107, exec, ${pkgs.grimblast}/bin/grimblast copy area
           bind = CTRL_SHIFT, E, exec, ${pkgs.gnome.gnome-characters}/bin/gnome-characters
 
           bindm = $mainMod, mouse:272, movewindow

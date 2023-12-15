@@ -7,15 +7,7 @@
       createHome = true;
       initialPassword = "gavin";
       description = "Gavin";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "keyd"
-        "docker"
-        "video"
-        "libvirtd"
-        "qemu-libvirtd"
-      ];
+      extraGroups = [ "networkmanager" "wheel" "keyd" "docker" "video" "libvirtd" ];
       shell = pkgs.nushell;
     };
 

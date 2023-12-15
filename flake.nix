@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     home-manager = {
@@ -46,7 +45,7 @@
                   hyprlandPlugins.split-monitor-workspaces = split-monitor-workspaces.packages.${system}.default;
                   grimblast = hypr-contrib.packages.${system}.grimblast;
 
-                  OVMF-arm = nixpkgs-stable.legacyPackages.aarch64-linux.OVMF;
+                  stable-ovmf-aarch = nixpkgs-stable.legacyPackages.aarch64-linux.OVMFFull;
                   # watershot = watershot.packages.${system}.default;
                 })
               ];
