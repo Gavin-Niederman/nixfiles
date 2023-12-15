@@ -3,11 +3,30 @@
     programs.nixneovim = {
       enable = true;
       colorschemes.gruvbox-nvim.enable = true;
+      extraConfigLua = ''
+        vim.o.number = true;
+        vim.o.relativenumber = true;
+        vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true });
+      '';
       mappings = {
         normal = {
-          "<leader>ef" = "vim.cmd.NvimTreeFocus";
-          "<leader>ee" = "vim.cmd.NvimTreeToggle";
-          "<leader>er" = "vim.cmd.NvimTreeRefresh";
+          "<leader>ff" = "vim.cmd.NvimTreeFocus";
+          "<leader>fe" = "vim.cmd.NvimTreeToggle";
+          "<leader>fr" = "vim.cmd.NvimTreeRefresh";
+          # "<leader>jj" = "vim.cmd('Telescope find_files')";
+        };
+      };
+      augroups = {
+        dashboard = {
+          autocmds = [{
+            event = "VimEnter";
+            pattern = "*";
+            luaCallback = ''
+              require('dashboard').setup {
+                
+              }
+            '';
+          }];
         };
       };
       plugins = {
@@ -16,6 +35,7 @@
           servers = {
             hls.enable = true;
             rust-analyzer.enable = true;
+            nil.enable = true;
           };
         };
         treesitter = {
@@ -26,6 +46,8 @@
           enable = true;
           extensions = { manix.enable = true; };
         };
+        dashboard.enable = true;
+        todo-comments.enable = true;
         nvim-tree = {
           enable = true;
           git.enable = true;
@@ -49,6 +71,10 @@
               action = ''
                 function(fallback)
                     local luasnip = require("luasnip")
+                    local check_backspace = function()
+                      local col = vim.fn.col "." - 1
+                      return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+                    end
                     if cmp.visible() then
                       cmp.select_next_item()
                     elseif luasnip.expandable() then
@@ -84,7 +110,7 @@
       extraPlugins = [ pkgs.vimExtraPlugins.lsp-zero-nvim ];
     };
 
-    home.packages = [ pkgs.neovide pkgs.nil ];
+    home.packages = with pkgs; [ neovide nil rust-analyzer ];
     home.file.".config/neovide/config.toml".text = ''
       neovim_bin = "${pkgs.neovim}/bin/nvim";
       vsync = true;
