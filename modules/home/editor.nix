@@ -1,41 +1,87 @@
 { pkgs, ... }: {
   config = {
-    programs.neovim = {
+    programs.nixneovim = {
       enable = true;
-      coc.enable = true;
-      plugins = with pkgs.vimPlugins; [
-        gruvbox-nvim
-
-        # Languages
-        vim-nix
-        rust-vim
-        coc-rust-analyzer
-
-        # NerdTree
-        {
-          plugin = nerdtree;
-          config = "autocmd VimEnter * NERDTree";
-        }
-        vim-devicons
-        vim-nerdtree-syntax-highlight
-      ];
-
-      extraLuaConfig = ''
-        vim.cmd([[botright terminal]])
-        vim.cmd([[inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#next(1) : CheckBackspace() ? "\<Tab>" : coc#refresh()]])
-
-        vim.o.background = "dark"
-        vim.cmd([[colorscheme gruvbox]])
-
-        if vim.g.neovide then
-          vim.g.neovide_theme = 'gruvbox'
-
-          vim.g.neovide_padding_top = 10
-          vim.g.neovide_padding_bottom = 10
-          vim.g.neovide_padding_right = 10
-          vim.g.neovide_padding_left = 10
-        end
-      '';
+      colorschemes.gruvbox-nvim.enable = true;
+      mappings = {
+        normal = {
+          "<leader>ef" = "vim.cmd.NvimTreeFocus";
+          "<leader>ee" = "vim.cmd.NvimTreeToggle";
+          "<leader>er" = "vim.cmd.NvimTreeRefresh";
+        };
+      };
+      plugins = {
+        lspconfig = {
+          enable = true;
+          servers = {
+            hls.enable = true;
+            rust-analyzer.enable = true;
+          };
+        };
+        treesitter = {
+          enable = true;
+          indent = true;
+        };
+        telescope = {
+          enable = true;
+          extensions = { manix.enable = true; };
+        };
+        nvim-tree = {
+          enable = true;
+          git.enable = true;
+        };
+        copilot.enable = true;
+        luasnip.enable = true;
+        nvim-cmp = {
+          enable = true;
+          snippet.luasnip.enable = true;
+          sources = {
+            copilot.enable = true;
+            crates.enable = true;
+            fish.enable = true;
+            nvim_lsp.enable = true;
+            treesitter.enable = true;
+          };
+          mapping = {
+            "<CR>" = "cmp.mapping.confirm({ select = true })";
+            "<Tab>" = {
+              modes = [ "i" "s" ];
+              action = ''
+                function(fallback)
+                    local luasnip = require("luasnip")
+                    if cmp.visible() then
+                      cmp.select_next_item()
+                    elseif luasnip.expandable() then
+                      luasnip.expand()
+                    elseif luasnip.expand_or_jumpable() then
+                      luasnip.expand_or_jump()
+                    elseif check_backspace() then
+                      fallback()
+                    else
+                      fallback()
+                    end
+                  end
+              '';
+            };
+            "<S-Tab>" = {
+              modes = [ "i" "s" ];
+              action = ''
+                function(fallback)
+                  local luasnip = require("luasnip")
+                  if cmp.visible() then
+                    cmp.select_prev_item()
+                  elseif luasnip.jumpable(-1) then
+                    luasnip.jump(-1)
+                  else
+                    fallback()
+                  end
+                end
+              '';
+            };
+          };
+        };
+      };
+      extraPlugins = [ pkgs.vimExtraPlugins.lsp-zero-nvim ];
     };
 
     home.packages = [ pkgs.neovide pkgs.nil ];
@@ -147,6 +193,7 @@
         "editor.cursorBlinking" = "smooth";
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nil";
+        "[nix]" = { "editor.defaultFormatter" = "brettm12345.nixfmt-vscode"; };
       };
     };
   };

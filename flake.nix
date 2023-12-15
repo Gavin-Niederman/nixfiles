@@ -1,4 +1,4 @@
-{ 
+{
   description = "My Nixos configuration";
 
   inputs = {
@@ -18,10 +18,13 @@
       url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
+
+    nixneovim.url = "github:nixneovim/nixneovim";
     # watershot.url = "github:Kirottu/watershot";
   };
 
-  outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, hypr-contrib, split-monitor-workspaces, ags, ... }:
+  outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, hypr-contrib
+    , split-monitor-workspaces, ags, nixneovim, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -30,8 +33,11 @@
         nixosModules.default
         home-manager.nixosModules.home-manager
         {
-          home-manager.sharedModules =
-            [ hyprland.homeManagerModules.default homeModules.default ];
+          home-manager.sharedModules = [
+            hyprland.homeManagerModules.default
+            homeModules.default
+            nixneovim.nixosModules.default
+          ];
         }
       ];
 
@@ -40,12 +46,15 @@
           modules = modules ++ defaultModules ++ [{
             nixpkgs = {
               overlays = [
+                nixneovim.overlays.default
                 (final: prev: {
                   ags = ags.packages.${system}.default;
-                  hyprlandPlugins.split-monitor-workspaces = split-monitor-workspaces.packages.${system}.default;
+                  hyprlandPlugins.split-monitor-workspaces =
+                    split-monitor-workspaces.packages.${system}.default;
                   grimblast = hypr-contrib.packages.${system}.grimblast;
 
-                  stable-ovmf-aarch = nixpkgs-stable.legacyPackages.aarch64-linux.OVMFFull;
+                  stable-ovmf-aarch =
+                    nixpkgs-stable.legacyPackages.aarch64-linux.OVMFFull;
                   # watershot = watershot.packages.${system}.default;
                 })
               ];
@@ -53,7 +62,7 @@
           }];
           system = system;
         };
-    in rec {
+    in {
       nixosConfigurations = {
         patriam = system {
           system = "x86_64-linux";
