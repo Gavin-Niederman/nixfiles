@@ -110,7 +110,7 @@
       extraPlugins = [ pkgs.vimExtraPlugins.lsp-zero-nvim ];
     };
 
-    home.packages = with pkgs; [ neovide nil rust-analyzer ];
+    home.packages = with pkgs; [ neovide nil rust-analyzer haskell-language-server zls ];
     home.file.".config/neovide/config.toml".text = ''
       neovim_bin = "${pkgs.neovim}/bin/nvim";
       vsync = true;
@@ -188,6 +188,24 @@
             publisher = "dtsvet";
             version = "1.4.1";
             sha256 = "sha256-zs7E3pxf4P8kb3J+5zLoAO2dvTeepuCuBJi5s354k0I=";
+          }
+          {
+            name = "wgsl";
+            publisher = "PolyMeilex";
+            version = "0.1.16";
+            sha256 = "sha256-0EcV80N8u3eQB74TNedjM5xbQFY7avUu3A8HWi7eZLk=";
+          }
+          {
+            name = "wgsl-analyzer";
+            publisher = "wgsl-analyzer";
+            version = "0.8.1";
+            sha256 = "sha256-ckclcxdUxhjWlPnDFVleLCWgWxUEENe0V328cjaZv+Y=";
+          }
+          {
+            name = "vscode-zig";
+            publisher = "ziglang";
+            version = "0.5.1";
+            sha256 = "sha256-ygxvkewK5Tf1zNIXxzu6D/tKYNVcNsU9cKij7d5aRdQ=";
           }
         ];
 
