@@ -1,9 +1,9 @@
-const { Window } = ags.Widget;
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
-export const Bar = ({monitor, name, anchor, child}) => Window({
+export const Bar = ({monitor, name, anchor, child}) => Widget.Window({
     monitor,
     name: `${name}-${monitor}`,
     anchor,
-    exclusive: true,
+    exclusivity: "exclusive",
     child,
 })

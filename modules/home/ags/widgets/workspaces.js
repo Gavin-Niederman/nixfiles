@@ -1,6 +1,6 @@
-const { Hyprland } = ags.Service;
-const { Box, Button, Label } = ags.Widget;
-const { execAsync } = ags.Utils;
+import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 
 const classNames = (full, current) => {
     let classes = ['workspace'];
@@ -9,40 +9,36 @@ const classNames = (full, current) => {
     return classes;
 }
 
-const Workspace = ({ id, full, current }) => Button({
-    className: classNames(full, current),
-    child: Label({
-        className: ['workspace-label'],
+const Workspace = ({ id, full, current }) => Widget.Button({
+    classNames: classNames(full, current),
+    child: Widget.Label({
+        className: 'workspace-label',
         label: `${id}`,
     }),
-    connections: [
-        [
-            'clicked', () => execAsync(`hyprctl dispatch split-workspace ${id}`)
-        ]
-    ],
 })
+    .on('clicked', _ => {
+        Hyprland.sendMessage(`/dispatch split-workspace ${id}`)
+    })
 
-export const Workspaces = ({ monitor }) => Box({
-    className: ['workspaces'],
-    connections: [
-        [
-            Hyprland,
-            box => {
-                const workspaces = Hyprland.workspaces;
-                let children = Array.from({ length: 10 }, (_, i) => {
-                    const workspaceID = i + (monitor * 10) + 1;
-                    const current = Hyprland.monitors.get(monitor).activeWorkspace.id === workspaceID;
-                    try {
-                        const workspace = workspaces.get(workspaceID);
-                        return Workspace({ id: i + 1, full: workspace.windows > 0, current });
-                    } catch (err) {
-                        return Workspace({ id: i + 1, full: false, current });
-                    }
-                })
-
-                box.children = children;
-            },
-            'changed'
-        ]
-    ],
+export const Workspaces = ({ monitor }) => Widget.Box({
+    className: 'workspaces',
 })
+    .hook(
+        Hyprland,
+        box => {
+            const workspaces = Hyprland.workspaces;
+            let children = Array.from({ length: 10 }, (_, i) => {
+                const workspaceID = i + (monitor * 10) + 1;
+                const current = Hyprland.monitors[monitor].activeWorkspace.id === workspaceID;
+                try {
+                    const workspace = workspaces.filter(w => w.id === workspaceID)[0];
+                    return Workspace({ id: i + 1, full: workspace.windows > 0, current });
+                } catch (err) {
+                    return Workspace({ id: i + 1, full: false, current });
+                }
+            })
+
+            box.children = children;
+        },
+        'changed'
+    )

@@ -1,16 +1,11 @@
-const { ProgressBar } = ags.Widget;
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 
-export const Battery = ({}) => ProgressBar({
-    className: ['battery'],
+export const BatteryBar = ({}) => Widget.ProgressBar({
+    className: 'battery',
     vertical: false,
-    value: Math.max(0, ags.Service.Battery.percent / 100),
-    connections: [
-        [
-            ags.Service.Battery,
-            progess => {
-                progess.value = Math.max(0, ags.Service.Battery.percent / 100);
-            },
-            'changed'
-        ]
-    ] 
+})
+.hook(Battery, bar => {
+    bar.value = Battery.percent
+    bar.visible = Battery.available
 });

@@ -1,62 +1,38 @@
 import { Bar } from './shared.js';
 import { Clock } from '../widgets/clock.js';
-import { Battery } from '../widgets/battery.js';
-import { Audio } from '../widgets/audio.js';
+import { BatteryBar } from '../widgets/battery.js';
+import { AudioBar } from '../widgets/audio.js';
 import { Workspaces } from '../widgets/workspaces.js';
 import { Separator } from '../widgets/separator.js';
 
-const { Box, CenterBox } = ags.Widget;
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
 export const TopBar = (monitor) => Bar({
     monitor,
     name: "topbar",
     anchor: ["top", "left", "right"],
-    child: CenterBox({
-        className: ['topbar', 'bar'],
-        startWidget: Box({
+    child: Widget.CenterBox({
+        classNames: ['topbar', 'bar'],
+        startWidget: Widget.Box({
             children: [
                 Workspaces({monitor})
             ],
         }),
-        centerWidget: Box({
+        centerWidget: Widget.Box({
             children: [
                 Clock({})
             ],
         }),
-        endWidget: Box({
-            halign: 'end',
+        endWidget: Widget.Box({
+            hpack: 'end',
             vexpand: false,
             hexpand: true,
             vertical: false,
-            children: ags.Service.Battery.available ? [
-                Battery({}),
+            children: [
+                BatteryBar({}),
                 Separator({}),
-                Audio({}),
-            ]: [
-                Audio({}),
+                AudioBar({}),
             ],
-
-            properties: [
-                ['containsBattery', false]
-            ],
-
-            // This is required because the available property of the Battery service is sometimes false for a while even on systems with a battery
-            connections: [
-                [
-                    ags.Service.Battery,
-                    box => {
-                        if (!box.containsBattery_ && ags.Service.Battery.available) {
-                            box.children = [
-                                Battery({}),
-                                Separator({}),
-                                Audio({}),
-                            ];
-                            box.containsBattery_ = true;
-                        }
-                    },
-                    'changed'
-                ]
-            ]
         })
     }),
 });

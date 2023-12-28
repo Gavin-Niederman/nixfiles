@@ -1,6 +1,6 @@
-const { Label } = ags.Widget;
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
-export const Separator = ({}) => Label({
-    className: ['separator'],
+export const Separator = ({}) => Widget.Label({
+    className: 'separator',
     label: "·"
 });
