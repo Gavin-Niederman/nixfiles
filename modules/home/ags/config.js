@@ -1,6 +1,17 @@
 import { TopBar } from "./layouts/topbar.js";
 import { compileScss } from "./style/style.js";
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+import { monitorFile } from 'resource:///com/github/Aylur/ags/utils.js';
+import App from 'resource:///com/github/Aylur/ags/app.js';
+
+const css_path = compileScss();
+monitorFile(
+    css_path,
+    () => {
+        App.resetCss();
+        App.applyCss(css_path);
+    },
+);
 
 const monitors = await Hyprland.sendMessage('j/monitors')
     .then((json_data) => {

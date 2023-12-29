@@ -4,6 +4,7 @@ import { BatteryBar } from '../widgets/battery.js';
 import { AudioBar } from '../widgets/audio.js';
 import { Workspaces } from '../widgets/workspaces.js';
 import { Separator } from '../widgets/separator.js';
+// import { Media } from '../widgets/media.js';
 
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
@@ -28,9 +29,10 @@ export const TopBar = (monitor) => Bar({
             vexpand: false,
             hexpand: true,
             vertical: false,
+            spacing: 15,
             children: [
+                // Media({}),
                 BatteryBar({}),
-                Separator({}),
                 AudioBar({}),
             ],
         })

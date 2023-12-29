@@ -8,6 +8,5 @@
     ./desktop.nix
     ./shell.nix
     ./nix.nix
-    ./virtualization.nix
   ];
 }
