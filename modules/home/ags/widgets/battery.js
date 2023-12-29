@@ -2,7 +2,7 @@ import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 import App from 'resource:///com/github/Aylur/ags/app.js';
 
-export const BatteryBar = ({}) => Widget.Overlay({
+export const BatteryBar = ({ }) => Widget.Overlay({
     vpack: 'center',
     child: Widget.ProgressBar({
         className: 'battery',
@@ -10,14 +10,49 @@ export const BatteryBar = ({}) => Widget.Overlay({
     }),
     pass_through: true,
     overlays: [
-        Widget.Icon({
-            icon: `${App.configDir}/icons/lightning.svg`,
-            size: 15,
-            css: "color: #2e3440"
+        Widget.Stack({
+            transition: 'crossfade',
+            items: [
+                [
+                    'charging',
+                    Widget.Icon({
+                        icon: `${App.configDir}/icons/lightning.svg`,
+                        size: 15,
+                        css: "color: #2e3440"
+                    })
+                ],
+                [
+                    'draining',
+                    Widget.Icon({
+                        icon: `${App.configDir}/icons/battery.svg`,
+                        size: 15,
+                        css: "color: #2e3440"
+                    })
+                ],
+                [
+                    'low',
+                    Widget.Icon({
+                        icon: `${App.configDir}/icons/battery-alert.svg`,
+                        size: 15,
+                        css: "color: #2e3440"
+                    })
+                ]
+            ]
         })
+            .hook(Battery, stack => {
+                if (Battery.charging) {
+                    stack.shown = 'charging';
+                } else {
+                    if (Battery.percent < 15) {
+                        stack.shown = 'low';
+                    } else {
+                        stack.shown = 'draining';
+                    }
+                }
+            })
     ]
 })
-.hook(Battery, overlay => {
-    overlay.child.value = Battery.percent / 100;
-    overlay.child.visible = Battery.available
-});
+    .hook(Battery, overlay => {
+        overlay.child.value = Battery.percent / 100;
+        overlay.child.visible = Battery.available
+    });
