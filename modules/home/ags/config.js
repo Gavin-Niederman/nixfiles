@@ -1,4 +1,5 @@
 import { TopBar } from "./layouts/topbar.js";
+import { NotificationPopup } from "./layouts/notificationPopup.js";
 import { compileScss } from "./style/style.js";
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 import { monitorFile } from 'resource:///com/github/Aylur/ags/utils.js';
@@ -37,5 +38,6 @@ export default {
     style: compileScss(),
     windows: [
         ...monitors.map(id => TopBar(id)),
+        NotificationPopup,
     ]
 };

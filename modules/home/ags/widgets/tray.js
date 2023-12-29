@@ -10,6 +10,6 @@ export const Tray = ({ }) => Widget.Box({
         child: Widget.Icon({ binds: [['icon', item, 'icon']] }),
         on_primary_click: (_, event) => item.activate(event),
         on_secondary_click: (_, event) => item.openMenu(event),
-        binds: [['tooltip-markup', item, 'tooltip-text']],
+        binds: [['tooltip-markup', item, 'tooltip-markup']],
     })))
 })
