@@ -10,6 +10,7 @@ const classNames = (full, current) => {
 }
 
 const Workspace = ({ id, full, current }) => Widget.Button({
+    cursor: "pointer",
     classNames: classNames(full, current),
     child: Widget.Label({
         className: 'workspace-label',

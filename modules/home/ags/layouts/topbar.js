@@ -4,6 +4,7 @@ import { BatteryBar } from '../widgets/battery.js';
 import { AudioBar } from '../widgets/audio.js';
 import { Workspaces } from '../widgets/workspaces.js';
 import { Separator } from '../widgets/separator.js';
+import { Tray } from '../widgets/tray.js';
 // import { Media } from '../widgets/media.js';
 
 import Widget from 'resource:///com/github/Aylur/ags/widget.js';
@@ -34,6 +35,7 @@ export const TopBar = (monitor) => Bar({
                 // Media({}),
                 BatteryBar({}),
                 AudioBar({}),
+                Tray({}),
             ],
         })
     }),
