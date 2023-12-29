@@ -5,11 +5,17 @@
 }
 
 window {
-	background-color: #303633
+	background-color: transparent;
 }
 
 .bar {
-	margin: 10px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-top: 15px;
+	margin-bottom: 0px;
+	border-radius: 7px;
+	min-height: 35px;
+	background-color: #2e3440
 }
 
 .clock {
@@ -17,17 +23,23 @@ window {
 	font-size: 1.25rem;
 }
 
+.workspaces {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .workspace {
 	padding: 0;
 	font-size: 1.1rem;
 	min-width: 20px;
 
+
 	&.full {
-		border-bottom: 3px solid #E63462;
+		border-bottom: 3px solid #d08770;
 	}
 
 	&.current {
-		border-top: 3px solid #E63462;
+		border-top: 3px solid #bf616a;
 	}
 }
 
@@ -36,27 +48,35 @@ window {
 }
 
 .tray {
-	background-color: #242826;
+	background-color: #3b4252;
 	border-radius: 20px;
 	min-width: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
+	margin-right: 10px;
 	font-size: 20px;
 }
 
 trough {
 	border-radius: 20px;
 
-	background-color: #131614;
+	background-color: #434c5e;
+	background-origin: padding-box;
 	min-height: 15px;
 	min-width: 100px;
 
-	highlight, progress {
+	highlight,
+	progress {
 		border-radius: 20px 0px 0px 20px;
-		background-image: linear-gradient(to right, #FE5F55, #E63462);
+		background-image: linear-gradient(to right, #bf616a 33%, #ebcb8b 33%, #ebcb8b 66%, #a3be8c 66%);
+		background-size: 100px;
 		min-height: 15px;
 	}
 }
+
+// scale, progressbar {
+// 	max-height: 9px;
+// }
 
 slider {
 	background-color: #303633;

@@ -27,6 +27,7 @@ export const TopBar = (monitor) => Bar({
         }),
         endWidget: Widget.Box({
             hpack: 'end',
+            vpack: 'center',
             vexpand: false,
             hexpand: true,
             vertical: false,
