@@ -25,7 +25,6 @@ const NotificationIcon = ({ app_entry, app_icon, image }) => {
 };
 
 export const Notification = notification => {
-    console.log(notification);
     const icon = NotificationIcon(notification);
     const summary = Widget.Label({
         className: 'notif-summary',
