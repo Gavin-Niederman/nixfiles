@@ -106,11 +106,12 @@
             };
           };
         };
+        nvim-autopairs.enable = true;
       };
       extraPlugins = [ pkgs.vimExtraPlugins.lsp-zero-nvim ];
     };
 
-    home.packages = with pkgs; [ neovide nil rust-analyzer haskell-language-server zls ];
+    home.packages = with pkgs; [ neovide nil haskell-language-server zls ];
     home.file.".config/neovide/config.toml".text = ''
       neovim_bin = "${pkgs.neovim}/bin/nvim";
       vsync = true;
@@ -144,6 +145,7 @@
           haskell.haskell
           justusadam.language-haskell
 
+          svelte.svelte-vscode
           astro-build.astro-vscode
           bradlc.vscode-tailwindcss
           dbaeumer.vscode-eslint
@@ -165,6 +167,12 @@
 
           github.vscode-github-actions
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          # {
+          #   name = "rust-analyzer";
+          #   publisher = "rust-lang";
+          #   version = "0.4.1806";
+          #   sha256 = "sha256-O0kQkDdz07DZh58TAXoeyPA2B15iZt2W8eiCpL9BE2c=";
+          # }
           {
             name = "gruvbox-themes";
             publisher = "tomphilbin";
@@ -231,6 +239,7 @@
         "rust-analyzer.inlayHints.chainingHints.enable" = false;
         "rust-analyzer.inlayHints.typeHints.enable" = false;
         "rust-analyzer.check.allTargets" = false;
+        "rust-analyzer.server.path" = "";
         "workbench.settings.openDefaultKeybindings" = true;
         "window.zoomLevel" = 2;
         "editor.cursorSmoothCaretAnimation" = "on";
