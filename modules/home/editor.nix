@@ -4,9 +4,12 @@
       enable = true;
       colorschemes.gruvbox-nvim.enable = true;
       extraConfigLua = ''
-        vim.o.number = true;
-        vim.o.relativenumber = true;
-        vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true });
+                vim.o.number = true;
+                vim.o.relativenumber = true;
+                vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true });
+        	require("toggleterm").setup{
+        		open_mapping = [[<C-/>]],
+        	}
       '';
       mappings = {
         normal = {
@@ -108,7 +111,10 @@
         };
         nvim-autopairs.enable = true;
       };
-      extraPlugins = [ pkgs.vimExtraPlugins.lsp-zero-nvim ];
+      extraPlugins = [
+        pkgs.vimExtraPlugins.lsp-zero-nvim
+        pkgs.vimExtraPlugins.nvim-toggleterm-lua
+      ];
     };
 
     home.packages = with pkgs; [ neovide nil haskell-language-server zls ];
@@ -239,7 +245,7 @@
         "rust-analyzer.inlayHints.chainingHints.enable" = false;
         "rust-analyzer.inlayHints.typeHints.enable" = false;
         "rust-analyzer.check.allTargets" = false;
-        "rust-analyzer.server.path" = "";
+        "rust-analyzer.server.path" = "rust-analyzer";
         "workbench.settings.openDefaultKeybindings" = true;
         "window.zoomLevel" = 2;
         "editor.cursorSmoothCaretAnimation" = "on";
