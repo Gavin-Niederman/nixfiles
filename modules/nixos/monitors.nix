@@ -34,36 +34,14 @@
 
   config = with lib;
     let
-      mkEwwWindow = m: ''
-        (defwindow ${m.output}
-            :monitor ${toString m.id}
-            :geometry (geometry
-                :width "100%"
-                :height "3%"
-                :anchor "top center"
-            )
-            :exclusive true
-            :focusable false
-            :class "bar"
-            (bar)
-        )
-      '';
-      ewwWindows = map mkEwwWindow config.monitors;
-
       mkHyprlandMonitor = m: ''
-        monitor=${m.output},${toString m.dimensions.x}x${
-          toString m.dimensions.y
-        }@${toString m.refreshRate},${toString m.offset.x}x${
-          toString m.offset.y
-        },${toString m.scale}
-        '';
+        ${m.output},${toString m.dimensions.x}x${toString m.dimensions.y}@${
+          toString m.refreshRate
+        },${toString m.offset.x}x${toString m.offset.y},${toString m.scale}
+      '';
       monitors = filter (s: s != "") (map mkHyprlandMonitor config.monitors);
     in {
-      home-manager.sharedModules = [{
-        wayland.windowManager.hyprland.extraConfig =
-          "${concatStringsSep "\n" monitors}";
-        home.file.".config/eww/eww.yuck".text =
-          "${concatStringsSep "\n" ewwWindows}";
-      }];
+      home-manager.sharedModules =
+        [{ wayland.windowManager.hyprland.settings.monitor = monitors; }];
     };
 }

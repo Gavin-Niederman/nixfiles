@@ -169,16 +169,9 @@
           mkhl.direnv
           ms-vsliveshare.vsliveshare
           ms-vscode.live-server
-          wakatime.vscode-wakatime
 
           github.vscode-github-actions
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          # {
-          #   name = "rust-analyzer";
-          #   publisher = "rust-lang";
-          #   version = "0.4.1806";
-          #   sha256 = "sha256-O0kQkDdz07DZh58TAXoeyPA2B15iZt2W8eiCpL9BE2c=";
-          # }
           {
             name = "gruvbox-themes";
             publisher = "tomphilbin";
@@ -214,12 +207,6 @@
             publisher = "wgsl-analyzer";
             version = "0.8.1";
             sha256 = "sha256-ckclcxdUxhjWlPnDFVleLCWgWxUEENe0V328cjaZv+Y=";
-          }
-          {
-            name = "vscode-zig";
-            publisher = "ziglang";
-            version = "0.5.1";
-            sha256 = "sha256-ygxvkewK5Tf1zNIXxzu6D/tKYNVcNsU9cKij7d5aRdQ=";
           }
         ];
 

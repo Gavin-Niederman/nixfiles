@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   config = {
@@ -11,5 +11,10 @@
     programs.gh.enable = true;
 
     programs.direnv.enable = true;
+
+    home.packages = with pkgs; [
+      rustup
+      nixfmt
+    ];
   };
 }

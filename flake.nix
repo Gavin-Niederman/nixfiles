@@ -1,75 +1,49 @@
 {
-  description = "My Nixos configuration";
+  description = "My Nixos Configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hyprland.url = "github:hyprwm/Hyprland";
-    hypr-contrib.url = "github:hyprwm/contrib";
-
-    ags.url = "github:Aylur/ags";
-    split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     nixneovim.url = "github:nixneovim/nixneovim";
-    # watershot.url = "github:Kirottu/watershot";
+    ags.url = "github:Aylur/ags";
   };
 
-  outputs = { nixpkgs, nixpkgs-stable, home-manager, hyprland, hypr-contrib
-    , split-monitor-workspaces, ags, nixneovim, ... }:
+  outputs = { nixpkgs, home-manager, nixneovim, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
+
+      overlays = system: [
+        nixneovim.overlays.default
+        (final: prev: { ags = ags.packages.${system}.default; })
+      ];
 
       defaultModules = [
         nixosModules.default
         home-manager.nixosModules.home-manager
         {
-          home-manager.sharedModules = [
-            hyprland.homeManagerModules.default
-            homeModules.default
-            nixneovim.nixosModules.default
-          ];
+          home-manager.sharedModules =
+            [ homeModules.default nixneovim.nixosModules.default ];
         }
       ];
 
-      system = { system, modules, ... }:
-        nixpkgs.lib.nixosSystem {
-          modules = modules ++ defaultModules ++ [{
-            nixpkgs = {
-              overlays = [
-                nixneovim.overlays.default
-                (final: prev: {
-                  ags = ags.packages.${system}.default;
-                  hyprlandPlugins.split-monitor-workspaces =
-                    split-monitor-workspaces.packages.${system}.default;
-                  grimblast = hypr-contrib.packages.${system}.grimblast;
+      setHostName = hostName: [{ networking.hostName = hostName; }];
 
-                  stable-ovmf-aarch =
-                    nixpkgs-stable.legacyPackages.aarch64-linux.OVMFFull;
-                  # watershot = watershot.packages.${system}.default;
-                })
-              ];
-            };
-          }];
+      host = { system, modules, hostName }:
+        nixpkgs.lib.nixosSystem {
+          modules = modules ++ defaultModules ++ setHostName hostName
+            ++ [{ nixpkgs.overlays = overlays system; }];
           system = system;
         };
     in {
       nixosConfigurations = {
-        patriam = system {
+        puerum = host {
           system = "x86_64-linux";
-          modules = [ ./hosts/patriam/configuration.nix ];
-        };
-        puerum = system {
-          system = "x86_64-linux";
+          hostName = "puerum";
           modules = [ ./hosts/puerum/configuration.nix ];
         };
       };

@@ -3,10 +3,11 @@
 {
   imports = [
     ./hyprland.nix
-    ./development.nix
     ./editor.nix
-    ./desktop.nix
     ./shell.nix
-    ./nix.nix
+    ./theme.nix
+    ./applications.nix
+    ./development.nix
   ];
+  config = { home.stateVersion = "23.11"; };
 }

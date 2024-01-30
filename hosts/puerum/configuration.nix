@@ -4,26 +4,18 @@
   imports = [ ./hardware-configuration.nix ];
 
   config = {
-    system.stateVersion = "23.11";
-
-    networking = {
-      hostName = "puerum";
-      networkmanager.enable = true;
-    };
+    networking = { networkmanager.enable = true; };
 
     time.timeZone = "America/Los_Angeles";
 
     i18n.defaultLocale = "en_US.UTF-8";
 
-    boot.loader = {
-      efi = {
-        canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot/efi";
-      };
-      systemd-boot.enable = true;
-    };
+    hardware.opengl.enable = true;
 
-    nixpkgs.config.allowUnfree = true;
+    boot.loader.efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
 
     monitors = [{
       output = "eDP-1";

@@ -1,14 +1,13 @@
-{ pkgs, lib, config, ... }:
+{ ... }:
 
 {
   imports = [
-    ./desktop.nix
-    ./user.nix
     ./nix.nix
-    ./development.nix
-    ./shell.nix
+    ./user.nix
     ./monitors.nix
     ./boot.nix
-    ./virtualization.nix
+    ./security.nix
+    ./fonts.nix
   ];
+  config = { system.stateVersion = "23.11"; };
 }

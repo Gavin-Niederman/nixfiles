@@ -21,14 +21,11 @@
         local config = {}
 
         config.color_scheme = 'Bright'
+	      config.enable_wayland = false
 
         return config
       '';
-      colorSchemes = {
-        Bright = {
-          foreground = "#FFFFFF";
-        };
-      };
+      colorSchemes = { Bright = { foreground = "#FFFFFF"; }; };
     };
   };
 }
