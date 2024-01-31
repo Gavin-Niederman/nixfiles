@@ -12,7 +12,8 @@
     ags.url = "github:Aylur/ags";
   };
 
-  outputs = { nixpkgs, home-manager, nixneovim, ags, ... }:
+  outputs =
+    { nixpkgs, home-manager, nixneovim, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;

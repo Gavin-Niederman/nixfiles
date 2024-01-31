@@ -3,7 +3,7 @@
 {
 	config = {
 		home.file.".config/ags/".source = ./ags;
-    home.packages = [ pkgs.sassc ];
+    home.packages = [ pkgs.sassc pkgs.waypaper ];
 		fonts.fontconfig.enable = true;
 
     home.pointerCursor = {

@@ -8,6 +8,8 @@
     ./boot.nix
     ./security.nix
     ./fonts.nix
+    ./audio.nix
+    ./utilities.nix
   ];
   config = { system.stateVersion = "23.11"; };
 }

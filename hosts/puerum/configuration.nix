@@ -17,6 +17,10 @@
       efiSysMountPoint = "/boot/efi";
     };
 
+    boot.extraModprobeConfig = ''
+      options snd-intel-dspcfg dsp_driver=1
+    '';
+
     monitors = [{
       output = "eDP-1";
       dimensions = {

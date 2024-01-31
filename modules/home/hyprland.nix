@@ -6,7 +6,8 @@
       enable = true;
       systemd.enable = true;
       settings = {
-        exec-once = [ "${pkgs.swww}/bin/swww init" "${pkgs.ags}/bin/ags" ];
+        exec-once =
+          [ "${pkgs.waypaper}/bin/waypaper --restore" "${pkgs.ags}/bin/ags" "${pkgs.swayosd}/bin/swayosd-server" ];
 
         env = [
           "XCURSOR_SIZE, 42"
@@ -99,17 +100,15 @@
           "$mod, D, exec, ${pkgs.fuzzel}/bin/fuzzel"
           ", 107, exec, ${pkgs.grimblast}/bin/grimblast copy area"
 
-          ", XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd --output-volume mute-toggle"
-          ", XF86AudioRaiseVolume, exec, ${pkgs.swayosd}/bin/swayosd --output-volume 5"
-          ", XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd --output-volume -5"
+          ", XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle"
+          ", XF86AudioRaiseVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume 5"
+          ", XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume -5"
 
-          ", XF86MonBrightnessUp, exec, ${pkgs.swayosd}/bin/swayosd --brightness raise"
-          ", XF86MonBrightnessDown, exec, ${pkgs.swayosd}/bin/swayosd --brightness lower"
+          ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%"
+          ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-"
         ];
-        bindm = [
-          "$mod, mouse:272, movewindow"
-          "$mod, mouse:273, resizewindow"
-        ];
+        bindm =
+          [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
       };
     };
   };
