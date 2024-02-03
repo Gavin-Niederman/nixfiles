@@ -47,6 +47,11 @@
           hostName = "puerum";
           modules = [ ./hosts/puerum/configuration.nix ];
         };
+        patriam = host {
+          system = "x86_64-linux";
+          hostName = "patriam";
+          modules = [ ./hosts/patriam/configuration.nix ];
+        };
       };
     };
 }
