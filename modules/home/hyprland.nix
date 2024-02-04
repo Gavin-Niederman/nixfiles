@@ -5,6 +5,7 @@
     wayland.windowManager.hyprland = {
       enable = true;
       systemd.enable = true;
+      plugins = pkgs.hyprlandPlugins;
       settings = {
         exec-once =
           [ "${pkgs.waypaper}/bin/waypaper --restore" "${pkgs.ags}/bin/ags" "${pkgs.swayosd}/bin/swayosd-server" ];
@@ -82,8 +83,8 @@
 
         "$mod" = "SUPER";
         bind = builtins.concatLists (builtins.genList (x: [
-          "$mod, ${toString x}, workspace, ${toString x}"
-          "$mod SHIFT, ${toString x}, movetoworkspace, ${toString x}"
+          "$mod, ${toString x}, split-workspace, ${toString x}"
+          "$mod SHIFT, ${toString x}, split-movetoworkspace, ${toString x}"
         ]) 10) ++ [
           "$mod, H, movefocus, l"
           "$mod, J, movefocus, d"

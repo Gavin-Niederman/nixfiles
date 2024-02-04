@@ -8,27 +8,40 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
+    split-monitor-workspaces = {
+      url = "github:Duckonaut/split-monitor-workspaces";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     nixneovim.url = "github:nixneovim/nixneovim";
     ags.url = "github:Aylur/ags";
   };
 
-  outputs =
-    { nixpkgs, home-manager, nixneovim, ags, ... }:
+  outputs = { nixpkgs, home-manager, hyprland, split-monitor-workspaces
+    , nixneovim, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
 
       overlays = system: [
         nixneovim.overlays.default
-        (final: prev: { ags = ags.packages.${system}.default; })
+        (final: prev: {
+          ags = ags.packages.${system}.default;
+          hyprlandPlugins =
+            [ split-monitor-workspaces.packages.${system}.default ];
+        })
       ];
 
       defaultModules = [
         nixosModules.default
         home-manager.nixosModules.home-manager
         {
-          home-manager.sharedModules =
-            [ homeModules.default nixneovim.nixosModules.default ];
+          home-manager.sharedModules = [
+            homeModules.default
+            nixneovim.nixosModules.default
+            hyprland.homeManagerModules.default
+          ];
         }
       ];
 
