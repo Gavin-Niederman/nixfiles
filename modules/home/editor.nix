@@ -114,6 +114,7 @@
       extraPlugins = [
         pkgs.vimExtraPlugins.lsp-zero-nvim
         pkgs.vimExtraPlugins.nvim-toggleterm-lua
+        pkgs.direnv-vim
       ];
     };
 

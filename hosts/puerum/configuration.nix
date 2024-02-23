@@ -21,6 +21,8 @@
       options snd-intel-dspcfg dsp_driver=1
     '';
 
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     monitors = [{
       output = "eDP-1";
       dimensions = {
