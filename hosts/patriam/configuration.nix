@@ -15,6 +15,8 @@
       daemon.enable = true;
     };
 
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     # Copious amounts of Nvidia fixes
     hardware.opengl = {
       enable = true;
@@ -27,14 +29,15 @@
       open = false;
       nvidiaSettings = true;
     };
-    home-manager.sharedModules = [
-      {
-        wayland.windowManager.hyprland.settings.env = [
-          "LIBVA_DRIVER_NAME,nvidia"
-          "WLR_NO_HARDWARE_CURSORS,1"
-        ];
-      }
-    ];
+    home-manager.sharedModules = [{
+      wayland.windowManager.hyprland.settings.env =
+        [ "LIBVA_DRIVER_NAME,nvidia" "WLR_NO_HARDWARE_CURSORS,1" ];
+    }];
+
+    # environment.systemPackages = [
+    #   (pkgs.cutter.withPlugins (ps: with ps; [ jsdec rz-ghidra sigdb ]))
+    #   (pkgs.rizin.withPlugins (ps: with ps; [ jsdec rz-ghidra sigdb ]))
+    # ];
 
     monitors = [
       {
@@ -52,7 +55,7 @@
         id = 2;
       }
       {
-        output = "DP-3";
+        output = "DP-2";
         dimensions = {
           x = 2560;
           y = 1440;
@@ -80,7 +83,7 @@
         id = 0;
       }
       {
-        output = "DP-2";
+        output = "DP-3";
         dimensions = {
           x = 1920;
           y = 1080;
