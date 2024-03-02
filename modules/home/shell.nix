@@ -6,6 +6,7 @@
     home.file.".config/starship.toml".source = ./starship/starship.toml;
 
     programs.carapace.enable = true;
+    programs.carapace.enableNushellIntegration = true;
     programs.nushell = {
       enable = true;
       configFile.source = ./nu/config.nu;
