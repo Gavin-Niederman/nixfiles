@@ -14,6 +14,7 @@
         auth include login
       '';
     };
+    security.pam.services.hyprlock = {};
 
     environment.systemPackages = with pkgs; [ lxde.lxsession xdg-utils ];
   };

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   config = {
@@ -111,6 +111,21 @@
         bindm =
           [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
       };
+    };
+    programs.hyprlock = {
+      enable = true;
+      general = {
+        grace = 3;
+      };
+      input-fields = [{
+        placeholder_text = "<i>Enter password...</i>";
+        outline_thickness = 0;
+      }];
+      backgrounds = [
+        {
+          path = "${config.home.homeDirectory}/backgrounds/pink_forest.png";
+        }
+      ];
     };
   };
 }

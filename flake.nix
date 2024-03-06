@@ -13,8 +13,12 @@
       url = "github:hyprwm/hypridle";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprlock = {
+      url = "github:hyprwm/hyprlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     split-monitor-workspaces = {
-      url = "github:Duckonaut/split-monitor-workspaces";
+      url = "github:bivsk/split-monitor-workspaces?ref=bivsk";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -22,7 +26,7 @@
     ags.url = "github:Aylur/ags";
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, split-monitor-workspaces
+  outputs = { nixpkgs, home-manager, hyprland, hyprlock, split-monitor-workspaces
     , nixneovim, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
@@ -46,6 +50,7 @@
             homeModules.default
             nixneovim.nixosModules.default
             hyprland.homeManagerModules.default
+            hyprlock.homeManagerModules.default
           ];
         }
       ];
