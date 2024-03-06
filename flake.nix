@@ -26,8 +26,8 @@
     ags.url = "github:Aylur/ags";
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, hyprlock, split-monitor-workspaces
-    , nixneovim, ags, ... }:
+  outputs = { nixpkgs, home-manager, hyprland, hyprlock, hypridle
+    , split-monitor-workspaces, nixneovim, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
@@ -51,6 +51,7 @@
             nixneovim.nixosModules.default
             hyprland.homeManagerModules.default
             hyprlock.homeManagerModules.default
+            hypridle.homeManagerModules.default
           ];
         }
       ];

@@ -3,6 +3,8 @@
 {
   config = {
     services.easyeffects.enable = true;
+    services.mako.enable = true;
+    
     programs.firefox.enable = true;
     i18n.inputMethod = {
       enabled = "fcitx5";

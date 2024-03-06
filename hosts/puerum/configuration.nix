@@ -37,5 +37,7 @@
       scale = 1;
       id = 0;
     }];
+
+    home-manager.sharedModules = [{ services.hypridle.enable = true; }];
   };
 }

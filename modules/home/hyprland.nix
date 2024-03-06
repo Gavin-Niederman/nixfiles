@@ -112,6 +112,7 @@
           [ "$mod, mouse:272, movewindow" "$mod, mouse:273, resizewindow" ];
       };
     };
+
     programs.hyprlock = {
       enable = true;
       general = {
@@ -124,6 +125,36 @@
       backgrounds = [
         {
           path = "${config.home.homeDirectory}/backgrounds/pink_forest.png";
+        }
+      ];
+    };
+
+    services.hypridle = {
+      lockCmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+      beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
+      afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+
+      listeners = [
+        {
+          # 5 minutes
+          timeout = 300;
+          onTimeout = "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
+        }
+        {
+          # 10 minutes
+          timeout = 600;
+          onTimeout = "${pkgs.systemd}/bin/loginctl lock-session";
+        }
+        {
+          # 13 minutes
+          timeout = 780;
+          onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        }
+        {
+          # 25 minutes
+          timeout = 1500;
+          onTimeout = "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
     };
