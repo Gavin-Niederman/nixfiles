@@ -7,9 +7,8 @@ export const Tray = ({ }) => Widget.Box({
     spacing: 10,
     children: SystemTray.bind('items').transform(items => items.map(item => Widget.Button({
         cursor: "pointer",
-        child: Widget.Icon({ binds: [['icon', item, 'icon']] }),
+        child: Widget.Icon({ icon: item.bind('icon') }),
         on_primary_click: (_, event) => item.activate(event),
         on_secondary_click: (_, event) => item.openMenu(event),
-        binds: [['tooltip-markup', item, 'tooltip-markup']],
     })))
 })

@@ -12,7 +12,7 @@ export const BatteryBar = ({ }) => Widget.Overlay({
     overlays: [
         Widget.Stack({
             transition: 'crossfade',
-            items: [
+            children: [
                 [
                     'charging',
                     Widget.Icon({

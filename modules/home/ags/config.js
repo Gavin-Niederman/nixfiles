@@ -1,12 +1,10 @@
 import { TopBar } from "./layouts/topbar.js";
-import { NotificationPopup } from "./layouts/notificationPopup.js";
+import { NotificationPopups } from "./layouts/notificationPopups.js";
 import { compileScss } from "./style/style.js";
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-import { monitorFile } from 'resource:///com/github/Aylur/ags/utils.js';
-import App from 'resource:///com/github/Aylur/ags/app.js';
+const hyprland = await Service.import("hyprland");
 
 const css_path = compileScss();
-monitorFile(
+Utils.monitorFile(
     css_path,
     () => {
         App.resetCss();
@@ -14,7 +12,7 @@ monitorFile(
     },
 );
 
-const monitors = await Hyprland.sendMessage('j/monitors')
+const monitors = await hyprland.sendMessage('j/monitors')
     .then((json_data) => {
         console.log(json_data)
         const data = JSON.parse(json_data);
@@ -27,7 +25,7 @@ const monitors = await Hyprland.sendMessage('j/monitors')
     })
     .catch(err => console.error(err));
 
-export default {
+App.config({
     baseIconSize: 18,
     closeWindowDelay: {
         'bar': 500, // milliseconds
@@ -38,6 +36,6 @@ export default {
     style: compileScss(),
     windows: [
         ...monitors.map(id => TopBar(id)),
-        NotificationPopup,
+        NotificationPopups(2),
     ]
-};
+});

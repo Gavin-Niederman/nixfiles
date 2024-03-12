@@ -1,7 +1,3 @@
-import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
-import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import { lookUpIcon } from 'resource:///com/github/Aylur/ags/utils.js';
-
 const NotificationIcon = ({ app_entry, app_icon, image }) => {
     if (image) {
         return Widget.Box({
@@ -15,10 +11,10 @@ const NotificationIcon = ({ app_entry, app_icon, image }) => {
     }
 
     let icon = 'dialog-information-symbolic';
-    if (lookUpIcon(app_icon))
+    if (Utils.lookUpIcon(app_icon))
         icon = app_icon;
 
-    if (app_entry && lookUpIcon(app_entry))
+    if (app_entry && Utils.lookUpIcon(app_entry))
         icon = app_entry;
 
     return Widget.Icon(icon);
