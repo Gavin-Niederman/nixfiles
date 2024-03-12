@@ -11,6 +11,7 @@
     ./audio.nix
     ./utilities.nix
     ./applications.nix
+    ./frc.nix
   ];
   config = { system.stateVersion = "23.11"; };
 }

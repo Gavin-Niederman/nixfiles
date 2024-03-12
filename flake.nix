@@ -22,18 +22,24 @@
       inputs.hyprland.follows = "hyprland";
     };
 
+    frc-nix = {
+      url = "github:frc3636/frc-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixneovim.url = "github:nixneovim/nixneovim";
     ags.url = "github:Aylur/ags";
   };
 
   outputs = { nixpkgs, home-manager, hyprland, hyprlock, hypridle
-    , split-monitor-workspaces, nixneovim, ags, ... }:
+    , split-monitor-workspaces, frc-nix, nixneovim, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
 
       overlays = system: [
         nixneovim.overlays.default
+        frc-nix.overlays.default
         (final: prev: {
           ags = ags.packages.${system}.default;
           hyprlandPlugins =
