@@ -12,32 +12,26 @@ export const BatteryBar = ({ }) => Widget.Overlay({
     overlays: [
         Widget.Stack({
             transition: 'crossfade',
-            children: [
-                [
-                    'charging',
+            children: {
+                'charging':
                     Widget.Icon({
                         icon: `${App.configDir}/icons/lightning.svg`,
                         size: 15,
                         css: "color: #2e3440"
-                    })
-                ],
-                [
-                    'draining',
+                    }),
+                'draining':
                     Widget.Icon({
                         icon: `${App.configDir}/icons/battery.svg`,
                         size: 15,
                         css: "color: #2e3440"
-                    })
-                ],
-                [
-                    'low',
+                    }),
+                'low':
                     Widget.Icon({
                         icon: `${App.configDir}/icons/battery-alert.svg`,
                         size: 15,
                         css: "color: #2e3440"
                     })
-                ]
-            ]
+            }
         })
             .hook(Battery, stack => {
                 if (Battery.charging) {
