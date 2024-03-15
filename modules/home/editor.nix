@@ -111,10 +111,11 @@
         };
         nvim-autopairs.enable = true;
       };
-      extraPlugins = [
-        pkgs.vimExtraPlugins.lsp-zero-nvim
-        pkgs.vimExtraPlugins.nvim-toggleterm-lua
-        pkgs.direnv-vim
+      extraPlugins = with pkgs; [
+        vimExtraPlugins.lsp-zero-nvim
+        vimExtraPlugins.nvim-toggleterm-lua
+        vimExtraPlugins.tree-sitter-just
+        direnv-vim
       ];
     };
 
@@ -158,6 +159,7 @@
           dbaeumer.vscode-eslint
 
           ms-vscode.cpptools
+          skellock.just
 
           vadimcn.vscode-lldb
 

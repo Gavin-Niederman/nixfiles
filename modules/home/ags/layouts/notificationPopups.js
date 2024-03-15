@@ -7,15 +7,14 @@ export const NotificationPopups = (monitor) =>
         monitor,
         name: 'notification-popup',
         exclusivity: "ignore",
-        anchor: ["top", "right"],
-        click_through: true,
+        anchor: ["bottom", "right"],
         child: Widget.Box({
-            click_through: true,
-            css: "min-width: 2px; min-height: 2px;",
+            css: "padding: 2px;",
             children: [Widget.Box({
                 className: 'notifications',
                 spacing: 10,
                 vertical: true,
+                vpack: "end",
                 children: notifications.bind('popups').as(popups => { console.log(popups); return popups.map(Notification) }),
             })],
         }),
