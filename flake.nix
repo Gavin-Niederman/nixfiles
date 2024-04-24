@@ -23,7 +23,7 @@
     };
 
     frc-nix = {
-      url = "github:frc3636/frc-nix";
+      url = "github:frc3636/frc-nix?ref=svg-icons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

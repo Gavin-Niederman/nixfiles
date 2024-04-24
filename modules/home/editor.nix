@@ -119,7 +119,7 @@
       ];
     };
 
-    home.packages = with pkgs; [ neovide nil haskell-language-server zls ];
+    home.packages = with pkgs; [ neovide nil haskell-language-server zls wl-clipboard ];
     home.file.".config/neovide/config.toml".text = ''
       neovim_bin = "${pkgs.neovim}/bin/nvim";
       vsync = true;
@@ -172,7 +172,7 @@
           mkhl.direnv
           ms-vsliveshare.vsliveshare
           ms-vscode.live-server
-
+          adpyke.codesnap
           github.vscode-github-actions
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
@@ -210,6 +210,12 @@
             publisher = "wgsl-analyzer";
             version = "0.8.1";
             sha256 = "sha256-ckclcxdUxhjWlPnDFVleLCWgWxUEENe0V328cjaZv+Y=";
+          }
+          {
+            name = "linkerscript";
+            publisher = "zixuanwang";
+            version = "1.0.4";
+            sha256 = "sha256-9w9fpMeewfVQIxRljyyxrjVz2EUJ9e9q1tz967tR1lU=";
           }
         ];
 

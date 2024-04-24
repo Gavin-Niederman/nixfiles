@@ -62,15 +62,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1710310190,
-        "narHash": "sha256-lHjuZCDcuBEuFRQmVLjKIxvHptVlNmOBHuY6MduFwdk=",
+        "lastModified": 1710291757,
+        "narHash": "sha256-SzCV/9yPlHaQvDgowpPCTZYS68/AmWafhrYI6EXwGRU=",
         "owner": "frc3636",
         "repo": "frc-nix",
-        "rev": "1f9272c0bb7da9f744b7edf7304872b518282e40",
+        "rev": "e8f485147b7e48687867dd2d9fceb78921feb86d",
         "type": "github"
       },
       "original": {
         "owner": "frc3636",
+        "ref": "svg-icons",
         "repo": "frc-nix",
         "type": "github"
       }
