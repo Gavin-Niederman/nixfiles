@@ -249,6 +249,7 @@
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nil";
         "[nix]" = { "editor.defaultFormatter" = "brettm12345.nixfmt-vscode"; };
+        "codesnap.showWindowControls" = false;
       };
     };
   };
