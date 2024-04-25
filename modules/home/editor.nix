@@ -174,6 +174,8 @@
           ms-vscode.live-server
           adpyke.codesnap
           github.vscode-github-actions
+          usernamehw.errorlens
+          streetsidesoftware.code-spell-checker
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "gruvbox-themes";
@@ -250,6 +252,8 @@
         "nix.serverPath" = "nil";
         "[nix]" = { "editor.defaultFormatter" = "brettm12345.nixfmt-vscode"; };
         "codesnap.showWindowControls" = false;
+        "errorLense.fontFamily" = "FiraCode Nerd Font Mono";
+        "cSpell.enabledLanguageIds" = ["asciidoc" "html" "markdown" "plaintext" "text"];
       };
     };
   };
