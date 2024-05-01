@@ -244,6 +244,7 @@
         "rust-analyzer.inlayHints.typeHints.enable" = false;
         "rust-analyzer.check.allTargets" = false;
         "rust-analyzer.server.path" = "rust-analyzer";
+        "rust-analyzer.check.command" = "clippy";
         "workbench.settings.openDefaultKeybindings" = true;
         "window.zoomLevel" = 2;
         "editor.cursorSmoothCaretAnimation" = "on";
