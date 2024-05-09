@@ -7,8 +7,11 @@
       systemd.enable = true;
       plugins = pkgs.hyprlandPlugins;
       settings = {
-        exec-once =
-          [ "${pkgs.waypaper}/bin/waypaper --restore" "${pkgs.ags}/bin/ags" "${pkgs.swayosd}/bin/swayosd-server" ];
+        exec-once = [
+          "${pkgs.waypaper}/bin/waypaper --restore"
+          "${pkgs.ags}/bin/ags"
+          "${pkgs.swayosd}/bin/swayosd-server"
+        ];
 
         env = [
           "XCURSOR_SIZE, 42"
@@ -93,6 +96,8 @@
           "$mod, S, togglesplit,"
           "$mod, V, togglefloating,"
           "$mod, F, fullscreen,"
+          "$mod, U, exec, ${pkgs.firefox}/bin/firefox"
+          "$mod, C, exec, ${pkgs.vscode}/bin/code"
 
           "$mod SHIFT, Q, killactive"
           "$mod SHIFT, E, exit"
@@ -102,9 +107,10 @@
           ", 107, exec, ${pkgs.grimblast}/bin/grimblast copy area"
 
           ", XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle"
+        ];
+        binde = [
           ", XF86AudioRaiseVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume 5"
           ", XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume -5"
-
           ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%"
           ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-"
         ];
@@ -115,18 +121,14 @@
 
     programs.hyprlock = {
       enable = true;
-      general = {
-        grace = 3;
-      };
+      general = { grace = 3; };
       input-fields = [{
         placeholder_text = "<i>Enter password...</i>";
         outline_thickness = 0;
       }];
-      backgrounds = [
-        {
-          path = "${config.home.homeDirectory}/backgrounds/pink_forest.png";
-        }
-      ];
+      backgrounds = [{
+        path = "${config.home.homeDirectory}/backgrounds/pink_forest.png";
+      }];
     };
 
     services.hypridle = {
@@ -138,7 +140,8 @@
         {
           # 5 minutes
           timeout = 300;
-          onTimeout = "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
+          onTimeout =
+            "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
         }
         {
           # 10 minutes

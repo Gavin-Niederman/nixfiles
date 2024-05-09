@@ -6,8 +6,11 @@
   config = {
     networking = { networkmanager.enable = true; };
 
-    time.timeZone = "America/Los_Angeles";
-
+    time = {
+      timeZone = "America/Los_Angeles";
+      hardwareClockInLocalTime = true;
+    };
+    
     i18n.defaultLocale = "en_US.UTF-8";
 
     hardware.opentabletdriver = {
