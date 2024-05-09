@@ -13,6 +13,9 @@
       envFile.source = ./nu/env.nu;
     };
 
+    programs.zoxide.enable = true;
+    programs.zoxide.enableNushellIntegration = true;
+
     programs.fish.enable = true;
 
     programs.wezterm = {

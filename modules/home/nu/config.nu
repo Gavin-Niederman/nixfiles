@@ -10,3 +10,6 @@ $env.config = {
         }
     }
 }
+
+alias z = zoxide
+alias f = zoxide
