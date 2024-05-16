@@ -23,6 +23,9 @@
         };
       };
     };
+    services.logind.extraConfig = ''
+      HandlePowerKey=ignore
+    '';
     environment.etc."greetd/environments".text = ''
       Hyprland
       nu

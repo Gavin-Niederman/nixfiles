@@ -6,5 +6,6 @@
       enable = true;
       remotePlay.openFirewall = true;
     };
+    virtualisation.docker.enable = true;
   };
 }
