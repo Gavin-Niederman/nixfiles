@@ -107,8 +107,8 @@
           ", 107, exec, ${pkgs.grimblast}/bin/grimblast copy area"
 
           ", XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle"
-          ", XF86PowerOff, exec, ${pkgs.wlogout}/bin/wlogout"
         ];
+        bindilt = [ ", XF86PowerOff, exec, pidof wlogout || ${pkgs.wlogout}/bin/wlogout" ];
         binde = [
           ", XF86AudioRaiseVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume 5"
           ", XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume -5"
