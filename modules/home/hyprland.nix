@@ -132,7 +132,10 @@
       }];
     };
 
-    services.hypridle = {
+    services.hypridle = let
+      idle-check = "${pkgs.nushell}/bin/nu -c \"idle unwrap\" --config ${config.home.homeDirectory}/.config/nushell/config.nu";
+      make-cmd = cmd: "${idle-check} && ${cmd}";
+    in {
       lockCmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
       beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
       afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
@@ -142,23 +145,23 @@
           # 5 minutes
           timeout = 300;
           onTimeout =
-            "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
+            make-cmd "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
         }
         {
           # 10 minutes
           timeout = 600;
-          onTimeout = "${pkgs.systemd}/bin/loginctl lock-session";
+          onTimeout = make-cmd "${pkgs.systemd}/bin/loginctl lock-session";
         }
         {
           # 13 minutes
           timeout = 780;
-          onTimeout = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          onTimeout = make-cmd "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
           onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
         }
         {
           # 25 minutes
           timeout = 1500;
-          onTimeout = "${pkgs.systemd}/bin/systemctl suspend";
+          onTimeout = make-cmd "${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
     };
