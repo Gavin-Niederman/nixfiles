@@ -86,9 +86,9 @@
 
         "$mod" = "SUPER";
         bind = builtins.concatLists (builtins.genList (x: [
-          "$mod, ${toString x}, split-workspace, ${toString x}"
-          "$mod SHIFT, ${toString x}, split-movetoworkspace, ${toString x}"
-        ]) 10) ++ [
+          "$mod, ${toString (if x == 10 then 0 else x)}, split-workspace, ${toString x}"
+          "$mod SHIFT, ${toString (if x == 10 then 0 else x)}, split-movetoworkspace, ${toString x}"
+        ]) 11) ++ [
           "$mod, H, movefocus, l"
           "$mod, J, movefocus, d"
           "$mod, K, movefocus, u"
