@@ -86,8 +86,12 @@
 
         "$mod" = "SUPER";
         bind = builtins.concatLists (builtins.genList (x: [
-          "$mod, ${toString (if x == 10 then 0 else x)}, split-workspace, ${toString x}"
-          "$mod SHIFT, ${toString (if x == 10 then 0 else x)}, split-movetoworkspace, ${toString x}"
+          "$mod, ${toString (if x == 10 then 0 else x)}, split-workspace, ${
+            toString x
+          }"
+          "$mod SHIFT, ${
+            toString (if x == 10 then 0 else x)
+          }, split-movetoworkspace, ${toString x}"
         ]) 11) ++ [
           "$mod, H, movefocus, l"
           "$mod, J, movefocus, d"
@@ -108,7 +112,9 @@
 
           ", XF86AudioMute, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle"
         ];
-        bindilt = [ ", XF86PowerOff, exec, pidof wlogout || ${pkgs.wlogout}/bin/wlogout" ];
+        bindilt = [
+          ", XF86PowerOff, exec, pidof wlogout || ${pkgs.wlogout}/bin/wlogout"
+        ];
         binde = [
           ", XF86AudioRaiseVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume 5"
           ", XF86AudioLowerVolume, exec, ${pkgs.swayosd}/bin/swayosd-client --output-volume -5"
@@ -133,10 +139,21 @@
     };
 
     services.hypridle = let
-      idle-check = "${pkgs.nushell}/bin/nu -c \"idle unwrap\" --config ${config.home.homeDirectory}/.config/nushell/config.nu";
-      make-cmd = cmd: "${idle-check} && ${cmd}";
+      make-cmd = { action, cmd }:
+        (pkgs.writeScriptBin "idle-checked-${action}" ''
+          #!${pkgs.nushell}/bin/nu
+          if (${pkgs.coreutils}/bin/cat ${config.home.homeDirectory}/.config/idle/idle_enable | into bool) {
+              ${cmd}
+          } else {
+              error make {
+                  msg: "idle is disabled"
+              }
+          }
+        '');
+
     in {
-      lockCmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+      lockCmd =
+        "${pkgs.procps}/bin/pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
       beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
       afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
 
@@ -144,24 +161,44 @@
         {
           # 5 minutes
           timeout = 300;
-          onTimeout =
-            make-cmd "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
+          onTimeout = "${
+              make-cmd {
+                action = "notify";
+                cmd =
+                  "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
+              }
+            }/bin/idle-checked-notify";
         }
         {
           # 10 minutes
           timeout = 600;
-          onTimeout = make-cmd "${pkgs.systemd}/bin/loginctl lock-session";
+          onTimeout = "${
+              make-cmd {
+                action = "lock";
+                cmd = "${pkgs.systemd}/bin/loginctl lock-session";
+              }
+            }/bin/idle-checked-lock";
         }
         {
           # 13 minutes
           timeout = 780;
-          onTimeout = make-cmd "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          onTimeout = "${
+              make-cmd {
+                action = "screen-off";
+                cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+              }
+            }/bin/idle-checked-screen-off";
           onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
         }
         {
           # 25 minutes
           timeout = 1500;
-          onTimeout = make-cmd "${pkgs.systemd}/bin/systemctl suspend";
+          onTimeout = "${
+              make-cmd {
+                action = "suspend";
+                cmd = "${pkgs.systemd}/bin/systemctl suspend";
+              }
+            }/bin/idle-checked-suspend";
         }
       ];
     };
