@@ -45,6 +45,7 @@
           hyprlandPlugins =
             [ split-monitor-workspaces.packages.${system}.default ];
           direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
+          fvim = final.callPackage ./pkgs/fvim.nix { };
         })
       ];
 

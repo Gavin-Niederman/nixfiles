@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   config = {
@@ -7,5 +7,7 @@
       remotePlay.openFirewall = true;
     };
     virtualisation.docker.enable = true;
+
+    environment.systemPackages = [ pkgs.fvim ];
   };
 }

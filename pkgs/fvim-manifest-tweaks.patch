@@ -1,0 +1,13 @@
+diff --git a/fvim.fsproj b/fvim.fsproj
+index a525715..e7c6657 100644
+--- a/fvim.fsproj
++++ b/fvim.fsproj
+@@ -19,7 +19,7 @@
+   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+     <OutputType>WinExe</OutputType>
+     <PublishTrimmed>true</PublishTrimmed>
+-    <PublishReadyToRun>true</PublishReadyToRun>
++    <PublishReadyToRun>false</PublishReadyToRun>
+     <TrimMode>link</TrimMode>
+     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+   </PropertyGroup>
