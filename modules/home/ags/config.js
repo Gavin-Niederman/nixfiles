@@ -12,7 +12,7 @@ Utils.monitorFile(
     },
 );
 
-const monitors = await hyprland.sendMessage('j/monitors')
+const monitors = await hyprland.messageAsync('j/monitors')
     .then((json_data) => {
         console.log(json_data)
         const data = JSON.parse(json_data);

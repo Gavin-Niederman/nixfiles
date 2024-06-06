@@ -1,6 +1,4 @@
-import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
-import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
+const Audio = await Service.import('audio');
 
 export const AudioBar = ({ }) => Widget.Slider({
     className: 'audio',

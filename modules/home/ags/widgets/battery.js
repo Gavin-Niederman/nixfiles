@@ -1,6 +1,4 @@
-import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
-import App from 'resource:///com/github/Aylur/ags/app.js';
+const Battery = await Service.import('battery');
 
 export const BatteryBar = ({ }) => Widget.Overlay({
     vpack: 'center',

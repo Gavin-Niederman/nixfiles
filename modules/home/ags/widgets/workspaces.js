@@ -1,6 +1,4 @@
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
+const Hyprland = await Service.import('hyprland');
 
 const classNames = (full, current) => {
     let classes = ['workspace'];
@@ -18,7 +16,7 @@ const Workspace = ({ id, full, current }) => Widget.Button({
     }),
 })
     .on('clicked', _ => {
-        Hyprland.sendMessage(`/dispatch split-workspace ${id}`)
+        Hyprland.messageAsync(`/dispatch split-workspace ${id}`)
     })
 
 export const Workspaces = ({ monitor }) => Widget.Box({
