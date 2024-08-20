@@ -3,9 +3,10 @@
 {
   config = {
     boot.loader = {
-      systemd-boot = {
+      grub = {
         enable = true;
-        editor = false;
+        configurationLimit = 5;
+        device = "/dev/disk/by-uuid/B461-39A9";
       };
       timeout = 5;
     };

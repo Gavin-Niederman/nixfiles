@@ -8,42 +8,28 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     split-monitor-workspaces = {
-      url = "github:bivsk/split-monitor-workspaces?ref=bivsk";
+      url = "github:Duckonaut/split-monitor-workspaces";
       inputs.hyprland.follows = "hyprland";
     };
-
-    frc-nix = {
-      url = "github:frc3636/frc-nix?ref=svg-icons";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixneovim.url = "github:nixneovim/nixneovim";
     ags.url = "github:Aylur/ags";
   };
 
-  outputs = { nixpkgs, home-manager, hyprland, hyprlock, hypridle
-    , split-monitor-workspaces, frc-nix, nixneovim, ags, ... }:
+  outputs = { nixpkgs, home-manager, hyprland, split-monitor-workspaces
+    , nixneovim, ags, ... }:
     let
       nixosModules.default = import ./modules/nixos;
       homeModules.default = import ./modules/home;
 
       overlays = system: [
         nixneovim.overlays.default
-        frc-nix.overlays.default
         (final: prev: {
           ags = ags.packages.${system}.default;
           hyprlandPlugins =
             [ split-monitor-workspaces.packages.${system}.default ];
+          hyprland = hyprland.packages.${system}.hyprland;
           direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
           fvim = final.callPackage ./pkgs/fvim.nix { };
         })
@@ -57,8 +43,6 @@
             homeModules.default
             nixneovim.nixosModules.default
             hyprland.homeManagerModules.default
-            hyprlock.homeManagerModules.default
-            hypridle.homeManagerModules.default
           ];
         }
       ];

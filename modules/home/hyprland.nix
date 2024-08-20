@@ -11,6 +11,7 @@
           "${pkgs.waypaper}/bin/waypaper --restore"
           "${pkgs.ags}/bin/ags"
           "${pkgs.swayosd}/bin/swayosd-server"
+          "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         ];
 
         env = [
@@ -106,6 +107,8 @@
           "$mod SHIFT, Q, killactive"
           "$mod SHIFT, E, exit"
 
+          "$mod SHIFT, R, exec, ags -q; ags"
+
           "$mod, RETURN, exec, ${pkgs.wezterm}/bin/wezterm"
           "$mod, D, exec, ${pkgs.fuzzel}/bin/fuzzel"
           ", 107, exec, ${pkgs.grimblast}/bin/grimblast copy area"
@@ -128,14 +131,16 @@
 
     programs.hyprlock = {
       enable = true;
-      general = { grace = 3; };
-      input-fields = [{
-        placeholder_text = "<i>Enter password...</i>";
-        outline_thickness = 0;
-      }];
-      backgrounds = [{
-        path = "${config.home.homeDirectory}/backgrounds/pink_forest.png";
-      }];
+      settings = {
+        general = { grace = 3; };
+        input-fields = [{
+          placeholder_text = "<i>Enter password...</i>";
+          outline_thickness = 0;
+        }];
+        backgrounds = [{
+          path = "${config.home.homeDirectory}/backgrounds/pink_forest.png";
+        }];
+      };
     };
 
     services.hypridle = let
@@ -152,55 +157,61 @@
         '');
 
     in {
-      lockCmd =
-        "${pkgs.procps}/bin/pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
-      beforeSleepCmd = "${pkgs.systemd}/bin/loginctl lock-session";
-      afterSleepCmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+      enable = true;
+      settings = {
 
-      listeners = [
-        {
-          # 5 minutes
-          timeout = 300;
-          onTimeout = "${
-              make-cmd {
-                action = "notify";
-                cmd =
-                  "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
-              }
-            }/bin/idle-checked-notify";
-        }
-        {
-          # 10 minutes
-          timeout = 600;
-          onTimeout = "${
-              make-cmd {
-                action = "lock";
-                cmd = "${pkgs.systemd}/bin/loginctl lock-session";
-              }
-            }/bin/idle-checked-lock";
-        }
-        {
-          # 13 minutes
-          timeout = 780;
-          onTimeout = "${
-              make-cmd {
-                action = "screen-off";
-                cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
-              }
-            }/bin/idle-checked-screen-off";
-          onResume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
-        }
-        {
-          # 25 minutes
-          timeout = 1500;
-          onTimeout = "${
-              make-cmd {
-                action = "suspend";
-                cmd = "${pkgs.systemd}/bin/systemctl suspend";
-              }
-            }/bin/idle-checked-suspend";
-        }
-      ];
+        general = {
+          lock_cmd =
+            "${pkgs.procps}/bin/pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock";
+          before_sleep_cmd = "${pkgs.systemd}/bin/loginctl lock-session";
+          after_sleep_cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+        };
+
+        listeners = [
+          {
+            # 5 minutes
+            timeout = 300;
+            on-timeout = "${
+                make-cmd {
+                  action = "notify";
+                  cmd =
+                    "${pkgs.libnotify}/bin/notify-send 'Idle' 'You have been idle for 5 minutes'";
+                }
+              }/bin/idle-checked-notify";
+          }
+          {
+            # 10 minutes
+            timeout = 600;
+            on-timeout = "${
+                make-cmd {
+                  action = "lock";
+                  cmd = "${pkgs.systemd}/bin/loginctl lock-session";
+                }
+              }/bin/idle-checked-lock";
+          }
+          {
+            # 13 minutes
+            timeout = 780;
+            on-timeout = "${
+                make-cmd {
+                  action = "screen-off";
+                  cmd = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+                }
+              }/bin/idle-checked-screen-off";
+            on-resume = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
+          }
+          {
+            # 25 minutes
+            timeout = 1500;
+            on-timeout = "${
+                make-cmd {
+                  action = "suspend";
+                  cmd = "${pkgs.systemd}/bin/systemctl suspend";
+                }
+              }/bin/idle-checked-suspend";
+          }
+        ];
+      };
     };
   };
 }

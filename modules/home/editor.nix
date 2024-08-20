@@ -176,6 +176,7 @@
           github.vscode-github-actions
           usernamehw.errorlens
           streetsidesoftware.code-spell-checker
+          iliazeus.vscode-ansi
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "gruvbox-themes";
