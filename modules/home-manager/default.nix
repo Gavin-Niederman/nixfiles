@@ -5,6 +5,12 @@
   imports = [
     # Nix toolchain configuration
     ./nix.nix
+    # General application configuration
+    ./applications.nix
+    # Niri configuration
+    ./niri.nix
+    # Fonts and fontconfig
+    ./fonts.nix
   ];
 
   # Home manager output path
@@ -14,5 +20,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "24.11";
+  home.stateVersion = "24.05";
 }

@@ -1,5 +1,5 @@
 # Linux user configuration
-{ ... }:
+{ lib, ... }:
 
 {
   users.users = {
@@ -11,4 +11,10 @@
     };
   };
   security.sudo.wheelNeedsPassword = false;
+
+  home-manager = {
+    useGlobalPkgs = true;
+
+    users = lib.attrsets.genAttrs [ "gavin" ] (_: { });
+  };
 }
