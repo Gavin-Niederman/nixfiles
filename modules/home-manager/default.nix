@@ -11,6 +11,8 @@
     ./niri.nix
     # Fonts and fontconfig
     ./fonts.nix
+    # System theming
+    ./theme.nix
   ];
 
   # Home manager output path

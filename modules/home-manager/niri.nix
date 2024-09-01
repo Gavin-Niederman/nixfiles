@@ -10,11 +10,4 @@
   # };
 
   home.file.".config/niri/config.kdl".source = ./niri/config.kdl; 
-
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.capitaine-cursors;
-    name = "capitaine-cursors";
-    size = 42;
-  };
 }
