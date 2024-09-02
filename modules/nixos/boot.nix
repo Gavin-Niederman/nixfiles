@@ -20,9 +20,7 @@ let
   };
 in {
   boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-    };
+    efi = { canTouchEfiVariables = true; };
     grub = {
       enable = true;
       device = "nodev";
@@ -39,10 +37,7 @@ in {
   services.greetd = {
     enable = true;
     settings = {
-      default_session = {
-        command =
-          "${pkgs.cage}/bin/cage -s ${pkgs.greetd.gtkgreet}/bin/gtkgreet";
-      };
+      default_session = { command = "${pkgs.greetd.tuigreet}/bin/tuigreet"; };
     };
   };
   environment.etc."greetd/environments".text = ''

@@ -16,9 +16,14 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixneovim = {
+      url = "github:nixneovim/nixneovim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -31,9 +36,11 @@
         [
           # Get niri-stable and niri-unstable in pkgs
           niri.overlays.niri
+          # Get extra neovim plugins in pkgs
+          nixneovim.overlays.default
           (final: prev:
             {
-              # Add packages here
+              direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
             })
         ];
 
@@ -43,11 +50,16 @@
         nixos-modules.default
         # We do home-manager configuration in the nixos configuration instead of through the cli
         home-manager.nixosModules.home-manager
-
-        # Allow for easy home-manager and nixos configuration of niri
         
         # Add our home-manager configuration
-        { home-manager.sharedModules = [ niri.homeModules.config home-manager-modules.default ]; }
+        { home-manager.sharedModules = [
+            # Allow for easy home-manager and nixos configuration of niri
+            niri.homeModules.config
+            # Declarative neovim config
+            nixneovim.nixosModules.default
+            home-manager-modules.default
+          ];
+        }
       ];
     in {
       nixosConfigurations = {

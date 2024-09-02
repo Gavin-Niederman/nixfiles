@@ -49,7 +49,7 @@
     variant = "";
   };
 
-  environment.systemPackages = [pkgs.xdg-utils pkgs.niri-stable];
+  environment.systemPackages = [ pkgs.xdg-utils pkgs.niri-stable ];
   xdg = {
     autostart.enable = true;
     menus.enable = true;
@@ -59,27 +59,39 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gnome];
-    configPackages = [pkgs.niri-stable];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-wlr
+    ];
+    configPackages = [ pkgs.niri-stable ];
+    config.common = {
+      "org.freedesktop.portal.Secret" = [ "gnome-keyring" ];
+
+      "org.freedesktop.portal.FileChooser" = [ "gtk" ];
+
+      default = "wlr";
+    };
   };
 
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  # systemd.user.services.niri-flake-polkit = {
-  #   description = "PolicyKit Authentication Agent provided by niri-flake";
-  #   wantedBy = ["niri.service"];
-  #   wants = ["graphical-session.target"];
-  #   after = ["graphical-session.target"];
-  #   serviceConfig = {
-  #     Type = "simple";
-  #     ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
-  #     Restart = "on-failure";
-  #     RestartSec = 1;
-  #     TimeoutStopSec = 10;
-  #   };
-  # };
+  systemd.user.services.kde-polkit = {
+    description = "KDE PolicyKit Authentication Agent";
+    wantedBy = [ "niri.service" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart =
+        "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
   programs.dconf.enable = true;
   fonts.enableDefaultPackages = true;
 }

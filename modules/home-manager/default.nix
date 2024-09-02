@@ -13,6 +13,8 @@
     ./fonts.nix
     # System theming
     ./theme.nix
+    # vscode and neovim
+    ./editor.nix
   ];
 
   # Home manager output path

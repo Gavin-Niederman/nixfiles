@@ -1,8 +1,8 @@
 { ... }:
 
 {
-    fonts.fontconfig = {
-        enable = true;
-        defaultFonts.monospace = [ "FiraCode" ];
-    };
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts.monospace = [ "FiraCode" ];
+  };
 }
