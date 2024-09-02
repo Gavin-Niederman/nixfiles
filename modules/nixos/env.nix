@@ -12,9 +12,12 @@
     gnome.hitori # sudoku game
     gnome.atomix # puzzle game
     gnome-console # terminal emulator
+    gnome-text-editor
   ];
   # Useful utilities that happen to be made by gnome
   services.gnome.core-utilities.enable = true;
+  # Trash can and other fs stuff
+  services.gvfs.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
@@ -54,7 +57,10 @@
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
+      (pkgs.xdg-desktop-portal-gtk.override {
+        # Do not build portals that are in the gnome portal.
+        buildPortalsInGnome = false;
+      })
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-wlr
     ];
