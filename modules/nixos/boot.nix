@@ -37,7 +37,9 @@ in {
   services.greetd = {
     enable = true;
     settings = {
-      default_session = { command = "${pkgs.greetd.tuigreet}/bin/tuigreet"; };
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu -r -c niri";
+      };
     };
   };
   environment.etc."greetd/environments".text = ''

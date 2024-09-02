@@ -1,26 +1,20 @@
 # Desktop environment/window manager configuration
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # environment.gnome.excludePackages = with pkgs; [
-  #   cheese # webcam tool
-  #   gedit # text editor
-  #   epiphany # web browser
-  #   geary # email reader
-  #   gnome.tali # poker game
-  #   gnome.iagno # go game
-  #   gnome.hitori # sudoku game
-  #   gnome.atomix # puzzle game
-  # ];
-
-  # programs.niri.enable = true;
+  environment.gnome.excludePackages = with pkgs; [
+    cheese # webcam tool
+    gedit # text editor
+    epiphany # web browser
+    geary # email reader
+    gnome.tali # poker game
+    gnome.iagno # go game
+    gnome.hitori # sudoku game
+    gnome.atomix # puzzle game
+    gnome-console # terminal emulator
+  ];
+  # Useful utilities that happen to be made by gnome
+  services.gnome.core-utilities.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
