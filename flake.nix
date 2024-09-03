@@ -32,17 +32,15 @@
       nixos-modules.default = import ./modules/nixos;
 
       # Nixpkgs overlays allow us to add custom packages to the nixpkgs set
-      overlays = system:
-        [
-          # Get niri-stable and niri-unstable in pkgs
-          niri.overlays.niri
-          # Get extra neovim plugins in pkgs
-          nixneovim.overlays.default
-          (final: prev:
-            {
-              direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
-            })
-        ];
+      overlays = system: [
+        # Get niri-stable and niri-unstable in pkgs
+        niri.overlays.niri
+        # Get extra neovim plugins in pkgs
+        nixneovim.overlays.default
+        (final: prev: {
+          direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
+        })
+      ];
 
       # The default modules for all systems.
       # System specific modules are held in ./hosts/<hostname>
@@ -50,9 +48,10 @@
         nixos-modules.default
         # We do home-manager configuration in the nixos configuration instead of through the cli
         home-manager.nixosModules.home-manager
-        
+
         # Add our home-manager configuration
-        { home-manager.sharedModules = [
+        {
+          home-manager.sharedModules = [
             # Allow for easy home-manager and nixos configuration of niri
             niri.homeModules.config
             # Declarative neovim config

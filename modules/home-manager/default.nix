@@ -15,6 +15,8 @@
     ./theme.nix
     # vscode and neovim
     ./editor.nix
+    # Nushell starship carapace and fish
+    ./shell.nix
   ];
 
   # Home manager output path

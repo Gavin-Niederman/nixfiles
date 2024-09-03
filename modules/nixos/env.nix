@@ -64,6 +64,7 @@
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-wlr
     ];
+
     configPackages = [ pkgs.niri-stable ];
     config.common = {
       "org.freedesktop.portal.Secret" = [ "gnome-keyring" ];

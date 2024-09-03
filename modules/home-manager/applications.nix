@@ -25,4 +25,12 @@ in {
     '';
   };
   programs.fuzzel.enable = true;
+
+  programs.git = {
+    enable = true;
+
+    userEmail = "gavinniederman@gmail.com";
+    userName = "Gavin-Niederman";
+  };
+  programs.gh.enable = true;
 }

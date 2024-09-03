@@ -1,5 +1,5 @@
 # Linux user configuration
-{ lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   users.users = {
@@ -8,6 +8,7 @@
       isNormalUser = true;
       openssh.authorizedKeys.keys = [ ];
       extraGroups = [ "wheel" "networkmanager" "audio" ];
+      shell = pkgs.nushell;
     };
   };
   security.sudo.wheelNeedsPassword = false;
