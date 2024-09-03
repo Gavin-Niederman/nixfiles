@@ -21,9 +21,15 @@
       url = "github:nixneovim/nixneovim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # A GJS wrapper for declarative and functional GTK widgets
+    ags = { 
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ags, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -57,6 +63,8 @@
             # Declarative neovim config
             nixneovim.nixosModules.default
             home-manager-modules.default
+            # AGS config
+            ags.homeManagerModules.default
           ];
         }
       ];

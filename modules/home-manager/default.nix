@@ -17,6 +17,8 @@
     ./editor.nix
     # Nushell starship carapace and fish
     ./shell.nix
+    # AGS widgets config
+    ./widgets.nix
   ];
 
   # Home manager output path
