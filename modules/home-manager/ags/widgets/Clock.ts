@@ -7,6 +7,12 @@ function formatTime(date: Date) {
 }
 
 const time = Variable('', { poll: [1000, () => formatTime(new Date())] });
-export default function Clock() {
-    return Widget.Label({ label: time.bind() });
-}
+const Clock = () => Widget.Box({
+    className: "clock",
+    children: [
+        Widget.Icon({ icon: "clock" }),
+        Widget.Label({ label: time.bind() })
+    ],
+});
+
+export default Clock;

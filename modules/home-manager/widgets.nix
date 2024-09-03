@@ -11,7 +11,10 @@
     extraPackages = with pkgs; [ gtksourceview webkitgtk accountsservice ];
   };
   home.packages = with pkgs;
-    [ # Used to build ts ags config
+    [ 
+      # Used to build ts ags config
       bun
+      # Used for scss preproccesing
+      dart-sass
     ];
 }
