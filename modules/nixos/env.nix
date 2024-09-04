@@ -7,10 +7,10 @@
     gedit # text editor
     epiphany # web browser
     geary # email reader
-    gnome.tali # poker game
-    gnome.iagno # go game
-    gnome.hitori # sudoku game
-    gnome.atomix # puzzle game
+    tali # poker game
+    iagno # go game
+    hitori # sudoku game
+    atomix # puzzle game
     gnome-console # terminal emulator
     gnome-text-editor
   ];
@@ -46,7 +46,7 @@
     variant = "";
   };
 
-  environment.systemPackages = [ pkgs.xdg-utils pkgs.niri-stable ];
+  environment.systemPackages = [ pkgs.xdg-utils pkgs.niri-unstable ];
   xdg = {
     autostart.enable = true;
     menus.enable = true;

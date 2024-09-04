@@ -16,6 +16,8 @@ let
     '';
   };
 in {
+  home.packages = [ pkgs.rustup pkgs.clang ];
+
   programs.firefox = { enable = true; };
   programs.kitty = {
     enable = true;

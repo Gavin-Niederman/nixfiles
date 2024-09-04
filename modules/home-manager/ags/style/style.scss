@@ -42,6 +42,29 @@ $aurora-2: $nord-13;
 $aurora-3: $nord-14;
 $aurora-4: $nord-15;
 
+
+* {
+    color: $foreground-primary;
+    background-color: $background-primary;
+}
+
+window {
+    background: transparent;
+}
+
+.topbar-container {
+    background-color: $background-secondary;
+    
+    border-radius: 9.3px;
+    border: solid $aurora-1 4px;
+
+    margin-left: 28px;
+    margin-right: 28px;
+	margin-top: 12px;
+	margin-bottom: 0px;
+}
+
 .clock {
     background-color: $background-tertiary;
+    color: $foreground-primary;
 }
