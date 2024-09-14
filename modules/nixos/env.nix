@@ -12,7 +12,7 @@
     hitori # sudoku game
     atomix # puzzle game
     gnome-console # terminal emulator
-    gnome-text-editor
+    gnome-text-editor # text editor (again)
   ];
   # Useful utilities that happen to be made by gnome
   services.gnome.core-utilities.enable = true;
@@ -29,6 +29,8 @@
     pulse.enable = true;
   };
 
+
+  # Slop that nix-generate-config generates
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -47,6 +49,7 @@
   };
 
   environment.systemPackages = [ pkgs.xdg-utils pkgs.niri-unstable ];
+  # XDG makes everything better
   xdg = {
     autostart.enable = true;
     menus.enable = true;
@@ -54,6 +57,7 @@
     icons.enable = true;
   };
 
+  # Enable three portals for optimal compatibility.
   xdg.portal = {
     enable = true;
     extraPortals = [
@@ -75,6 +79,7 @@
     };
   };
 
+  # Enable polkit and gnome-keyring for authentication.
   security.polkit.enable = true;
   services.gnome.gnome-keyring.enable = true;
   systemd.user.services.kde-polkit = {
