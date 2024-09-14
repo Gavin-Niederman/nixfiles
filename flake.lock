@@ -1414,15 +1414,15 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1726273858,
-        "narHash": "sha256-+8t0XgxLfafsh5gi6DkwIReMl29lv6j7kQe4z3ErInA=",
-        "owner": "gavin-niederman",
+        "lastModified": 1726326927,
+        "narHash": "sha256-ZpSIi3ldnQwax/ARD5sfwiUOonRmlqI9J//yiy01QwU=",
+        "owner": "Supreeeme",
         "repo": "xwayland-satellite",
-        "rev": "26344afe3f76b2a712edfe46c57c5eba1c88ac8e",
+        "rev": "402a764a11e7e1ed4b4941353f9b773b9b134488",
         "type": "github"
       },
       "original": {
-        "owner": "gavin-niederman",
+        "owner": "Supreeeme",
         "repo": "xwayland-satellite",
         "type": "github"
       }

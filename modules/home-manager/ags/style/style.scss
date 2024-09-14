@@ -64,6 +64,11 @@ window {
 	margin-bottom: 0px;
 }
 
+.workspace.active {
+    background-color: $background-tertiary;
+    border: solid $aurora-1 4px;
+}
+
 .clock {
     background-color: $background-tertiary;
     color: $foreground-primary;

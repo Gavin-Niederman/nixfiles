@@ -17,7 +17,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # A external rootless xwayland program so that i can run stuff like GIMP
-    xwayland-satellite.url = "github:gavin-niederman/xwayland-satellite";
+    # I wrote this flake :3
+    xwayland-satellite.url = "github:Supreeeme/xwayland-satellite";
 
     nixneovim = {
       url = "github:nixneovim/nixneovim";

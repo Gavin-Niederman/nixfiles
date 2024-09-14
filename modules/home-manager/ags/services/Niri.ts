@@ -138,11 +138,20 @@ export class NiriService extends Service {
                 console.warn(`Workspace with id ${id} not found`);
                 return;
             }
+
+            this.workspaces.forEach(w => {
+                if (w.output === workspace.output) {
+                    w.is_active = false;
+                    w.is_focused = false;
+                }
+            })
+
             workspace.is_active = true;
             workspace.is_focused = focused;
             this._activeWorkspaces.filter(w => this.getWorkspace(w)?.output !== workspace.output ?? true);
             this._activeWorkspaces.push(id);
             this.notify("active-workspaces");
+            this.notify("workspaces");
             this.emit("workspace-activated", id);
         }
         else if ("WorkspaceActiveWindowChanged" in event) {
@@ -157,6 +166,7 @@ export class NiriService extends Service {
                 this._activeWindows[workspace_id] = active_window_id;
             }
             this.notify("active-windows");
+            this.notify("workspaces");
             this.emit("workspace-active-window-changed", workspace_id, active_window_id);
         }
         else if ("WindowsChanged" in event) {
