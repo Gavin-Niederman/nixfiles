@@ -7,6 +7,8 @@
   home.file.".config/niri/config.kdl".text = ''
     // fuck if i know
     spawn-at-startup "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+    // Xwayland support
+    spawn-at-startup "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
     // enable a cool wallpaper
     spawn-at-startup "${pkgs.swaybg}/bin/swaybg" "-i" "${config.home.homeDirectory}/Wallpapers/dragons_nord.png" "-m" "fill"
 
@@ -25,6 +27,8 @@
         GTK_IM_MODULE "fcitx"
         QT_IM_MODULE "fcitx"
         XMODIFIERS "@im=fcitx"
+        // Xwayland support
+        DISPLAY ":0"
     }
 
     cursor {
@@ -148,14 +152,14 @@
         Mod+K     { focus-window-up; }
         Mod+L     { focus-column-right; }
 
-        Mod+Ctrl+Left  { move-column-left; }
-        Mod+Ctrl+Down  { move-window-down; }
-        Mod+Ctrl+Up    { move-window-up; }
-        Mod+Ctrl+Right { move-column-right; }
-        Mod+Ctrl+H     { move-column-left; }
-        Mod+Ctrl+J     { move-window-down; }
-        Mod+Ctrl+K     { move-window-up; }
-        Mod+Ctrl+L     { move-column-right; }
+        Mod+Shift+Left  { move-column-left; }
+        Mod+Shift+Down  { move-window-down; }
+        Mod+Shift+Up    { move-window-up; }
+        Mod+Shift+Right { move-column-right; }
+        Mod+Shift+H     { move-column-left; }
+        Mod+Shift+J     { move-window-down; }
+        Mod+Shift+K     { move-window-up; }
+        Mod+Shift+L     { move-column-right; }
 
         // Alternative commands that move across workspaces when reaching
         // the first or last window in a column.
@@ -169,14 +173,14 @@
         Mod+Ctrl+Home { move-column-to-first; }
         Mod+Ctrl+End  { move-column-to-last; }
 
-        Mod+Shift+Left  { focus-monitor-left; }
-        Mod+Shift+Down  { focus-monitor-down; }
-        Mod+Shift+Up    { focus-monitor-up; }
-        Mod+Shift+Right { focus-monitor-right; }
-        Mod+Shift+H     { focus-monitor-left; }
-        Mod+Shift+J     { focus-monitor-down; }
-        Mod+Shift+K     { focus-monitor-up; }
-        Mod+Shift+L     { focus-monitor-right; }
+        Mod+Ctrl+Left  { focus-monitor-left; }
+        Mod+Ctrl+Down  { focus-monitor-down; }
+        Mod+Ctrl+Up    { focus-monitor-up; }
+        Mod+Ctrl+Right { focus-monitor-right; }
+        Mod+Ctrl+H     { focus-monitor-left; }
+        Mod+Ctrl+J     { focus-monitor-down; }
+        Mod+Ctrl+K     { focus-monitor-up; }
+        Mod+Ctrl+L     { focus-monitor-right; }
 
         Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
         Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
@@ -199,13 +203,13 @@
         Mod+Page_Up        { focus-workspace-up; }
         Mod+U              { focus-workspace-down; }
         Mod+I              { focus-workspace-up; }
-        Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-        Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-        Mod+Ctrl+U         { move-column-to-workspace-down; }
-        Mod+Ctrl+I         { move-column-to-workspace-up; }
+        Mod+Shift+Page_Down { move-column-to-workspace-down; }
+        Mod+Shift+Page_Up   { move-column-to-workspace-up; }
+        Mod+Shift+U         { move-column-to-workspace-down; }
+        Mod+Shift+I         { move-column-to-workspace-up; }
 
-        Mod+Shift+U         { move-workspace-down; }
-        Mod+Shift+I         { move-workspace-up; }
+        Mod+Ctrl+U         { move-workspace-down; }
+        Mod+Ctrl+I         { move-workspace-up; }
 
         Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
         Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
@@ -226,15 +230,15 @@
         Mod+7 { focus-workspace 7; }
         Mod+8 { focus-workspace 8; }
         Mod+9 { focus-workspace 9; }
-        Mod+Ctrl+1 { move-column-to-workspace 1; }
-        Mod+Ctrl+2 { move-column-to-workspace 2; }
-        Mod+Ctrl+3 { move-column-to-workspace 3; }
-        Mod+Ctrl+4 { move-column-to-workspace 4; }
-        Mod+Ctrl+5 { move-column-to-workspace 5; }
-        Mod+Ctrl+6 { move-column-to-workspace 6; }
-        Mod+Ctrl+7 { move-column-to-workspace 7; }
-        Mod+Ctrl+8 { move-column-to-workspace 8; }
-        Mod+Ctrl+9 { move-column-to-workspace 9; }
+        Mod+Shift+1 { move-column-to-workspace 1; }
+        Mod+Shift+2 { move-column-to-workspace 2; }
+        Mod+Shift+3 { move-column-to-workspace 3; }
+        Mod+Shift+4 { move-column-to-workspace 4; }
+        Mod+Shift+5 { move-column-to-workspace 5; }
+        Mod+Shift+6 { move-column-to-workspace 6; }
+        Mod+Shift+7 { move-column-to-workspace 7; }
+        Mod+Shift+8 { move-column-to-workspace 8; }
+        Mod+Shift+9 { move-column-to-workspace 9; }
 
         Mod+Comma  { consume-window-into-column; }
         Mod+Period { expel-window-from-column; }

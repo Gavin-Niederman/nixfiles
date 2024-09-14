@@ -88,9 +88,9 @@ export class NiriService extends Service {
 
     private _windows: Window[] = [];
     private _workspaces: Workspace[] = [];
-    private _outputs: { [key: string]: Output} = {};
+    private _outputs: { [key: string]: Output } = {};
 
-    private _activeWindows: {[key: number]: number} = [];
+    private _activeWindows: { [key: number]: number } = [];
     private _activeWorkspaces: number[] = [];
     private _focusedWindow: number | undefined = undefined;
 
@@ -122,6 +122,86 @@ export class NiriService extends Service {
     }
     readonly messageAsync = async (args: string[]) => {
         return Utils.execAsync(["niri", "msg", "-j", ...args]);
+    }
+
+    private readonly handleEvent = (event: Event) => {
+        if ("WorkspacesChanged" in event) {
+            const { workspaces } = event.WorkspacesChanged;
+            this._workspaces = workspaces;
+            this.notify("workspaces");
+            this.emit("changed");
+        }
+        else if ("WorkspaceActivated" in event) {
+            const { id, focused } = event.WorkspaceActivated;
+            const workspace = this.getWorkspace(id);
+            if (workspace === undefined) {
+                console.warn(`Workspace with id ${id} not found`);
+                return;
+            }
+            workspace.is_active = true;
+            workspace.is_focused = focused;
+            this._activeWorkspaces.filter(w => this.getWorkspace(w)?.output !== workspace.output ?? true);
+            this._activeWorkspaces.push(id);
+            this.notify("active-workspaces");
+            this.emit("workspace-activated", id);
+        }
+        else if ("WorkspaceActiveWindowChanged" in event) {
+            const { workspace_id, active_window_id } = event.WorkspaceActiveWindowChanged;
+            const workspace = this.getWorkspace(workspace_id);
+            if (workspace === undefined) {
+                console.warn(`Workspace with id ${workspace_id} not found`);
+                return;
+            }
+            workspace.active_window_id = active_window_id;
+            if (active_window_id !== undefined) {
+                this._activeWindows[workspace_id] = active_window_id;
+            }
+            this.notify("active-windows");
+            this.emit("workspace-active-window-changed", workspace_id, active_window_id);
+        }
+        else if ("WindowsChanged" in event) {
+            const { windows } = event.WindowsChanged;
+            this._windows = windows;
+            this.notify("windows");
+        }
+        else if ("WindowOpenedOrChanged" in event) {
+            const { window } = event.WindowOpenedOrChanged;
+            const existingWindow = this.getWindow(window.id);
+            if (existingWindow !== undefined) {
+                Object.assign(existingWindow, window);
+            } else {
+                this._windows.push(window);
+            }
+            this.notify("windows");
+            this.emit("window-added-or-changed", window.id);
+        }
+        else if ("WindowClosed" in event) {
+            const { id } = event.WindowClosed;
+            this._windows = this.windows.filter(w => w.id !== id);
+            this.notify("windows");
+            this.emit("window-closed", id);
+        }
+        else if ("WindowFocusChanged" in event) {
+            const { id } = event.WindowFocusChanged;
+            if (id === undefined) {
+                return;
+            }
+
+            this._focusedWindow = id;
+            this.notify("focused-window");
+            this.emit("window-focus-changed", id);
+            this.emit("changed");
+            const window = this.getWindow(id);
+
+            if (window === undefined) {
+                console.warn(`Window with id ${id} not found`);
+                return;
+            }
+            window.is_focused = true;
+        }
+        else {
+            console.warn(`Unknown niri event variant: ${Object.keys(event)[0]}`);
+        }
     }
 
     constructor() {
@@ -159,6 +239,7 @@ export class NiriService extends Service {
             ["niri", "msg", "-j", "event-stream"],
             (output) => {
                 const event: Event = JSON.parse(output);
+                this.handleEvent(event);
             },
             error => logError(error),
         );

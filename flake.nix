@@ -16,6 +16,8 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # A external rootless xwayland program so that i can run stuff like GIMP
+    xwayland-satellite.url = "github:gavin-niederman/xwayland-satellite";
 
     nixneovim = {
       url = "github:nixneovim/nixneovim";
@@ -23,13 +25,14 @@
     };
 
     # A GJS wrapper for declarative and functional GTK widgets
-    ags = { 
+    ags = {
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ags, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixneovim, niri, xwayland-satellite
+    , ags, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -45,6 +48,8 @@
         nixneovim.overlays.default
         (final: prev: {
           direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
+          xwayland-satellite =
+            xwayland-satellite.packages.${system}.xwayland-satellite;
         })
       ];
 

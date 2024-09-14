@@ -9,7 +9,7 @@ const Workspaces = (output: string) => Widget.Box({
                 className: "workspace",
                 label: workspace.name ?? workspace.idx.toString(),
                 onClicked: () => {
-                    Niri.message(["action", "focus-workspace", `${workspace.idx}`]);
+                    Niri.messageAsync(["action", "focus-workspace", `${workspace.idx}`]);
                     log(`Switched to workspace ${workspace.idx}`);
                 },
             });
