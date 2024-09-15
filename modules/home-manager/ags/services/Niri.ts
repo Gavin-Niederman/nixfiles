@@ -1,5 +1,5 @@
 import GLib from 'gi://GLib';
-import Gio from 'types/@girs/gio-2.0/gio-2.0';
+import Gio from 'gi://Gio';
 
 export interface Workspace {
     id: number,
