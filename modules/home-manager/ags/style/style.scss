@@ -1,47 +1,34 @@
-/* Nord Colors */
+// Catppuccin Machiatto Colors
+$rosewater: #f4dbd6;
+$flamingo: #f0c6c6;
+$pink: #f5bde6;
+$mauve: #c6a0f6;
+$red: #ed8796;
+$maroon: #ee99a0;
+$peach: #f5a97f;
+$yellow: #eed49f;
+$green: #a6da95;
+$teal: #8bd5ca;
+$sky: #91d7e3;
+$sapphire: #7dc4e4;
+$blue: #8aadf4;
+$lavender: #b7bdf8;
 
-/* Polar Night */
-$nord-0: #2e3440;
-$nord-1: #3b4252;
-$nord-2: #434c5e;
-$nord-3: #4c566a;
-/* Snow Storm */
-$nord-4: #d8dee9;
-$nord-5: #e5e9f0;
-$nord-6: #eceff4;
-/* Frost */
-$nord-7: #8fbcbb;
-$nord-8: #88c0d0;
-$nord-9: #81a1c1;
-$nord-10: #5e81ac;
-/* Aurora */
-$nord-11: #bf616a;
-$nord-12: #d08770;
-$nord-13: #ebcb8b;
-$nord-14: #a3be8c;
-$nord-15: #b48ead;
+$text: #cad3f5;
+$subtext-1: #b8c0e0;
+$subtext-0: #a5adcb;
 
-/* Rebindings for clarity */
-$background-primary: $nord-0;
-$background-secondary: $nord-1;
-$background-tertiary: $nord-2;
-$background-quaternary: $nord-3;
+$overlay-2: #939ab7;
+$overlay-1: #8087a2;
+$overlay-0: #6e738d;
 
-$foreground-primary: $nord-6;
-$foreground-secondary: $nord-5;
-$foreground-tertiary: $nord-4;
+$surface-2: #5b6078;
+$surface-1: #494d64;
+$surface-0: #363a4f;
 
-$frost-0: $nord-7;
-$frost-1: $nord-8;
-$frost-2: $nord-9;
-$frost-3: $nord-10;
-
-$aurora-0: $nord-11;
-$aurora-1: $nord-12;
-$aurora-2: $nord-13;
-$aurora-3: $nord-14;
-$aurora-4: $nord-15;
-
+$base: #24273a;
+$mantle: #1e2030;
+$crust: #181926;
 
 * {
     all: unset;
@@ -52,7 +39,7 @@ window {
 }
 
 separator {
-    border-top: 2px solid $frost-0;
+    border-top: 2px solid $sky;
     &.vertical {
         margin-top: 8px;
         margin-bottom: 8px;
@@ -68,7 +55,7 @@ separator {
 $sidebar-width: 32px;
 
 .sidebar-container {
-    background-color: $background-primary;
+    background-color: $base;
     min-width: $sidebar-width;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -76,17 +63,17 @@ $sidebar-width: 32px;
 
 .workspace {
     border-radius: 8px;
-    background-color: $foreground-primary;
+    background-color: $text;
     padding: 8px;
     margin-bottom: 6px;
 
     &.active, &:last-child.active {
-        background-color: $aurora-1;
+        background-color: $peach;
         min-height: 12px;
     }
 
     &:last-child {
-        background-color: $background-tertiary;
+        background-color: $surface-0;
         margin-bottom: 0;
     }
 }
@@ -97,17 +84,17 @@ $sidebar-width: 32px;
     border-radius: 8px;
 
     &.active {
-        background-color: $frost-0;
+        background-color: $sky;
     }
     &.focused {
-        background-color: $aurora-1;
+        background-color: $peach;
     }
 }
 
 .clock {
     margin-right: 50px;
     margin-bottom: 50px;
-    color: $foreground-primary;
+    color: $text;
 
     .time {
         font-size: 7rem;
@@ -122,13 +109,13 @@ $sidebar-width: 32px;
 
 .screen-bevels {
     .shadow {
-        box-shadow: inset 0 0 8px $background-primary;
+        box-shadow: inset 0 0 8px $base;
     }
 
     box.bevels {
         border-radius: 16px;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
-        box-shadow: 0 0 0 $sidebar-width $background-primary;
+        box-shadow: 0 0 0 $sidebar-width $base;
     }
 }

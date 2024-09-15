@@ -9,10 +9,14 @@
     spawn-at-startup "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
     // Xwayland support
     spawn-at-startup "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
+    
+    // start ags
+    spawn-at-startup "${pkgs.ags}/bin/ags" 
+
     // enable the swww daemon
     spawn-at-startup "${pkgs.swww}/bin/swww-daemon"
     // Set a cool wallpaper
-    spawn-at-startup "${pkgs.swww}/bin/swww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_nord.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
+    spawn-at-startup "${pkgs.swww}/bin/swww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_catppuccin_macchiato.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
 
     // Remove horrendous window decorations
     prefer-no-csd
@@ -101,7 +105,7 @@
         focus-ring {
             width 4
 
-            active-gradient from="#bf616a" to="#d08770" angle=45
+            active-gradient from="#f5a97f" to="#ed8796" angle=45
 
             inactive-color "#434c5e"
         }

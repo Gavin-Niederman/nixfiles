@@ -15,10 +15,12 @@
     };
   };
 
-  home.packages = with pkgs; [
-    adwaita-icon-theme
-    morewaita-icon-theme
-  ];
+  home.packages = with pkgs; [ adwaita-icon-theme morewaita-icon-theme ];
+
+  catppuccin = {
+    flavor = "macchiato";
+    accent = "sky";
+  };
 
   gtk = {
     enable = true;
@@ -33,9 +35,6 @@
       package = pkgs.morewaita-icon-theme;
     };
 
-    theme = {
-      name = "Nordic-darker";
-      package = pkgs.nordic;
-    };
+    catppuccin.enable = true;
   };
 }

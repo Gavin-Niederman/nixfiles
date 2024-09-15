@@ -30,10 +30,13 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Catpuccin themes
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { self, nixpkgs, home-manager, nixneovim, niri, xwayland-satellite
-    , ags, ... }@inputs:
+    , ags, catppuccin, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -71,6 +74,8 @@
             home-manager-modules.default
             # AGS config
             ags.homeManagerModules.default
+            # Catppuccin themes
+            catppuccin.homeManagerModules.catppuccin
           ];
         }
       ];
