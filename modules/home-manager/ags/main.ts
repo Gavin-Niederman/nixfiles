@@ -1,6 +1,6 @@
 import Gdk from "gi://Gdk";
 import Niri from "services/Niri";
-import TopBar from "widgets/TopBar";
+import SideBar from "widgets/SideBar";
 
 App.addIcons(App.configDir + '/assets');
 
@@ -10,5 +10,5 @@ const monitors = Array.from({ length: numMonitors }, (_, i) => i);
 App.config({
     // generated in config.js
     style: "/tmp/ags/style.css",
-    windows: monitors.map((monitor) => TopBar(monitor, Object.keys(Niri.outputs)[monitor])),
+    windows: monitors.map((monitor) => SideBar(monitor, Object.keys(Niri.outputs)[monitor])),
 });

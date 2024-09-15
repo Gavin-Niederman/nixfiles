@@ -44,27 +44,39 @@ $aurora-4: $nord-15;
 
 
 * {
+    all: unset;
     color: $foreground-primary;
-    background-color: $background-primary;
 }
 
 window {
     background: transparent;
 }
 
-.topbar-container {
-    background-color: $background-secondary;
-    
-    border-radius: 9.3px;
-    border: solid $aurora-1 4px;
-
-    margin-left: 28px;
-    margin-right: 28px;
-	margin-top: 12px;
-	margin-bottom: 0px;
+.sidebar-container {
+    background-color: $background-primary;
+    min-width: 32px;
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
 
-.workspace.active {
+.workspace {
+    border-radius: 8px;
+    background-color: $foreground-primary;
+    padding: 8px;
+    margin-bottom: 6px;
+
+    &.active, &:last-child.active {
+        background-color: $aurora-1;
+        min-height: 12px;
+    }
+
+    &:last-child {
+        background-color: $background-tertiary;
+        margin-bottom: 0;
+    }
+}
+
+.window.focused {
     background-color: $background-tertiary;
     border: solid $aurora-1 4px;
 }

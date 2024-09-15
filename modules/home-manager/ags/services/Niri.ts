@@ -197,10 +197,13 @@ export class NiriService extends Service {
                 return;
             }
 
+            const focusedWindow = this.focused_window;
+            if (focusedWindow !== undefined) {
+                focusedWindow.is_focused = false;
+            }
+
             this._focusedWindow = id;
-            this.notify("focused-window");
-            this.emit("window-focus-changed", id);
-            this.emit("changed");
+
             const window = this.getWindow(id);
 
             if (window === undefined) {
@@ -208,6 +211,11 @@ export class NiriService extends Service {
                 return;
             }
             window.is_focused = true;
+
+            this.notify("focused-window");
+            this.notify("windows");
+            this.emit("window-focus-changed", id);
+            this.emit("changed");
         }
         else {
             console.warn(`Unknown niri event variant: ${Object.keys(event)[0]}`);

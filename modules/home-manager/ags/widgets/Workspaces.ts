@@ -2,13 +2,15 @@ import Niri from "services/Niri";
 
 const Workspace = (idx: number, active: boolean) => Widget.Button({
     classNames: active ? ["workspace", "active"] : ["workspace"],
-    label: idx.toString(),
+    hexpand: false,
     onClicked: () => {
         Niri.messageAsync(["action", "focus-workspace", idx.toString()]);
     },
 });
 
-const Workspaces = (output: string) => Widget.Box({
+const Workspaces = (output: string, vertical: boolean) => Widget.Box({
+    vertical,
+    hpack: "center",
     className: "workspaces",
     children: Niri.bind("workspaces").as(workspaces =>
         workspaces.filter(w => w.output === output)
