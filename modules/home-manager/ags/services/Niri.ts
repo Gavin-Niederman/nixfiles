@@ -197,11 +197,7 @@ export class NiriService extends Service {
                 return;
             }
 
-            const focusedWindow = this.focused_window;
-            if (focusedWindow !== undefined) {
-                focusedWindow.is_focused = false;
-            }
-
+            this.windows.forEach(w => w.is_focused = false);
             this._focusedWindow = id;
 
             const window = this.getWindow(id);

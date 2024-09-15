@@ -9,8 +9,10 @@
     spawn-at-startup "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
     // Xwayland support
     spawn-at-startup "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
-    // enable a cool wallpaper
-    spawn-at-startup "${pkgs.swaybg}/bin/swaybg" "-i" "${config.home.homeDirectory}/Wallpapers/dragons_nord.png" "-m" "fill"
+    // enable the swww daemon
+    spawn-at-startup "${pkgs.swww}/bin/swww-daemon"
+    // Set a cool wallpaper
+    spawn-at-startup "${pkgs.swww}/bin/swww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_nord.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
 
     // Remove horrendous window decorations
     prefer-no-csd

@@ -5,6 +5,7 @@
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
+    anonymousPro
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 }

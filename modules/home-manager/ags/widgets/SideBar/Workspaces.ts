@@ -14,7 +14,7 @@ const Workspaces = (output: string, vertical: boolean) => Widget.Box({
     className: "workspaces",
     children: Niri.bind("workspaces").as(workspaces =>
         workspaces.filter(w => w.output === output)
-            .sort((a, b) => a.id - b.id)
+            .sort((a, b) => a.idx - b.idx)
             .map(workspace => Workspace(workspace.idx, workspace.is_active))
     )
 });

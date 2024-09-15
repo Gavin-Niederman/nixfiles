@@ -15,6 +15,11 @@
     };
   };
 
+  home.packages = with pkgs; [
+    adwaita-icon-theme
+    morewaita-icon-theme
+  ];
+
   gtk = {
     enable = true;
 
@@ -24,8 +29,8 @@
     };
 
     iconTheme = {
-      name = "Nordic-darker";
-      package = pkgs.nordic;
+      name = "MoreWaita";
+      package = pkgs.morewaita-icon-theme;
     };
 
     theme = {

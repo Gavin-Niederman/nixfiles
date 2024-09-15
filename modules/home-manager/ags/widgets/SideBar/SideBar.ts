@@ -1,7 +1,5 @@
-import Clock from "widgets/Clock";
-import Workspaces from "widgets/Workspaces";
-import Windows from "widgets/Windows";
-import Niri from "services/Niri";
+import Workspaces from "./Workspaces";
+import Windows from "./Windows";
 
 function SideBar(monitor: number, output: string) {
     return Widget.Window({
@@ -16,6 +14,7 @@ function SideBar(monitor: number, output: string) {
                 vertical: true,
                 children: [
                     Workspaces(output, true),
+                    Widget.Separator({ vertical: true }),
                     Windows()
                 ]
             }),
