@@ -1,5 +1,6 @@
 const ScreenBevels = (monitor: number) => Widget.Window({
     monitor,
+    name: `screen-bevels-${monitor}`,
     anchor: ["top", "bottom", "right", "left"],
     className: "screen-bevels",
     clickThrough: true,

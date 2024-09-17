@@ -1,0 +1,14 @@
+.clock {
+    margin-right: 50px;
+    margin-bottom: 50px;
+    color: $text;
+    font-family: "Anonymous Pro", monospace;
+
+    .time {
+        font-size: 7rem;
+    }
+
+    .date {
+        font-size: 1.7rem;
+    }
+}

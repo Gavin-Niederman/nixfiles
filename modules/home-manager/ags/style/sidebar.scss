@@ -1,0 +1,93 @@
+$sidebar-width: 32px;
+
+.sidebar-container {
+    background-color: $base;
+    min-width: $sidebar-width;
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+.workspace {
+    border-radius: 8px;
+    background-color: $text;
+    padding: 8px;
+    margin-bottom: 6px;
+
+    &.active,
+    &:last-child.active {
+        background-color: $peach;
+        min-height: 12px;
+    }
+
+    &:last-child {
+        background-color: $surface-0;
+        margin-bottom: 0;
+    }
+}
+
+.window {
+    margin-bottom: 4px;
+    padding: 4px;
+    border-radius: 8px;
+
+    &.active {
+        background-color: $sky;
+    }
+
+    &.focused {
+        background-color: $peach;
+    }
+}
+
+
+.battery-percent {
+    font-size: 0.8rem;
+    color: $text;
+    margin-bottom: 4px;
+    font-family: "Anonymous Pro", monospace;
+    font-weight: bold;
+}
+
+.battery-bar {
+    trough {
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+
+    &.critical trough block.filled {
+        background-color: $red;
+    }
+
+    &.low trough block.filled {
+        background-color: $maroon;
+    }
+
+    &.medium trough block.filled {
+        background-color: $peach;
+    }
+
+    &.high trough block.filled {
+        background-color: $yellow;
+    }
+
+    &.full trough block.filled {
+        background-color: $green;
+    }
+
+    &.charging trough block.filled {
+        background-color: $green;
+    }
+}
+
+.screen-bevels {
+    .shadow {
+        box-shadow: inset 8px 0 8px -8px transparentize(#000, 0.2);
+    }
+
+    box.bevels {
+        border-radius: 16px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        box-shadow: 0 0 0 $sidebar-width $base;
+    }
+}

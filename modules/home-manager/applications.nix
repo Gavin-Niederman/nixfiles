@@ -9,7 +9,10 @@
     font.name = "FiraCode Nerd Font Mono";
     catppuccin.enable = true;
   };
-  programs.fuzzel.enable = true;
+  programs.fuzzel = {
+    enable = true;
+    catppuccin.enable = true;
+  };
 
   programs.git = {
     enable = true;

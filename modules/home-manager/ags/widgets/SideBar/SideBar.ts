@@ -1,5 +1,6 @@
 import Workspaces from "./Workspaces";
 import Windows from "./Windows";
+import Battery from "./Battery";
 
 function SideBar(monitor: number, output: string) {
     return Widget.Window({
@@ -18,6 +19,13 @@ function SideBar(monitor: number, output: string) {
                     Windows()
                 ]
             }),
+            endWidget: Widget.Box({
+                vertical: true,
+                vpack: "end",
+                children: [
+                    Battery(true),
+                ]
+            })
         }),
         exclusivity: "exclusive",
     });

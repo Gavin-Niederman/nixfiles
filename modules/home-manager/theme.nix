@@ -35,6 +35,12 @@
       package = pkgs.morewaita-icon-theme;
     };
 
-    catppuccin.enable = true;
+    theme = {
+      name = "catppuccin-macchiato-sky-standard";
+      package = pkgs.catppuccin-gtk.override {
+        variant = "macchiato";
+        accents = [ "sky" ];
+      };
+    };
   };
 }

@@ -1,0 +1,41 @@
+window {
+    background: transparent;
+}
+
+separator {
+    border-top: 2px solid $sky;
+
+    &.vertical {
+        margin-top: 8px;
+        margin-bottom: 8px;
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+
+    &.horizontal {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+}
+
+levelbar {
+    border-radius: 16px;
+
+    &.vertical trough {
+        min-height: 64pt;
+    }
+
+    &.horizontal trough {
+        min-width: 64pt;
+    }
+
+    .filled {
+        border-radius: 16px;
+        background-color: $sky;
+    }
+
+    .empty {
+        border-radius: 16px;
+        background-color: $surface-1;
+    }
+}

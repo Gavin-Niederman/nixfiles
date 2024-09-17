@@ -100,4 +100,7 @@
   security.pam.services.swaylock = { };
   programs.dconf.enable = true;
   fonts.enableDefaultPackages = true;
+
+  # For battery status
+  services.upower.enable = true;
 }
