@@ -28,12 +28,12 @@ const Battery = (vertical: boolean) => Widget.Box({
         Widget.Stack({
             transition: "slide_up",
             children: {
-                "critical": BatteryIcon("battery-critical-symbolic"),
-                "low": BatteryIcon("battery-low-symbolic"),
-                "medium": BatteryIcon("battery-medium-symbolic"),
-                "high": BatteryIcon("battery-high-symbolic"),
-                "full": BatteryIcon("battery-full-symbolic"),
-                "charging": BatteryIcon("battery-charging-symbolic"),
+                "critical": BatteryIcon("bat-critical-symbolic"),
+                "low": BatteryIcon("bat-low-symbolic"),
+                "medium": BatteryIcon("bat-medium-symbolic"),
+                "high": BatteryIcon("bat-high-symbolic"),
+                "full": BatteryIcon("bat-full-symbolic"),
+                "charging": BatteryIcon("bat-charging-symbolic"),
             },
             shown: Utils.merge([
                 BatteryService.bind("percent").as(p => level(p)),
@@ -43,7 +43,7 @@ const Battery = (vertical: boolean) => Widget.Box({
         }),
         Widget.Label({
             className: "battery-percent",
-            label: BatteryService.bind("percent").as(p => `${p}%`),
+            label: BatteryService.bind("percent").as(p => `${p.toFixed(0)}%`),
         }),
         Widget.LevelBar({
             vertical,
