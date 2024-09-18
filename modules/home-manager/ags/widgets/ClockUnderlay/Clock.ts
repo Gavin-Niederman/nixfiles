@@ -1,5 +1,3 @@
-import Gtk from "gi://Gtk";
-
 function formatTime(date: Date) {
     return Intl.DateTimeFormat('en-US', {
         dateStyle: undefined,

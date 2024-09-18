@@ -12,6 +12,8 @@
     ./env.nix
     # Font installation
     ./fonts.nix
+    # Keyboard input configuration (fxitx, power button, etc...)
+    ./input.nix
   ];
 
   # The version of nixpkgs that we are using to configure the system.
