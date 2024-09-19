@@ -18,19 +18,60 @@ separator {
     }
 }
 
-levelbar {
+$slider-size: 16px;
+$slider-shift: $slider-size / 2;
+
+scale {
+    &.vertical {
+        margin-bottom: $slider-shift;
+    }
+    &.horizontal {
+        margin-left: $slider-shift;
+    }
+    trough {
+        background-color: $surface-1;
+        border-radius: 16px;
+    }
+}
+
+levelbar,
+scale {
     border-radius: 16px;
 
-    &.vertical trough {
-        min-height: 64pt;
+    &.vertical {
+        trough {
+            min-height: 64px;
+        }
+        highlight {
+            min-width: $slider-size;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
     }
 
-    &.horizontal trough {
-        min-width: 64pt;
+    &.horizontal {
+        trough {
+            min-width: 64px;
+        }
+        highlight {
+            min-height: $slider-size;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
     }
 
-    .filled {
-        border-radius: 16px;
+    slider {
+        background-color: $text;
+        border-radius: 100%;
+
+        min-height: $slider-size;
+        min-width: $slider-size;
+    }
+
+    .filled,
+    highlight {
+        min-width: $slider-size;
+        border-radius: $slider-size;
         background-color: $sky;
     }
 

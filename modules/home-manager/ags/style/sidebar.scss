@@ -39,13 +39,23 @@ $sidebar-width: 32px;
     }
 }
 
-
-.battery-percent {
+.percent-display {
     font-size: 0.8rem;
     color: $text;
     margin-bottom: 4px;
     font-family: "Anonymous Pro", monospace;
     font-weight: bold;
+}
+
+.volume-slider {
+    trough {
+        margin-right: 8px;
+        margin-left: 8px;
+        margin-top: 8px;
+    }
+    &.muted trough highlight {
+        background-color: $surface-1;
+    }
 }
 
 .battery-bar {

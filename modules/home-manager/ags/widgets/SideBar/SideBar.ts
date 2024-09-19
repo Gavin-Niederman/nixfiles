@@ -1,6 +1,7 @@
 import Workspaces from "./Workspaces";
 import Windows from "./Windows";
 import Battery from "./Battery";
+import Audio from "./Audio";
 
 function SideBar(monitor: number, output: string) {
     return Widget.Window({
@@ -23,6 +24,7 @@ function SideBar(monitor: number, output: string) {
                 vertical: true,
                 vpack: "end",
                 children: [
+                    Audio(true),
                     Battery(true),
                 ]
             })

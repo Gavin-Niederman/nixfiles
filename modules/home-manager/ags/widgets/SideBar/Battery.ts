@@ -39,10 +39,10 @@ const Battery = (vertical: boolean) => Widget.Box({
                 BatteryService.bind("percent").as(p => level(p)),
                 BatteryService.bind("charging")],
                 (level, charging) => charging ? "charging" : level
-            )
+            ),
         }),
         Widget.Label({
-            className: "battery-percent",
+            className: "percent-display",
             label: BatteryService.bind("percent").as(p => `${p.toFixed(0)}%`),
         }),
         Widget.LevelBar({
