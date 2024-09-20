@@ -8,9 +8,9 @@ const SystemPanel = () => Widget.Window({
     child: Widget.Box({
         className: "system-panel-container",
         children: [
-            Widget.Label({label: "Hiiiii :3"})
+            Widget.Label({ label: "Hiiiii :3" })
         ],
     }),
-}).keybind("Escape", (self) => App.closeWindow("system-panel"));
+}).keybind("Escape", () => App.closeWindow("system-panel"));
 
 export default SystemPanel;
