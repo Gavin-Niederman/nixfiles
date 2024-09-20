@@ -1,4 +1,5 @@
 import Gtk from "gi://Gtk";
+import { SymbolicIcon } from "widgets/shared";
 
 const AudioService = await Service.import('audio');
 
@@ -8,14 +9,14 @@ const Audio = (vertical: boolean) => Widget.Box({
     children: [
         Widget.Stack({
             children: {
-                "on": Widget.Icon({
+                "on": SymbolicIcon({
                     icon: "speaker-on-symbolic",
-                    css: "color: #cad3f5",
+                    onClicked: () => AudioService.speaker.is_muted = !AudioService.speaker.is_muted,
                     size: 24
                 }),
-                "off": Widget.Icon({
+                "off": SymbolicIcon({
                     icon: "speaker-off-symbolic",
-                    css: "color: #cad3f5",
+                    onClicked: () => AudioService.speaker.is_muted = !AudioService.speaker.is_muted,
                     size: 24
                 })
             },

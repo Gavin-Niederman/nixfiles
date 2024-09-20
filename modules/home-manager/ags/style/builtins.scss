@@ -1,3 +1,5 @@
+@use "sass:math";
+
 window {
     background: transparent;
 }
@@ -19,17 +21,10 @@ separator {
 }
 
 $slider-size: 16px;
-$slider-shift: $slider-size / 2;
 
 scale {
-    &.vertical {
-        margin-bottom: $slider-shift;
-    }
-    &.horizontal {
-        margin-left: $slider-shift;
-    }
     trough {
-        background-color: $surface-1;
+        background-color: $surface-0;
         border-radius: 16px;
     }
 }
@@ -42,10 +37,9 @@ scale {
         trough {
             min-height: 64px;
         }
+
         highlight {
             min-width: $slider-size;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
         }
     }
 
@@ -53,19 +47,10 @@ scale {
         trough {
             min-width: 64px;
         }
+
         highlight {
             min-height: $slider-size;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
         }
-    }
-
-    slider {
-        background-color: $text;
-        border-radius: 100%;
-
-        min-height: $slider-size;
-        min-width: $slider-size;
     }
 
     .filled,
@@ -77,6 +62,14 @@ scale {
 
     .empty {
         border-radius: 16px;
-        background-color: $surface-1;
+        background-color: $surface-0;
     }
+}
+
+image.symbolic {
+    transition: all 0.2s;
+    color: $text;
+}
+.icon-container.hoverable:hover image.symbolic {
+    color: $sky;
 }

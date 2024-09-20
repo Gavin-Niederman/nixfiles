@@ -1,3 +1,5 @@
+import { SymbolicIcon } from "widgets/shared";
+
 const BatteryService = await Service.import("battery");
 
 function level(percent: number) {
@@ -15,9 +17,8 @@ function level(percent: number) {
     }
 }
 
-const BatteryIcon = (icon: string) => Widget.Icon({
+const BatteryIcon = (icon: string) => SymbolicIcon({
     icon,
-    css: "color: #cad3f5",
     size: 24
 });
 

@@ -103,4 +103,6 @@
 
   # For battery status
   services.upower.enable = true;
+  # For power profile configuration
+  services.power-profiles-daemon.enable = true;
 }
