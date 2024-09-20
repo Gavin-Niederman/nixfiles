@@ -87,6 +87,12 @@
             ++ [{ nixpkgs.overlays = overlays "x86_64-linux"; }];
           system = "x86_64-linux";
         };
+        noctiluca = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./hosts/noctiluca/configuration.nix ] ++ default-modules
+            ++ [{ nixpkgs.overlays = overlays "x86_64-linux"; }];
+          system = "x86_64-linux";
+        };
       };
     };
 }

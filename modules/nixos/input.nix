@@ -10,6 +10,10 @@
     };
   };
 
-  home-manager.sharedModules =
-    [{ niri.autostart.fcitx5.package = config.i18n.inputMethod.package; }];
+  home-manager.sharedModules = [{
+    programs.niri.extraConfig = ''
+      // Input method
+      spawn-at-startup "${config.i18n.inputMethod.package}/bin/fcitx5" "-d" "-r"
+    '';
+  }];
 }

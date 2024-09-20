@@ -3,12 +3,22 @@
 
 {
   options = {
-    niri.autostart.fcitx5.package = lib.mkOption { type = lib.types.package; };
+    programs.niri.extraConfig = lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+    };
   };
   config = {
     home.file."Wallpapers/".source = ./wallpaper;
 
     home.file.".config/niri/config.kdl".text = ''
+      // Extra Config
+
+      ${config.programs.niri.extraConfig}
+      
+      // End Extra Config.
+      // The rest of this file is default config.
+
       // fuck if i know
       spawn-at-startup "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
       // Xwayland support
@@ -21,9 +31,6 @@
       spawn-at-startup "${pkgs.swww}/bin/swww-daemon"
       // Set a cool wallpaper
       spawn-at-startup "${pkgs.swww}/bin/swww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_catppuccin_macchiato.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
-
-      // Input method
-      spawn-at-startup "${config.niri.autostart.fcitx5.package}/bin/fcitx5" "-d" "-r"
 
       // Remove horrendous window decorations
       prefer-no-csd
