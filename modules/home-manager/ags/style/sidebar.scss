@@ -47,17 +47,6 @@ $sidebar-width: 32px;
     font-weight: bold;
 }
 
-.volume-slider {
-    trough {
-        margin-right: 8px;
-        margin-left: 8px;
-        margin-bottom: 8px;
-    }
-    &.muted trough highlight {
-        background-color: $surface-1;
-    }
-}
-
 .battery-bar {
     trough {
         margin-right: 8px;

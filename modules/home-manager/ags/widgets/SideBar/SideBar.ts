@@ -1,7 +1,7 @@
 import Workspaces from "./Workspaces";
 import Windows from "./Windows";
 import Battery from "./Battery";
-import Audio from "./Audio";
+import { Audio, Dummy } from "widgets";
 import QuickSettingsToggle from "./QuickSettingsToggle";
 
 const BatteryService = await Service.import("battery");
@@ -26,18 +26,12 @@ function SideBar(monitor: number, output: string) {
             endWidget: Widget.Box({
                 vertical: true,
                 vpack: "end",
-                children: BatteryService.bind("available").as((available) => {
-                    let widgets: any[] = [
+                children: BatteryService.bind("available").as((available) => [
                         QuickSettingsToggle(),
                         Widget.Separator({ vertical: true }),
                         Audio(true),
-                    ];
-                    if (available) {
-                        widgets.push(Battery(true));
-                    }
-
-                    return widgets;
-                }),
+                        available ? Battery(true) : Dummy()
+                    ]),
             })
         }),
         exclusivity: "exclusive",

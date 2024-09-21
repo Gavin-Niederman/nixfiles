@@ -64,11 +64,3 @@ scale {
         background-color: $surface-0;
     }
 }
-
-image.symbolic {
-    transition: all 0.2s;
-    color: $text;
-}
-.icon-container.hoverable:hover image.symbolic {
-    color: $sky;
-}

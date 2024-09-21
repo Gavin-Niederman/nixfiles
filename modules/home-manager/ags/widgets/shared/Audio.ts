@@ -1,9 +1,8 @@
 import Gtk from "gi://Gtk";
-import { SymbolicIcon } from "widgets";
-
+import { SymbolicIcon, Dummy } from "widgets";
 const AudioService = await Service.import('audio');
 
-const Audio = (vertical: boolean) => Widget.Box({
+const Audio = (vertical: boolean, drawValue: boolean = true) => Widget.Box({
     className: "audio",
     vertical,
     children: [
@@ -22,10 +21,10 @@ const Audio = (vertical: boolean) => Widget.Box({
             },
             shown: AudioService.speaker.bind("is_muted").as(m => m ? "off" : "on"),
         }),
-        Widget.Label({
+        drawValue ? Widget.Label({
             className: "percent-display",
             label: AudioService.speaker.bind("volume").as(p => `${(p * 100).toFixed(0)}%`),
-        }),
+        }) : Dummy(),
         Widget.Slider({
             classNames: AudioService.speaker.bind("is_muted")
                 .as(muted =>
@@ -33,8 +32,8 @@ const Audio = (vertical: boolean) => Widget.Box({
                         .concat(vertical ? ["vertical"] : ["horizontal"])
                         .concat(muted ? ["muted"] : [])
                 ),
-            orientation: Gtk.Orientation.VERTICAL,
-            inverted: true,
+            orientation: vertical ? Gtk.Orientation.VERTICAL : Gtk.Orientation.HORIZONTAL,
+            inverted: vertical,
             drawValue: false,
             value: AudioService.speaker.bind("volume").as(v => v * 100),
             min: 0,

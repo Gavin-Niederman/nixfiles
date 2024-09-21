@@ -1,4 +1,6 @@
+import { Audio, Dummy } from "widgets";
 import Brightness from "./Brightness";
+import { Brightness as BrightnessService } from "services";
 
 const QuickSettings = () => Widget.Window({
     visible: true,
@@ -12,7 +14,8 @@ const QuickSettings = () => Widget.Window({
         vertical: true,
         children: [
             // Brightness slider
-            Brightness(),
+            BrightnessService.available ? Brightness() : Dummy(),
+            Audio(false, false),
         ],
     }),
 }).keybind("Escape", () => App.closeWindow("quick-settings"));

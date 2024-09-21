@@ -1,9 +1,16 @@
 @import "constants.scss";
 @import "colors.scss";
+
+// Gtk widget styles
 @import "builtins.scss";
+// Sidebar styles
 @import "sidebar.scss";
+// Clock underlay styles
 @import "clock.scss";
+// Quick settings styles
 @import "quick-settings.scss";
+// 'Shared' widget styles (widgets/shared)
+@import "shared.scss";
 
 * {
     all: unset;

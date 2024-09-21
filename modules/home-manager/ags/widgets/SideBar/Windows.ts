@@ -1,7 +1,6 @@
 import { Niri } from "services";
+import { Dummy } from "widgets";
 const Apps = await Service.import("applications");
-
-const Dummy = () => Widget.Box({ visible: false });
 
 const Window = (app_id: string | undefined, id: number, focused: boolean, active: boolean) => {
     if (!app_id) return Dummy();
