@@ -1,4 +1,4 @@
-import { SymbolicIcon } from "widgets/shared";
+import { SymbolicIcon } from "widgets";
 
 const BatteryService = await Service.import("battery");
 

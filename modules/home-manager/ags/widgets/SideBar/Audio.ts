@@ -1,5 +1,5 @@
 import Gtk from "gi://Gtk";
-import { SymbolicIcon } from "widgets/shared";
+import { SymbolicIcon } from "widgets";
 
 const AudioService = await Service.import('audio');
 

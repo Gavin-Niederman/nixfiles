@@ -1,4 +1,4 @@
-import Niri from "services/Niri";
+import { Niri } from "services";
 
 const Workspace = (idx: number, active: boolean) => Widget.Button({
     classNames: active ? ["workspace", "active"] : ["workspace"],

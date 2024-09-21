@@ -2,7 +2,7 @@ import Workspaces from "./Workspaces";
 import Windows from "./Windows";
 import Battery from "./Battery";
 import Audio from "./Audio";
-import SystemPanelToggle from "./SystemPanelToggle";
+import QuickSettingsToggle from "./QuickSettingsToggle";
 
 function SideBar(monitor: number, output: string) {
     return Widget.Window({
@@ -25,7 +25,7 @@ function SideBar(monitor: number, output: string) {
                 vertical: true,
                 vpack: "end",
                 children: [
-                    SystemPanelToggle(),
+                    QuickSettingsToggle(),
                     Widget.Separator({ vertical: true }),
                     Audio(true),
                     Battery(true),

@@ -1,4 +1,4 @@
-import Niri from "services/Niri";
+import { Niri } from "services";
 const Apps = await Service.import("applications");
 
 const Dummy = () => Widget.Box({ visible: false });

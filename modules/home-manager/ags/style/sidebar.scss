@@ -95,7 +95,7 @@ $sidebar-width: 32px;
     }
 
     box.bevels {
-        border-radius: 16px;
+        border-radius: $corner-radius;
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
         box-shadow: 0 0 0 $sidebar-width $base;

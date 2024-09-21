@@ -1,0 +1,16 @@
+.quick-settings-container {
+    margin: 8px;
+    background-color: $base;
+    padding: 8px;
+    border-radius: $corner-radius;
+
+    scale.horizontal trough {
+        min-width: 120px;
+    }
+
+    .slider-row {
+        image {
+            margin-right: 4px;
+        }
+    }
+}

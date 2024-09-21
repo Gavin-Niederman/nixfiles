@@ -18,7 +18,7 @@
     # Nushell starship carapace and fish
     ./shell.nix
     # AGS widgets config
-    ./widgets.nix
+    ./ags.nix
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

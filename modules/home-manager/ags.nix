@@ -17,5 +17,7 @@
       bun
       # Used for scss preproccesing
       dart-sass
+      # Used for brightness control
+      brightnessctl
     ];
 }
