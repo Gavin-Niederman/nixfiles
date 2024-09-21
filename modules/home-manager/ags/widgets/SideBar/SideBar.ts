@@ -4,6 +4,8 @@ import Battery from "./Battery";
 import Audio from "./Audio";
 import QuickSettingsToggle from "./QuickSettingsToggle";
 
+const BatteryService = await Service.import("battery");
+
 function SideBar(monitor: number, output: string) {
     return Widget.Window({
         monitor,
@@ -24,12 +26,18 @@ function SideBar(monitor: number, output: string) {
             endWidget: Widget.Box({
                 vertical: true,
                 vpack: "end",
-                children: [
-                    QuickSettingsToggle(),
-                    Widget.Separator({ vertical: true }),
-                    Audio(true),
-                    Battery(true),
-                ]
+                children: BatteryService.bind("available").as((available) => {
+                    let widgets: any[] = [
+                        QuickSettingsToggle(),
+                        Widget.Separator({ vertical: true }),
+                        Audio(true),
+                    ];
+                    if (available) {
+                        widgets.push(Battery(true));
+                    }
+
+                    return widgets;
+                }),
             })
         }),
         exclusivity: "exclusive",

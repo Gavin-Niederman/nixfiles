@@ -14,6 +14,9 @@
     };
 
     time.timeZone = "America/Los_Angeles";
+    # This fixes a bug where windows will default to GMT
+    time.hardwareClockInLocalTime = true;
+
     i18n.defaultLocale = "en_US.UTF-8";
 
     hardware.monitors = {
