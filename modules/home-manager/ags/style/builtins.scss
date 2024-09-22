@@ -25,13 +25,13 @@ $slider-size: 16px;
 scale {
     trough {
         background-color: $surface-0;
-        border-radius: 16px;
+        border-radius: $ui-radius;
     }
 }
 
 levelbar,
 scale {
-    border-radius: 16px;
+    border-radius: $ui-radius;
 
     &.vertical {
         trough {
@@ -60,7 +60,7 @@ scale {
     }
 
     .empty {
-        border-radius: 16px;
+        border-radius: $ui-radius;
         background-color: $surface-0;
     }
 }

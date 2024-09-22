@@ -8,7 +8,7 @@ $sidebar-width: 32px;
 }
 
 .workspace {
-    border-radius: 8px;
+    border-radius: $ui-radius;
     background-color: $text;
     padding: 8px;
     margin-bottom: 6px;
@@ -28,7 +28,7 @@ $sidebar-width: 32px;
 .window {
     margin-bottom: 4px;
     padding: 4px;
-    border-radius: 8px;
+    border-radius: $ui-radius;
 
     &.active {
         background-color: $sky;

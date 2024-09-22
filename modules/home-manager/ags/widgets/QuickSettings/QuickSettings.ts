@@ -1,6 +1,7 @@
 import { Audio, Dummy } from "widgets";
 import Brightness from "./Brightness";
 import { Brightness as BrightnessService } from "services";
+import PowerProfile from "./PowerProfile";
 
 const QuickSettings = () => Widget.Window({
     visible: true,
@@ -12,10 +13,12 @@ const QuickSettings = () => Widget.Window({
     child: Widget.Box({
         className: "quick-settings-container",
         vertical: true,
+        hpack: "start",
         children: [
             // Brightness slider
             BrightnessService.available ? Brightness() : Dummy(),
             Audio(false, false),
+            PowerProfile(),
         ],
     }),
 }).keybind("Escape", () => App.closeWindow("quick-settings"));

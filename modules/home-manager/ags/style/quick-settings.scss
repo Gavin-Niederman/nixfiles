@@ -14,3 +14,16 @@
         }
     }
 }
+
+.large-button {
+    padding: 8px;
+    background-color: $sky;
+    border-radius: $ui-radius;
+    color: $base;
+
+    transition: all 0.2s;
+
+    &:hover {
+        background-color: $text;
+    }
+}

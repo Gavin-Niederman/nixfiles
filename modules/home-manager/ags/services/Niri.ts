@@ -193,7 +193,7 @@ export class NiriService extends Service {
         }
         else if ("WindowFocusChanged" in event) {
             const { id } = event.WindowFocusChanged;
-            if (id === undefined) {
+            if (!id) {
                 return;
             }
 
