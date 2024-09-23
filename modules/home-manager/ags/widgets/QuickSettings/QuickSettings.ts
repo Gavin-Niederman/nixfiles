@@ -14,6 +14,7 @@ const QuickSettings = () => Widget.Window({
         className: "quick-settings-container",
         vertical: true,
         hpack: "start",
+        spacing: 8,
         children: [
             // Brightness slider
             BrightnessService.available ? Brightness() : Dummy(),

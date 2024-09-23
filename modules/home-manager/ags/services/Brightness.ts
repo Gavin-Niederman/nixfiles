@@ -42,7 +42,6 @@ class BrightnessService extends Service {
         if (!this._available) return;
         const maxBrightness = Number(Utils.exec(["brightnessctl", "m"]));
         this._brightness = Number(Utils.exec(["brightnessctl", "g"])) / maxBrightness;
-        console.log(this._brightness, maxBrightness);
 
         Utils.monitorFile(`/sys/class/backlight/${this.device}/brightness`, async () => {
             const currentBrightness = await this.currentBrightness();

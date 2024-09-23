@@ -16,6 +16,7 @@
     ./input.nix
     # Declarative Niri output config
     ./monitors.nix
+    ./ssh.nix
   ];
 
   # The version of nixpkgs that we are using to configure the system.
