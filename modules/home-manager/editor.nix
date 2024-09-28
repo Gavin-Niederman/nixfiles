@@ -206,6 +206,12 @@
           version = "1.0.4";
           sha256 = "sha256-9w9fpMeewfVQIxRljyyxrjVz2EUJ9e9q1tz967tR1lU=";
         }
+        {
+          name = "vscode-twoslash";
+          publisher = "Orta";
+          version = "1.0.2";
+          sha256 = "sha256-fuad6fG0RqLMSAfJVTzMp4eGOSDb95Y45AmoGD6jL70=";
+        }
       ];
 
     userSettings = {
