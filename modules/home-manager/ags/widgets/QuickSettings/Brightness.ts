@@ -16,6 +16,7 @@ const Brightness = () => Widget.Box({
             value: BrightnessService.bind("brightness").as(b => b * 100),
             min: 0,
             max: 100,
+            expand: true,
             onChange: (args: { value: number }) => BrightnessService.brightness = args.value / 100,
         })
     ]

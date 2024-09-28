@@ -2,7 +2,7 @@ import Gtk from "gi://Gtk";
 import { SymbolicIcon, Dummy } from "widgets";
 const AudioService = await Service.import('audio');
 
-const Audio = (vertical: boolean, drawValue: boolean = true) => Widget.Box({
+const Audio = (vertical: boolean, drawValue: boolean = true, expand: boolean = false) => Widget.Box({
     className: "audio",
     vertical,
     children: [
@@ -38,6 +38,7 @@ const Audio = (vertical: boolean, drawValue: boolean = true) => Widget.Box({
             value: AudioService.speaker.bind("volume").as(v => v * 100),
             min: 0,
             max: 100,
+            expand,
             onChange: (args: { value: number }) => AudioService.speaker.volume = args.value / 100,
         })
     ]
