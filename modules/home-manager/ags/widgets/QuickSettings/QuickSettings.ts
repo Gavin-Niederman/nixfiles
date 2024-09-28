@@ -4,7 +4,7 @@ import { Brightness as BrightnessService } from "services";
 import PowerProfile from "./PowerProfile";
 
 const QuickSettings = () => Widget.Window({
-    visible: true,
+    visible: false,
     keymode: "on-demand",
     exclusivity: "normal",
     name: "quick-settings",

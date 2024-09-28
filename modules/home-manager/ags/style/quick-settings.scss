@@ -16,15 +16,44 @@
     }
 }
 
-.large-button {
-    padding: 8px;
+.toggle-button {
     background-color: $sky;
     border-radius: $ui-radius;
     color: $base;
 
-    transition: all 0.2s;
+    .toggle-button-child {
+        transition: all 0.2s;
+        padding: 8px;
 
-    &:hover {
-        background-color: $text;
+        &:hover {
+            background-color: $text;
+        }
+    }
+
+    .toggle-button-dropdown {
+        background-color: $lavender;
+
+        image {
+            transition: all 0.2s;
+        }
+        &.dropped image {
+            -gtk-icon-transform: rotate(90deg);
+        }
+    }
+
+    :first-child {
+        border-top-left-radius: $ui-radius;
+        border-bottom-left-radius: $ui-radius;
+    }
+    :last-child {
+        border-top-right-radius: $ui-radius;
+        border-bottom-right-radius: $ui-radius;
+    }
+
+    .revealer-content-container {
+        box-shadow: inset 0px 10px 8px -4px transparentize(#000, 0.75);
+        background-color: $surface-0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
 }

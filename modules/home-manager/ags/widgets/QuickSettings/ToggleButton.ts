@@ -1,17 +1,46 @@
 import Gtk from "gi://Gtk";
-import { Binding } from "types/service";
-import { ButtonProps } from "types/widgets/button";
+import { BindableProps, Binding } from "types/service";
 
-export type ToggleButtonProps = Omit<ButtonProps, "class_name" | "className" | "class_names" | "classNames">
+type ToggleButtonProps<ToggleButtonChild extends Gtk.Widget, RevealerChild extends Gtk.Widget> = BindableProps<{
+    toggleButtonContent: ToggleButtonChild;
+    revealerContent: RevealerChild;
+}>
 
-function ButtonWrapper<Child extends Gtk.Widget>(child: Child, toggled: Binding<any, any, boolean> | boolean) {
+export function ToggleButton<ToggleButtonChild extends Gtk.Widget, RevealerChild extends Gtk.Widget>(props: ToggleButtonProps<ToggleButtonChild, RevealerChild>) {
+    const revealer = Widget.Revealer({
+        child: Widget.Box({
+            className: "revealer-content-container",
+            child: props.revealerContent,
+        }),
+    });
+    
+    const toggleButton = Widget.Box({
+        children: [
+            Widget.Button({
+                className: "toggle-button-toggle toggle-button-child",
+                child: props.toggleButtonContent,
+                hexpand: true,
+            }),
+            Widget.Button({
+                className: "toggle-button-dropdown toggle-button-child",
+                child: Widget.Icon({
+                    icon: "caret-right-symbolic",
+                    size: 24,
+                }),
+                onClicked: (self) => {
+                    revealer.revealChild = !revealer.revealChild;
+                    self.toggleClassName("dropped", revealer.revealChild);
+                }
+            })
+        ],
+    });
+
     return Widget.Box({
-        className: "toggle-button-wrapper",
-        child
+        className: "toggle-button",
+        vertical: true,
+        children: [
+            toggleButton,
+            revealer,
+        ]
     })
-}
-
-export const ToggleButton = (props: ToggleButtonProps) => Widget.Button({
-    className: "large-button",
-    ...props,
-});
+};
