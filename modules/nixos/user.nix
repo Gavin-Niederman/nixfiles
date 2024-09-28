@@ -7,7 +7,7 @@
       initialPassword = "gavin";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [ ];
-      extraGroups = [ "wheel" "networkmanager" "audio" ];
+      extraGroups = [ "wheel" "networkmanager" "audio" "dialout" ];
       shell = pkgs.nushell;
     };
   };

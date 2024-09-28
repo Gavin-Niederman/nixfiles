@@ -29,7 +29,6 @@
     pulse.enable = true;
   };
 
-
   # Slop that nix-generate-config generates
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";

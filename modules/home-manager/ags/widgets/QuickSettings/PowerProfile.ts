@@ -1,8 +1,8 @@
-import LargeButton from "./LargeButton";
+import { ToggleButton } from "./ToggleButton";
 
 const PowerProfiles = await Service.import('powerprofiles')
 
-const PowerProfile = () => LargeButton({
+const PowerProfile = () => ToggleButton({
     child: Widget.Box({
         children: [
             Widget.Label({

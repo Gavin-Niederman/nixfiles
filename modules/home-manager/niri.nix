@@ -15,7 +15,7 @@
       // Extra Config
 
       ${config.programs.niri.extraConfig}
-      
+
       // End Extra Config.
       // The rest of this file is default config.
 
@@ -34,6 +34,10 @@
 
       // Remove horrendous window decorations
       prefer-no-csd
+
+      hotkey-overlay {
+        skip-at-startup
+      }
 
       environment {
           XCURSOR_SIZE "42"

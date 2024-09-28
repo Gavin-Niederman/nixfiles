@@ -12,10 +12,17 @@
       hostName = "latia";
     };
 
+    programs.steam.enable = true;
+
     time.timeZone = "America/Los_Angeles";
     i18n.defaultLocale = "en_US.UTF-8";
 
     hardware.graphics.enable = true;
+
+    hardware.opentabletdriver = {
+      enable = true;
+      daemon.enable = true;
+    };
 
     boot.loader.efi = { canTouchEfiVariables = true; };
     boot.extraModprobeConfig = ''
