@@ -27,14 +27,17 @@
     &.toggled {
         background-color: $sky;
     }
+
     background-color: $surface-0;
-    
+    transition: all 0.2s;
+
     border-radius: $ui-radius;
 
-    &:not(.toggled) .toggle-button-toggle {
+    &:not(.toggled) .toggle-button-child {
         color: $text;
     }
-    &:not(.toggled) .toggle-button-toggle:hover {
+
+    &:not(.toggled) .toggle-button-child:hover {
         color: $base;
     }
 
@@ -43,26 +46,19 @@
         border-bottom-right-radius: 0;
     }
 
+
     .toggle-button-child {
         color: $base;
         transition: all 0.2s;
         padding: 8px;
 
         &:hover {
-            background-color: $text;
+            background-color: $lavender;
         }
     }
 
-    .toggle-button-dropdown {
-        background-color: $lavender;
-
-        image {
-            transition: all 0.2s;
-        }
-
-        &.dropped image {
-            -gtk-icon-transform: rotate(90deg);
-        }
+    .toggle-button-dropdown.dropped image {
+        -gtk-icon-transform: rotate(90deg);
     }
 
     :first-child {
