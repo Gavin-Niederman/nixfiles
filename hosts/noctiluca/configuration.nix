@@ -23,6 +23,7 @@
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
       modesetting.enable = true;
+      powerManagement.enable = false;
       open = false;
       # This driver version stops my pc from hanging during startup
       package = config.boot.kernelPackages.nvidiaPackages.mkDriver {

@@ -69,6 +69,8 @@
       // Find the full list of options on the wiki:
       // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
       input {
+          disable-power-key-handling
+
           keyboard {
               xkb {
                   // You can set rules, model, layout, variant and options.
@@ -157,6 +159,8 @@
           // Suggested binds for running programs: terminal, app launcher, screen locker.
           Mod+Return { spawn "${pkgs.kitty}/bin/kitty"; }
           Mod+D { spawn "${pkgs.fuzzel}/bin/fuzzel"; }
+
+          XF86PowerOff { spawn "ags" "-r" "App.openWindow('logout-menu')"; }
 
           // Example volume keys mappings for PipeWire & WirePlumber.
           // The allow-when-locked=true property makes them work even when the session is locked.

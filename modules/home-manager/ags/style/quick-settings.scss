@@ -29,7 +29,7 @@
     }
 
     background-color: $surface-0;
-    transition: all 0.2s;
+    transition: $transition;
 
     border-radius: $ui-radius;
 
@@ -49,7 +49,7 @@
 
     .toggle-button-child {
         color: $base;
-        transition: all 0.2s;
+        transition: $transition;
         padding: 8px;
 
         &:hover {
@@ -81,7 +81,7 @@
 }
 
 .power-profile {
-    transition: all 0.2s;
+    transition: $transition;
 
     &:hover {
         color: $sky;

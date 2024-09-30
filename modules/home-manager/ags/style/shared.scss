@@ -11,7 +11,7 @@
 }
 
 image.symbolic {
-    transition: all 0.2s;
+    transition: $transition;
     color: $text;
 }
 .icon-container.hoverable:hover image.symbolic {

@@ -1,7 +1,8 @@
 import Gdk from "gi://Gdk";
 import { Niri, Style } from "services";
 import {
-    ClockUnderlay, ScreenBevels, SideBar, QuickSettings
+    ClockUnderlay, ScreenBevels, SideBar, QuickSettings,
+    LogoutMenu
 } from "widgets";
 
 App.addIcons(App.configDir + '/assets');
@@ -35,6 +36,7 @@ App.config({
         ...forEachMonitor((monitor, output) => SideBar(monitor, output!)),
         ...forEachMonitor((monitor) => ScreenBevels(monitor)),
         ...forEachMonitor((monitor) => ClockUnderlay(monitor)),
-        QuickSettings()
+        QuickSettings(),
+        LogoutMenu()
     ],
 });
