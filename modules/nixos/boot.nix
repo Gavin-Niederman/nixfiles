@@ -46,4 +46,7 @@ in {
     ${pkgs.niri-unstable}/bin/niri-session
     nu
   '';
+  services.logind = {
+    powerKey = "ignore";
+  };
 }
