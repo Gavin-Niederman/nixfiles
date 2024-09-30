@@ -18,8 +18,6 @@ let
       cp -r bsol/ $out
     '';
   };
-
-  niriWrapper = pkgs.writeShellScriptBin "niri" "${pkgs.niri-unstable} --session";
 in {
   boot.loader = {
     efi = { canTouchEfiVariables = true; };
@@ -40,12 +38,12 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu -r -c ${niriWrapper}/bin/niri";
+        command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu -r -c "${pkgs.niri-unstable}/bin/niri-session"'';
       };
     };
   };
   environment.etc."greetd/environments".text = ''
-    ${niriWrapper}/bin/niri --session
+    ${pkgs.niri-unstable}/bin/niri-session
     nu
   '';
 }
