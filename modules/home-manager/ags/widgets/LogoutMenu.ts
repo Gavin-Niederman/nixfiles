@@ -29,7 +29,7 @@ const LogoutMenu = () => Widget.Window({
                     children: [
                         LogoutMenuOption("circular-arrow-symbolic", () => Utils.exec("systemctl reboot")),
                         LogoutMenuOption("power-symbolic", () => Utils.exec("systemctl poweroff")),
-                        LogoutMenuOption("logout-symbolic", () => Utils.exec("niri msg action exit")),
+                        LogoutMenuOption("logout-symbolic", () => Utils.exec("niri msg action quit")),
                     ]
                 }),
                 Widget.Box({
