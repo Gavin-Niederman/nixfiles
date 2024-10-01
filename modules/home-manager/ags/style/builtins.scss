@@ -4,6 +4,10 @@ window {
     background: transparent;
 }
 
+window, window > * {
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
 separator {
     border-top: 2px solid $sky;
 
