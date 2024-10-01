@@ -170,7 +170,7 @@ class StyleService extends Service {
         this.notify("output-path");
     }
 
-    private _flavor: keyof typeof flavors = "latte";
+    private _flavor: keyof typeof flavors = "macchiato";
     get flavor() {
         return this._flavor;
     }
