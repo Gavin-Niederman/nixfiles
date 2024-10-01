@@ -12,7 +12,7 @@ const ProfileOption = (profile: string) => {
         hexpand: true,
         classNames: PPSelected.bind()
             .as(active => active == profile)
-            .as(active => active ? ["active", "power-profile"] : ["power-profile"]),
+            .as(active => active ? ["active", "toggle-button-dropdown-option"] : ["toggle-button-dropdown-option"]),
         label: renameProfile(profile),
         onClicked: () => PPSelected.value = profile,
     })

@@ -19,8 +19,8 @@
     }
 
     >:not(:last-child):not(.dummy) {
-        margin-bottom: 8px;
-    }
+        margin-bottom: 16px;
+    } 
 }
 
 .toggle-button {
@@ -80,7 +80,7 @@
     }
 }
 
-.power-profile {
+.toggle-button-dropdown-option {
     transition: $transition;
 
     &:hover {

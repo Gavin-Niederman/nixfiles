@@ -29,6 +29,8 @@ Style.connect("style-rebuilt", (service) => {
     App.applyCss(service.output_path, true);
 });
 
+await Style.buildStyle();
+
 App.config({
     // generated in config.js
     style: "/tmp/ags/style.css",

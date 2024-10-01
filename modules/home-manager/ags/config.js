@@ -8,9 +8,9 @@ try {
         "--external", "resource://*",
         "--external", "gi://*",
     ])
-    await Utils.execAsync([
-        "dart-sass", `${App.configDir}/style/style.scss`, `${tmpdir}/style.css`
-    ])
+    // await Utils.execAsync([
+    //     "dart-sass", `${App.configDir}/style/style.scss`, `${tmpdir}/style.css`
+    // ])
     await import(`file://${tmpdir}/js/main.js`)
 } catch (error) {
     console.error(error)

@@ -16,6 +16,7 @@
       # Used to build ts ags config
       bun
       # Used for scss preproccesing
+      fd
       dart-sass
       # Used for brightness control
       brightnessctl

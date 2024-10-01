@@ -2,6 +2,7 @@ import { Audio, Dummy } from "widgets";
 import Brightness from "./Brightness";
 import { Brightness as BrightnessService } from "services";
 import PowerProfile from "./PowerProfile";
+import CatppuccinFlavor from "./CatppuccinFlavor";
 
 const QuickSettings = () => Widget.Window({
     visible: false,
@@ -19,6 +20,7 @@ const QuickSettings = () => Widget.Window({
             BrightnessService.available ? Brightness() : Dummy(),
             Audio(false, false, true),
             PowerProfile(),
+            CatppuccinFlavor(),
         ],
     }),
 }).keybind("Escape", () => App.closeWindow("quick-settings"));
