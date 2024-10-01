@@ -15,7 +15,13 @@
     };
   };
 
-  home.packages = with pkgs; [ adwaita-icon-theme morewaita-icon-theme ];
+  home.packages = let
+    allCatppuccin = map (flavor:
+      pkgs.catppuccin-gtk.override {
+        variant = flavor;
+        accents = [ "sky" ];
+      }) [ "macchiato" "frappe" "latte" "mocha" ];
+  in with pkgs; [ adwaita-icon-theme morewaita-icon-theme ] ++ allCatppuccin;
 
   catppuccin = {
     flavor = "macchiato";
@@ -35,12 +41,12 @@
       package = pkgs.morewaita-icon-theme;
     };
 
-    theme = {
-      name = "catppuccin-macchiato-sky-standard";
-      package = pkgs.catppuccin-gtk.override {
-        variant = "macchiato";
-        accents = [ "sky" ];
-      };
-    };
+    # theme = {
+    #   name = "catppuccin-macchiato-sky-standard";
+    #   package = pkgs.catppuccin-gtk.override {
+    #     variant = "macchiato";
+    #     accents = [ "sky" ];
+    #   };
+    # };
   };
 }

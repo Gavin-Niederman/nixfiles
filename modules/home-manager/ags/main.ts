@@ -1,9 +1,20 @@
 import Gdk from "gi://Gdk";
+import Gio from "gi://Gio";
 import { Niri, Style } from "services";
 import {
     ClockUnderlay, ScreenBevels, SideBar, QuickSettings,
     LogoutMenu
 } from "widgets";
+
+
+const settings = new Gio.Settings({
+    schema: "org.gnome.desktop.interface",
+})
+Style.connect("changed", () => {
+    const light = Style.flavor === "latte";
+    settings.set_string("color-scheme", `prefer-${light ? "light" : "dark"}`);
+    settings.set_string("gtk-theme", `catppuccin-${Style.flavor}-sky-standard`)
+})
 
 App.addIcons(App.configDir + '/assets');
 

@@ -168,6 +168,7 @@ class StyleService extends Service {
     set output_path(value: string) {
         this.outputPath = value;
         this.notify("output-path");
+        this.emit("changed");
     }
 
     private _flavor: keyof typeof flavors = "macchiato";
@@ -177,6 +178,7 @@ class StyleService extends Service {
     set flavor(value: "macchiato" | "latte" | "frappe" | "mocha") {
         this._flavor = value;
         this.notify("flavor");
+        this.emit("changed");
         this.buildStyle();
     }
 
