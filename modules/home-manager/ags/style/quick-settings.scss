@@ -82,6 +82,7 @@
 
 .toggle-button-dropdown-option {
     transition: $transition;
+    color: $text;
 
     &:hover {
         color: $sky;

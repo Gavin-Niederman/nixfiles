@@ -184,7 +184,7 @@ class StyleService extends Service {
         super();
         this.outputPath = outputPath;
 
-        const watcher = Utils.monitorFile(App.configDir + "/style/", this.buildStyle);
+        const watcher = Utils.monitorFile(App.configDir + "/style/", async () => await this.buildStyle());
         if (!watcher) {
             console.error("Failed to style file watcher! Something has gone horribly wrong...");
         }
