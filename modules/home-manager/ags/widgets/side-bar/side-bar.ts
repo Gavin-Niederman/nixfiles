@@ -1,8 +1,8 @@
-import Workspaces from "./Workspaces";
-import Windows from "./Windows";
-import Battery from "./Battery";
+import Workspaces from "./workspaces";
+import Windows from "./windows";
+import Battery from "./battery";
 import { Audio, Dummy } from "widgets";
-import QuickSettingsToggle from "./QuickSettingsToggle";
+import QuickSettingsToggle from "./quick-settings-toggle";
 
 const BatteryService = await Service.import("battery");
 

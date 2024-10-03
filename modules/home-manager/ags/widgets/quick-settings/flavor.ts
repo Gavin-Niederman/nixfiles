@@ -1,10 +1,10 @@
 import { Style } from "services";
-import { ToggleButton } from "./ToggleButton";
+import { ToggleButton } from "./toggle-button";
 
-const Flavor = Variable(Style.flavor);
+const SelectedFlavor = Variable(Style.flavor);
 const DarkMode = Variable(Style.flavor !== "latte");
 
-Flavor.connect("changed", ({ value }) => {
+SelectedFlavor.connect("changed", ({ value }) => {
     if (DarkMode.value) {
         Style.flavor = value as "macchiato" | "latte" | "frappe" | "mocha";
     }
@@ -19,14 +19,14 @@ const flavors = {
 const FlavorOption = (flavor: "macchiato" | "latte" | "frappe" | "mocha") => Widget.Button({
     hpack: "start",
     hexpand: true,
-    classNames: Flavor.bind()
+    classNames: SelectedFlavor.bind()
         .as(selected => selected === flavor)
         .as(active => active ? ["active", "toggle-button-dropdown-option"] : ["toggle-button-dropdown-option"]),
     label: flavors[flavor],
-    onClicked: () => Flavor.value = flavor,
+    onClicked: () => SelectedFlavor.value = flavor,
 });
 
-const CatppuccinFlavor = () => ToggleButton({
+const Flavor = () => ToggleButton({
     toggleButtonContent: Widget.Box({
         spacing: 8,
         hpack: "start",
@@ -56,13 +56,13 @@ const CatppuccinFlavor = () => ToggleButton({
         if (!DarkMode.value) {
             Style.flavor = "latte";
         } else {
-            if (Flavor.value === "latte") {
-                Flavor.value = "macchiato";
+            if (SelectedFlavor.value === "latte") {
+                SelectedFlavor.value = "macchiato";
             };
-            Style.flavor = Flavor.value as "macchiato" | "latte" | "frappe" | "mocha";
+            Style.flavor = SelectedFlavor.value as "macchiato" | "latte" | "frappe" | "mocha";
         }
     },
     toggled: DarkMode.bind(),
 });
 
-export default CatppuccinFlavor;
+export default Flavor;

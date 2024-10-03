@@ -1,5 +1,5 @@
 import { Style } from "services";
-import Clock from "./Clock";
+import Clock from "./clock";
 
 const ClockUnderlay = (monitor: number) => Widget.Window({
     monitor,

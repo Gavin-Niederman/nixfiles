@@ -1,4 +1,4 @@
-import { ToggleButton } from "./ToggleButton";
+import { ToggleButton } from "./toggle-button";
 
 const PowerProfiles = await Service.import("powerprofiles");
 

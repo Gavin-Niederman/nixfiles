@@ -1,3 +1,3 @@
-export { default as SymbolicIcon } from "./SymbolicIcon";
-export { default as Audio } from "./Audio";
-export { default as Dummy } from "./Dummy";
+export { default as SymbolicIcon } from "./symbolic-icon";
+export { default as Audio } from "./audio";
+export { default as Dummy } from "./dummy";
