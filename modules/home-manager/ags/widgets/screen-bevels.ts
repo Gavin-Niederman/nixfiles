@@ -1,19 +1,19 @@
 const ScreenBevels = (monitor: number) =>
-  Widget.Window({
-    monitor,
-    name: `screen-bevels-${monitor}`,
-    anchor: ["top", "bottom", "right", "left"],
-    className: "screen-bevels",
-    clickThrough: true,
-    expand: true,
-    child: Widget.Box({
-      expand: true,
-      className: "shadow",
-      child: Widget.Box({
+    Widget.Window({
+        monitor,
+        name: `screen-bevels-${monitor}`,
+        anchor: ["top", "bottom", "right", "left"],
+        className: "screen-bevels",
+        clickThrough: true,
         expand: true,
-        className: "bevels",
-      }),
-    }),
-  });
+        child: Widget.Box({
+            expand: true,
+            className: "shadow",
+            child: Widget.Box({
+                expand: true,
+                className: "bevels",
+            }),
+        }),
+    });
 
 export default ScreenBevels;
