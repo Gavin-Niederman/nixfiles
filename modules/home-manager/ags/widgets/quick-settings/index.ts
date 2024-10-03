@@ -1,2 +1,2 @@
-import QuickSettings from './quick-settings';
+import QuickSettings from "./quick-settings";
 export default QuickSettings;
