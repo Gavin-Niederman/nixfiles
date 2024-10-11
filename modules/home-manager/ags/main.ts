@@ -15,6 +15,7 @@ const settings = new Gio.Settings({
 Style.connect("changed", async () => {
     const light = Style.flavor === "latte";
     settings.set_string("color-scheme", `prefer-${light ? "light" : "dark"}`);
+    settings.set_string("gtk-theme", "");
     settings.set_string("gtk-theme", `catppuccin-${Style.flavor}-sky-standard`);
 });
 

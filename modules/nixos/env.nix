@@ -13,6 +13,7 @@
     atomix # puzzle game
     gnome-console # terminal emulator
     gnome-text-editor # text editor (again)
+    nautilus # file manager
   ];
   # Useful utilities that happen to be made by gnome
   services.gnome.core-utilities.enable = true;
@@ -47,7 +48,8 @@
     variant = "";
   };
 
-  environment.systemPackages = [ pkgs.xdg-utils pkgs.niri-unstable ];
+  environment.systemPackages =
+    [ pkgs.xdg-utils pkgs.niri-unstable pkgs.nemo ];
   # XDG makes everything better
   xdg = {
     autostart.enable = true;

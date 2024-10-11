@@ -4,6 +4,12 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # A slightly faster Nix implementation
+    lix = {
+      url =
+        "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home manager
     home-manager = {
@@ -35,8 +41,8 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixneovim, niri, xwayland-satellite
-    , ags, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, lix, home-manager, nixneovim, niri
+    , xwayland-satellite, ags, catppuccin, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -63,6 +69,9 @@
         nixos-modules.default
         # We do home-manager configuration in the nixos configuration instead of through the cli
         home-manager.nixosModules.home-manager
+
+        # Enable Lix
+        lix.nixosModules.default
 
         # Add our home-manager configuration
         {
