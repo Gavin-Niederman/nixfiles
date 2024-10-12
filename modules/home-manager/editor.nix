@@ -152,6 +152,7 @@
         astro-build.astro-vscode
         bradlc.vscode-tailwindcss
         dbaeumer.vscode-eslint
+        esbenp.prettier-vscode
 
         ms-vscode.cpptools
         skellock.just
@@ -245,10 +246,12 @@
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
       "[nix]" = { "editor.defaultFormatter" = "brettm12345.nixfmt-vscode"; };
+      "editor.defaultFormatter" = "esbenp.prettier-vscode";
       "codesnap.showWindowControls" = false;
       "errorLense.fontFamily" = "FiraCode Nerd Font Mono";
       "cSpell.enabledLanguageIds" =
         [ "asciidoc" "html" "markdown" "plaintext" "text" ];
+      "typescript.updateImportsOnFileMove.enabled" = "always";
     };
   };
 }
