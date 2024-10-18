@@ -246,7 +246,9 @@
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
       "[nix]" = { "editor.defaultFormatter" = "brettm12345.nixfmt-vscode"; };
-      "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+      "[javascript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+      "[toml]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
       "codesnap.showWindowControls" = false;
       "errorLense.fontFamily" = "FiraCode Nerd Font Mono";
       "cSpell.enabledLanguageIds" =

@@ -53,6 +53,7 @@
           XMODIFIERS "@im=fcitx"
           // Xwayland support
           DISPLAY ":0"
+          _JAVA_AWT_WM_NONREPARENTING "1"
       }
 
       cursor {
