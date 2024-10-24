@@ -24,7 +24,7 @@
     };
     # A external rootless xwayland program so that i can run stuff like GIMP
     # I wrote this flake :3
-    xwayland-satellite.url = "github:Supreeeme/xwayland-satellite";
+    xwayland-satellite.url = "github:Supreeeme/xwayland-satellite?rev=stylus";
 
     nixneovim = {
       url = "github:nixneovim/nixneovim";

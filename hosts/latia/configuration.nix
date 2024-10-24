@@ -24,6 +24,14 @@
       daemon.enable = true;
     };
 
+    hardware.bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+      settings.General.Enable = "Source,Sink,Media,Socket";
+    };
+    home-manager.sharedModules = [{ services.mpris-proxy.enable = true; }];
+    services.blueman.enable = true;
+
     boot.loader.efi = { canTouchEfiVariables = true; };
     boot.extraModprobeConfig = ''
       options snd-intel-dspcfg dsp_driver=1
