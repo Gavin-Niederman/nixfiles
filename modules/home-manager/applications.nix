@@ -35,4 +35,22 @@
   dconf.settings."org/gnome/settings-daemon/plugins/xsettings" = {
     overrides = "{'Gtk/IMModule':<'fcitx'>}";
   };
+
+  # Desktop file for running vesktop without the gpu
+  xdg = {
+    enable = true;
+    desktopEntries.vesktopNoGpu = {
+      exec = "vesktop --disable-gpu";
+      categories = [ "Network" "InstantMessaging" "Chat" ];
+      genericName = "Internet Messenger";
+      icon = "vesktop";
+      name = "Vesktop (No GPU)";
+      type = "Application";
+      settings = {
+        Keywords = "discord;vencord;electron;chat;gpu";
+        StartupWMClass = "Vesktop";
+        Version = "1.4";
+      };
+    };
+  };
 }
