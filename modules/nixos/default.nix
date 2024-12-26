@@ -18,6 +18,8 @@
     ./monitors.nix
     ./ssh.nix
     ./cutter.nix
+    ./printer.nix
+    ./locate.nix
   ];
 
   # The version of nixpkgs that we are using to configure the system.
