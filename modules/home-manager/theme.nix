@@ -1,18 +1,40 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
-{
+let
+  # Not used right now but kept for reference
+  patched-capitaine = pkgs.capitaine-cursors.overrideAttrs (oldAttrs: {
+    patches = (oldAttrs.patches or [ ]) ++ [
+      (builtins.toFile "nominal-size.patch" ''
+        diff --git a/build.sh b/build.sh
+        index e008e47..37c257c 100755
+        --- a/build.sh
+        +++ b/build.sh
+        @@ -12,7 +12,7 @@ SPECS="$SRC/config"
+         ALIASES="$SRC/cursor-aliases"
+         SIZES=('1' '1.25' '1.5' '2' '2.5' '3' '4' '5' '6' '10')
+         DPIS=('lo' 'tv' 'hd' 'xhd' 'xxhd' 'xxxhd')
+        -SVG_DIM=24
+        +SVG_DIM=21
+         SVG_DPI=96
+         
+         # Truncates $SIZES based on the specified max DPI.
+      '')
+    ];
+
+    buildPhase = ''
+      HOME="$NIX_BUILD_ROOT" ./build.sh --max-dpi tv --type dark
+    '';
+    installPhase = ''
+      install -dm 0755 $out/share/icons
+      cp -pr dist/dark $out/share/icons/capitaine-cursors
+    '';
+  });
+in {
   home.pointerCursor = {
     gtk.enable = true;
     package = pkgs.capitaine-cursors;
     name = "capitaine-cursors";
-    size = 42;
-  };
-
-  # Fixes cursor size on gtk apps and firefox
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      cursor-size = lib.hm.gvariant.mkInt32 42;
-    };
+    size = 36;
   };
 
   home.packages = let
@@ -34,6 +56,7 @@
     cursorTheme = {
       name = "capitaine-cursors";
       package = pkgs.capitaine-cursors;
+      size = 36;
     };
 
     iconTheme = {

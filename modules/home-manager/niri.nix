@@ -40,7 +40,7 @@
       }
 
       environment {
-          XCURSOR_SIZE "42"
+          XCURSOR_SIZE "36"
           MOZ_ENABLE_WAYLAND "1"
           NIXOS_OZONE_WL "1"
           XDG_SESSION_TYPE "wayland"
@@ -58,7 +58,7 @@
 
       cursor {
           xcursor-theme "capitaine-cursors"
-          xcursor-size 48
+          xcursor-size 36
       }
 
       window-rule {
