@@ -13,6 +13,8 @@
       hostName = "noctiluca";
     };
 
+    programs.steam.enable = true;
+
     time.timeZone = "America/Los_Angeles";
     # This fixes a bug where windows will default to GMT
     time.hardwareClockInLocalTime = true;
