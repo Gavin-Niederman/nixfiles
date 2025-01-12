@@ -31,18 +31,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # A GJS wrapper for declarative and functional GTK widgets
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # My personal DE
+    ballad.url = "github:gavin-niederman/ballad";
 
     # Catpuccin themes
     catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs = { self, nixpkgs, lix, home-manager, nixneovim, niri
-    , xwayland-satellite, ags, catppuccin, ... }@inputs:
+    , xwayland-satellite, ballad, catppuccin, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -60,6 +57,7 @@
           direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
           xwayland-satellite =
             xwayland-satellite.packages.${system}.xwayland-satellite;
+          ballad = ballad.packages.${system}.default;
         })
       ];
 
@@ -81,8 +79,6 @@
             # Declarative neovim config
             nixneovim.nixosModules.default
             home-manager-modules.default
-            # AGS config
-            ags.homeManagerModules.default
             # Catppuccin themes
             catppuccin.homeManagerModules.catppuccin
           ];

@@ -4,9 +4,9 @@ My personal NixOS configuration!
 
 This setup is using the Niri Wayland compositor.
 
-## Widgets
+## Desktop Environment
 
-My widgets are made with [AGS]. Some aspects of my widgets are also directly inspired by GNOME or [Aylur's dotfiles](https://github.com/Aylur/dotfiles) (the creator of [AGS])
+I use [Ballad](https://github.com/gavin-niederman/ballad) as my DE. Ballad is a custom DE that I'm building from the ground up made for TWMs like Niri.
 
 ## Wallpaper
 

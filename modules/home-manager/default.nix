@@ -17,8 +17,8 @@
     ./editor.nix
     # Nushell starship carapace and fish
     ./shell.nix
-    # AGS widgets config
-    ./ags.nix
+    # DE (Ballad) configuration
+    ./ballad.nix
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

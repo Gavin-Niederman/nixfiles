@@ -34,6 +34,8 @@ in {
     };
   };
 
+  services.accounts-daemon.enable = true;
+
   services.greetd = {
     enable = true;
     settings = {
