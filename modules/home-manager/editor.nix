@@ -248,7 +248,7 @@
       "[nix]" = { "editor.defaultFormatter" = "brettm12345.nixfmt-vscode"; };
       "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
       "[javascript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
-      "[toml]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
+      "[toml]" = { "editor.defaultFormatter" = "tamasfe.even-better-toml"; };
       "codesnap.showWindowControls" = false;
       "errorLense.fontFamily" = "FiraCode Nerd Font Mono";
       "cSpell.enabledLanguageIds" =

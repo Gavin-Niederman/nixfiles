@@ -138,24 +138,10 @@
               inactive-color "#434c5e"
           }
 
-          // You can also add a border. It's similar to the focus ring, but always visible.
-          border {
-              // The settings are the same as for the focus ring.
-              // If you enable the border, you probably want to disable the focus ring.
-              off
-
-              width 4
-              active-color "#ffc87f"
-              inactive-color "#505050"
-
-              // active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
-              // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
-          }
-
           // Always show neighbor windows
           struts {
-              left 16
-              right 16
+              left 32
+              right 32
           }
       }
 
@@ -164,7 +150,6 @@
       binds {
           Mod+Shift+Slash { show-hotkey-overlay; }
 
-          // Suggested binds for running programs: terminal, app launcher, screen locker.
           Mod+Return { spawn "${pkgs.kitty}/bin/kitty"; }
           Mod+D { spawn "${pkgs.fuzzel}/bin/fuzzel"; }
 
@@ -183,68 +168,33 @@
 
           Mod+Shift+Q { close-window; }
 
-          Mod+Left  { focus-column-left; }
-          Mod+Down  { focus-window-down; }
-          Mod+Up    { focus-window-up; }
-          Mod+Right { focus-column-right; }
           Mod+H     { focus-column-left; }
           Mod+J     { focus-window-down; }
           Mod+K     { focus-window-up; }
           Mod+L     { focus-column-right; }
 
-          Mod+Shift+Left  { move-column-left; }
-          Mod+Shift+Down  { move-window-down; }
-          Mod+Shift+Up    { move-window-up; }
-          Mod+Shift+Right { move-column-right; }
           Mod+Shift+H     { move-column-left; }
           Mod+Shift+J     { move-window-down; }
           Mod+Shift+K     { move-window-up; }
           Mod+Shift+L     { move-column-right; }
-
-          // Alternative commands that move across workspaces when reaching
-          // the first or last window in a column.
-          // Mod+J     { focus-window-or-workspace-down; }
-          // Mod+K     { focus-window-or-workspace-up; }
-          // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
-          // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
 
           Mod+Home { focus-column-first; }
           Mod+End  { focus-column-last; }
           Mod+Ctrl+Home { move-column-to-first; }
           Mod+Ctrl+End  { move-column-to-last; }
 
-          Mod+Ctrl+Left  { focus-monitor-left; }
-          Mod+Ctrl+Down  { focus-monitor-down; }
-          Mod+Ctrl+Up    { focus-monitor-up; }
-          Mod+Ctrl+Right { focus-monitor-right; }
           Mod+Ctrl+H     { focus-monitor-left; }
           Mod+Ctrl+J     { focus-monitor-down; }
           Mod+Ctrl+K     { focus-monitor-up; }
           Mod+Ctrl+L     { focus-monitor-right; }
 
-          Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-          Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-          Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-          Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
           Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
           Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
           Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
           Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-          // Alternatively, there are commands to move just a single window:
-          // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-          // ...
-
-          // And you can also move a whole workspace to another monitor:
-          // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-          // ...
-
-          Mod+Page_Down      { focus-workspace-down; }
-          Mod+Page_Up        { focus-workspace-up; }
           Mod+U              { focus-workspace-down; }
           Mod+I              { focus-workspace-up; }
-          Mod+Shift+Page_Down { move-column-to-workspace-down; }
-          Mod+Shift+Page_Up   { move-column-to-workspace-up; }
           Mod+Shift+U         { move-column-to-workspace-down; }
           Mod+Shift+I         { move-column-to-workspace-up; }
 
@@ -255,11 +205,6 @@
           Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
           Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
           Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
-
-          Mod+WheelScrollRight      { focus-column-right; }
-          Mod+WheelScrollLeft       { focus-column-left; }
-          Mod+Ctrl+WheelScrollRight { move-column-right; }
-          Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 
           Mod+1 { focus-workspace 1; }
           Mod+2 { focus-workspace 2; }
@@ -282,6 +227,9 @@
 
           Mod+Comma  { consume-window-into-column; }
           Mod+Period { expel-window-from-column; }
+
+          Mod+V { toggle-window-floating; }
+          Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
           Mod+R { switch-preset-column-width; }
           Mod+Shift+R { reset-window-height; }

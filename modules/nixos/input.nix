@@ -16,4 +16,13 @@
       spawn-at-startup "${config.i18n.inputMethod.package}/bin/fcitx5" "-d" "-r"
     '';
   }];
+
+  services.keyd = {
+    enable = true;
+    keyboards.all.settings = {
+      main = {
+        capslock = "leftmeta";
+      };
+    };
+  };
 }
