@@ -4,12 +4,6 @@
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # A slightly faster Nix implementation
-    lix = {
-      url =
-        "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # Home manager
     home-manager = {
@@ -22,10 +16,7 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # A external rootless xwayland program so that i can run stuff like GIMP
-    # I wrote this flake :3
-    xwayland-satellite.url = "github:Supreeeme/xwayland-satellite?rev=stylus";
-
+    
     nixneovim = {
       url = "github:nixneovim/nixneovim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,8 +29,7 @@
     catppuccin.url = "github:catppuccin/nix";
   };
 
-  outputs = { self, nixpkgs, lix, home-manager, nixneovim, niri
-    , xwayland-satellite, ballad, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ballad, catppuccin, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -55,8 +45,6 @@
         nixneovim.overlays.default
         (final: prev: {
           direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
-          xwayland-satellite =
-            xwayland-satellite.packages.${system}.xwayland-satellite;
           ballad = ballad.packages.${system}.default;
         })
       ];
@@ -67,9 +55,6 @@
         nixos-modules.default
         # We do home-manager configuration in the nixos configuration instead of through the cli
         home-manager.nixosModules.home-manager
-
-        # Enable Lix
-        lix.nixosModules.default
 
         # Add our home-manager configuration
         {

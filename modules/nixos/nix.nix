@@ -1,5 +1,5 @@
 # Nix toolchain configuration
-{ ... }:
+{ pkgs, ... }:
 
 {
   nix = {
@@ -12,7 +12,11 @@
         "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
+      trusted-users = [ "root" "gavin" ];
     };
+
+    package = pkgs.lixPackageSets.stable.lix;
   };
   nixpkgs.config.allowUnfree = true;
+
 }

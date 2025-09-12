@@ -148,18 +148,21 @@
 
         yzhang.markdown-all-in-one
 
-        svelte.svelte-vscode
+        # svelte.svelte-vscode
         astro-build.astro-vscode
         bradlc.vscode-tailwindcss
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
 
-        ms-vscode.cpptools
         skellock.just
 
+        llvm-vs-code-extensions.vscode-clangd
         vadimcn.vscode-lldb
 
         jnoortheen.nix-ide
+
+        ms-python.python
+        ms-python.pylint
 
         # Copilot
         github.copilot
@@ -171,6 +174,12 @@
         usernamehw.errorlens
         iliazeus.vscode-ansi
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "svelte-vscode";
+          publisher = "svelte";
+          version = "109.10.0";
+          sha256 = "sha256-Rpzcf0ioM7faDWG1xcEuz6GNzU1lHZsGxGgaKwC8SKk=";
+        }
         {
           name = "dependi";
           publisher = "fill-labs";
@@ -212,6 +221,12 @@
           publisher = "Orta";
           version = "1.0.2";
           sha256 = "sha256-fuad6fG0RqLMSAfJVTzMp4eGOSDb95Y45AmoGD6jL70=";
+        }
+        {
+          name = "arm";
+          publisher = "dan-c-underwood";
+          version = "1.7.4";
+          sha256 = "sha256-gZBM980AoD+0wnfHXJK9sqCuuLtRY08JnO3Qdq/TRfc=";
         }
       ];
 

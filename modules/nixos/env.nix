@@ -16,12 +16,12 @@
     nautilus # file manager
   ];
   # Useful utilities that happen to be made by gnome
-  services.gnome.core-utilities.enable = true;
+  services.gnome.core-apps.enable = true;
   # Trash can and other fs stuff
   services.gvfs.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -64,7 +64,7 @@
     extraPortals = [
       (pkgs.xdg-desktop-portal-gtk.override {
         # Do not build portals that are in the gnome portal.
-        buildPortalsInGnome = false;
+        # buildPortalsInGnome = false;
       })
       pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-wlr
@@ -91,7 +91,7 @@
     serviceConfig = {
       Type = "simple";
       ExecStart =
-        "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
+        "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
       Restart = "on-failure";
       RestartSec = 1;
       TimeoutStopSec = 10;

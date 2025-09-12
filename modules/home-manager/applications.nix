@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = [ pkgs.rustup pkgs.clang pkgs.thunderbird ];
+  home.packages = [ pkgs.rustup pkgs.clang pkgs.thunderbird pkgs.rnote ];
 
   programs.firefox = { enable = true; };
   programs.kitty = {

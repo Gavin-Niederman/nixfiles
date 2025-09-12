@@ -7,6 +7,6 @@
     noto-fonts-emoji
     anonymousPro
     lato
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
   ];
 }

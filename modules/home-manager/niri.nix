@@ -21,8 +21,6 @@
 
       // fuck if i know
       spawn-at-startup "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
-      // Xwayland support
-      spawn-at-startup "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
 
       // start ballad
       spawn-at-startup "${pkgs.ballad}/bin/ballad-shell" 
@@ -56,6 +54,11 @@
           _JAVA_AWT_WM_NONREPARENTING "1"
       }
 
+      // Xwayland support
+      xwayland-satellite {
+        path "${pkgs.xwayland-satellite}/bin/xwayland-satellite"
+      }
+
       cursor {
           xcursor-theme "capitaine-cursors"
           xcursor-size 36
@@ -71,6 +74,18 @@
           exclude title="^Krita"
 
           open-floating true
+      }
+
+      layer-rule {
+          match namespace="^swww-daemon$"
+          match namespace="^gtk4-layer-shell$"
+
+          place-within-backdrop true
+      }
+      overview {
+          workspace-shadow {
+              off
+          }
       }
 
       // Input device configuration.
@@ -143,6 +158,8 @@
               left 32
               right 32
           }
+
+          background-color "transparent"
       }
 
       screenshot-path null

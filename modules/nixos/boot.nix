@@ -1,6 +1,6 @@
 # Bootloader configuration.
 # I use GRUB as my bootloader with os-prober to detect other operating systems.
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 # Package a silly GRUB theme
 let
@@ -33,6 +33,12 @@ in {
       theme = bsolTheme;
     };
   };
+  boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    extraModprobeConfig = ''
+      options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    '';
+  };
 
   services.accounts-daemon.enable = true;
 
@@ -40,7 +46,8 @@ in {
     enable = true;
     settings = {
       default_session = {
-        command = ''${pkgs.greetd.tuigreet}/bin/tuigreet --user-menu -r -c "${pkgs.niri-unstable}/bin/niri-session"'';
+        command = ''
+          ${pkgs.tuigreet}/bin/tuigreet --user-menu -r -c "${pkgs.niri-unstable}/bin/niri-session"'';
       };
     };
   };
@@ -48,7 +55,8 @@ in {
     ${pkgs.niri-unstable}/bin/niri-session
     nu
   '';
-  services.logind = {
-    powerKey = "ignore";
-  };
+  services.logind = { powerKey = "ignore"; };
+
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "gavin" ];
 }
