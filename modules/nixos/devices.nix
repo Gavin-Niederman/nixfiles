@@ -7,4 +7,6 @@
     openFirewall = true;
     nssmdns4 = true;
   };
+
+  programs.kdeconnect.enable = true;
 }

@@ -76,18 +76,6 @@
           open-floating true
       }
 
-      layer-rule {
-          match namespace="^swww-daemon$"
-          match namespace="^gtk4-layer-shell$"
-
-          place-within-backdrop true
-      }
-      overview {
-          workspace-shadow {
-              off
-          }
-      }
-
       // Input device configuration.
       // Find the full list of options on the wiki:
       // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
@@ -158,8 +146,6 @@
               left 32
               right 32
           }
-
-          background-color "transparent"
       }
 
       screenshot-path null

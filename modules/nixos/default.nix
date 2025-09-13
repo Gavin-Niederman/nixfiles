@@ -18,7 +18,8 @@
     ./monitors.nix
     ./ssh.nix
     ./cutter.nix
-    ./printer.nix
+    # Remote devices configuration (e.g. printers kde connect)
+    ./devices.nix
     ./locate.nix
   ];
 
