@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.starship.enable = true;
@@ -33,4 +33,8 @@
     '';
   };
   programs.fish.enable = true;
+
+  home.packages = [ (pkgs.writeShellScriptBin "bg" ''
+    nohup $@ >/dev/null 2>/dev/null & disown
+  '') ];
 }
