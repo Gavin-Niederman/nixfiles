@@ -76,6 +76,19 @@
           open-floating true
       }
 
+      window-rule {
+          match is-floating=true
+
+          shadow {
+              on
+              softness 20
+              spread 1
+              offset x=0 y=5
+              draw-behind-window true
+              color "#00000048"
+          }
+      }
+
       // Input device configuration.
       // Find the full list of options on the wiki:
       // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
