@@ -135,6 +135,27 @@
         "type": "github"
       }
     },
+    "home-manager_3": {
+      "inputs": {
+        "nixpkgs": [
+          "zen",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758207369,
+        "narHash": "sha256-BG7GlXo5moXtrFSCqnkIb1Q00szOZXTj5Dx7NmWgves=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "b5698ed57db7ee7da5e93df2e6bbada91c88f3ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -461,7 +482,8 @@
         "home-manager": "home-manager",
         "niri": "niri",
         "nixneovim": "nixneovim",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_5",
+        "zen": "zen"
       }
     },
     "rust-overlay": {
@@ -545,6 +567,27 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "zen": {
+      "inputs": {
+        "home-manager": "home-manager_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1758226879,
+        "narHash": "sha256-8MPKT12hpzW6akQl7BGNBqiqsXHQJCG/wUSTUFh1HpQ=",
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
+        "rev": "95a81f1567d3dbb7e435eea8a70cd8706614debd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xc000022070",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     }

@@ -106,4 +106,19 @@
   services.upower.enable = true;
   # For power profile configuration
   services.power-profiles-daemon.enable = true;
+
+  # For Figma fonts
+  systemd.user.services.figma-agent = {
+    description = "Figma Agent (figma font helper)";
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart =
+        "${pkgs.figma-agent}/bin/figma-agent";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 }

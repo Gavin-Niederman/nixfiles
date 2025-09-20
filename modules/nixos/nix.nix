@@ -15,7 +15,7 @@
       trusted-users = [ "root" "gavin" ];
     };
 
-    package = pkgs.lixPackageSets.stable.lix;
+    # package = pkgs.lixPackageSets.stable.lix;
   };
   nixpkgs.config.allowUnfree = true;
 

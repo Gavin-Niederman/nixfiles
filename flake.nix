@@ -16,7 +16,7 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     nixneovim = {
       url = "github:nixneovim/nixneovim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,9 +27,15 @@
 
     # Catpuccin themes
     catppuccin.url = "github:catppuccin/nix";
+
+    zen = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ballad, catppuccin, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ballad, catppuccin
+    , zen, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -66,6 +72,8 @@
             home-manager-modules.default
             # Catppuccin themes
             catppuccin.homeManagerModules.catppuccin
+            # Zen browser
+            zen.homeModules.beta
           ];
         }
       ];

@@ -19,6 +19,8 @@
     ./shell.nix
     # DE (Ballad) configuration
     ./ballad.nix
+    # Zen Browser configuration
+    ./zen.nix
   ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
