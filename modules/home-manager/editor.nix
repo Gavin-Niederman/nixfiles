@@ -22,15 +22,17 @@
     };
     augroups = {
       dashboard = {
-        autocmds = [{
-          event = "VimEnter";
-          pattern = "*";
-          luaCallback = ''
-            require('dashboard').setup {
-              
-            }
-          '';
-        }];
+        autocmds = [
+          {
+            event = "VimEnter";
+            pattern = "*";
+            luaCallback = ''
+              require('dashboard').setup {
+
+              }
+            '';
+          }
+        ];
       };
     };
     plugins = {
@@ -47,7 +49,9 @@
       };
       telescope = {
         enable = true;
-        extensions = { manix.enable = true; };
+        extensions = {
+          manix.enable = true;
+        };
       };
       dashboard.enable = true;
       todo-comments.enable = true;
@@ -70,7 +74,10 @@
         mapping = {
           "<CR>" = "cmp.mapping.confirm({ select = true })";
           "<Tab>" = {
-            modes = [ "i" "s" ];
+            modes = [
+              "i"
+              "s"
+            ];
             action = ''
               function(fallback)
                   local luasnip = require("luasnip")
@@ -93,7 +100,10 @@
             '';
           };
           "<S-Tab>" = {
-            modes = [ "i" "s" ];
+            modes = [
+              "i"
+              "s"
+            ];
             action = ''
               function(fallback)
                 local luasnip = require("luasnip")
@@ -119,7 +129,12 @@
     ];
   };
 
-  home.packages = with pkgs; [ neovide nil nixfmt-classic wl-clipboard ];
+  home.packages = with pkgs; [
+    neovide
+    nil
+    nixfmt-classic
+    wl-clipboard
+  ];
   home.file.".config/neovide/config.toml".text = ''
     neovim_bin = "${pkgs.neovim}/bin/nvim";
     vsync = true;
@@ -132,7 +147,8 @@
 
     mutableExtensionsDir = false;
 
-    extensions = with pkgs.vscode-extensions;
+    extensions =
+      with pkgs.vscode-extensions;
       [
         # Looks
         pkief.material-icon-theme
@@ -173,7 +189,8 @@
         # ms-vscode.live-server
         usernamehw.errorlens
         iliazeus.vscode-ansi
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      ]
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "svelte-vscode";
           publisher = "svelte";
@@ -228,6 +245,12 @@
           version = "1.7.4";
           sha256 = "sha256-gZBM980AoD+0wnfHXJK9sqCuuLtRY08JnO3Qdq/TRfc=";
         }
+        {
+          name = "ev3dev-browser";
+          version = "1.2.1";
+          publisher = "ev3dev";
+          sha256 = "sha256-sFzGzUOHoKlVf7D1L7lYZ5uHl42uvYHfl5oRCoQfx6g=";
+        }
       ];
 
     userSettings = {
@@ -260,15 +283,32 @@
       "editor.cursorBlinking" = "smooth";
       "nix.enableLanguageServer" = true;
       "nix.serverPath" = "nil";
-      "[nix]" = { "editor.defaultFormatter" = "brettm12345.nixfmt-vscode"; };
-      "[typescript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
-      "[javascript]" = { "editor.defaultFormatter" = "esbenp.prettier-vscode"; };
-      "[toml]" = { "editor.defaultFormatter" = "tamasfe.even-better-toml"; };
+      "[nix]" = {
+        "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
+      };
+      "[typescript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[javascript]" = {
+        "editor.defaultFormatter" = "esbenp.prettier-vscode";
+      };
+      "[toml]" = {
+        "editor.defaultFormatter" = "tamasfe.even-better-toml";
+      };
       "codesnap.showWindowControls" = false;
       "errorLense.fontFamily" = "FiraCode Nerd Font Mono";
-      "cSpell.enabledLanguageIds" =
-        [ "asciidoc" "html" "markdown" "plaintext" "text" ];
+      "cSpell.enabledLanguageIds" = [
+        "asciidoc"
+        "html"
+        "markdown"
+        "plaintext"
+        "text"
+      ];
       "typescript.updateImportsOnFileMove.enabled" = "always";
     };
+  };
+
+  programs.zed-editor = {
+    enable = true;
   };
 }

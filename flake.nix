@@ -32,10 +32,12 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    frc-nix.url = "github:frc4451/frc-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, nixneovim, niri, ballad, catppuccin
-    , zen, ... }@inputs:
+    , zen, frc-nix, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -53,6 +55,8 @@
           direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
           ballad = ballad.packages.${system}.default;
         })
+
+        frc-nix.overlays.default
       ];
 
       # The default modules for all systems.
