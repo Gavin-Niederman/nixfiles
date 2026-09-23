@@ -69,10 +69,12 @@
           clip-to-geometry true
       }
 
-      // Zen (zen.nix) and Zed (~/.config/zed/settings.json) are configured
-      // with translucent window backgrounds, so blur whatever is behind them.
+      // Zen (zen.nix), Zed (~/.config/zed/settings.json) and kitty
+      // (applications.nix) are configured with translucent window
+      // backgrounds, so blur whatever is behind them.
       window-rule {
           match app-id="^zen-beta$"
+          match app-id="^kitty$"
           match app-id=r#"^dev\.zed\.Zed$"#
 
           // Otherwise niri paints the focus ring as a solid rectangle behind

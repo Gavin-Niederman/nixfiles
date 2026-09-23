@@ -11,6 +11,11 @@
   programs.kitty = {
     enable = true;
     font.name = "FiraCode Nerd Font Mono";
+    # Acrylic look: translucent background, niri blurs behind it (see niri.nix)
+    settings = {
+      background_opacity = "0.8";
+      dynamic_background_opacity = true;
+    };
   };
   programs.fuzzel = {
     enable = true;
