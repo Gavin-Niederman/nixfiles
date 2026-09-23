@@ -31,6 +31,15 @@
       };
     };
     profiles.default = {
+      settings = {
+        # Transparent window background (niri blurs behind it, see niri.nix)
+        "zen.widget.linux.transparency" = true;
+        # Translucent/frosted toolbar, sidebar, and popups
+        "zen.theme.acrylic-elements" = true;
+        # Keep the window transparent when unfocused (default paints a solid
+        # InactiveCaption background over the toolbox on blur)
+        "zen.view.grey-out-inactive-windows" = false;
+      };
       search = {
         force = true;
         default = "ddg";
