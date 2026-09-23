@@ -3,22 +3,26 @@
 {
   home.packages = [ pkgs.rustup pkgs.clang pkgs.thunderbird pkgs.rnote ];
 
-  programs.firefox = { enable = true; };
+  programs.firefox = {
+    enable = true;
+    # Keep the pre-26.05 profile location; moving it would orphan the existing profile.
+    configPath = ".mozilla/firefox";
+  };
   programs.kitty = {
     enable = true;
     font.name = "FiraCode Nerd Font Mono";
-    catppuccin.enable = true;
   };
   programs.fuzzel = {
     enable = true;
-    catppuccin.enable = true;
   };
 
   programs.git = {
     enable = true;
 
-    userEmail = "gavinniederman@gmail.com";
-    userName = "Gavin-Niederman";
+    settings.user = {
+      email = "gavinniederman@gmail.com";
+      name = "Gavin-Niederman";
+    };
   };
   programs.gh.enable = true;
 

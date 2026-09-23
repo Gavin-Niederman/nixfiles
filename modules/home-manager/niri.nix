@@ -25,10 +25,10 @@
       // start ballad
       spawn-at-startup "${pkgs.ballad}/bin/ballad-shell" 
 
-      // enable the swww daemon
-      spawn-at-startup "${pkgs.swww}/bin/swww-daemon"
+      // enable the awww daemon
+      spawn-at-startup "${pkgs.awww}/bin/awww-daemon"
       // Set a cool wallpaper
-      spawn-at-startup "${pkgs.swww}/bin/swww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_catppuccin_macchiato.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
+      spawn-at-startup "${pkgs.awww}/bin/awww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_catppuccin_macchiato.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
 
       // Remove horrendous window decorations
       prefer-no-csd
@@ -69,9 +69,44 @@
           clip-to-geometry true
       }
 
+      // Zen (zen.nix) and Zed (~/.config/zed/settings.json) are configured
+      // with translucent window backgrounds, so blur whatever is behind them.
+      window-rule {
+          match app-id="^zen-beta$"
+          match app-id=r#"^dev\.zed\.Zed$"#
+
+          // Otherwise niri paints the focus ring as a solid rectangle behind
+          // the (CSD) window, and it shows through the translucent surface.
+          draw-border-with-background false
+
+          background-effect {
+              blur true
+          }
+      }
+
       window-rule {
           match app-id="krita"
           exclude title="^Krita"
+
+          open-floating true
+      }
+
+      // Games: no rounded corners or clipping (avoids cropped edges and
+      // needless compositing work on fullscreen surfaces).
+      window-rule {
+          match app-id=r#"^steam_app_\d+$"#
+          match app-id="gamescope"
+
+          geometry-corner-radius 0
+          clip-to-geometry false
+      }
+
+      // Steam popups (friends list, notifications, etc) should float rather
+      // than getting a whole tiling column.
+      window-rule {
+          match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+          match app-id="steam" title="^Friends List$"
+          match app-id="steam" title="^Steam Settings$"
 
           open-floating true
       }
