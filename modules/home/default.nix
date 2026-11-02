@@ -3,6 +3,7 @@
     ./browser.nix
     ./btop.nix
     ./cursors.nix
+    ./discord.nix
     ./feishin.nix
     ./git.nix
     ./launcher.nix

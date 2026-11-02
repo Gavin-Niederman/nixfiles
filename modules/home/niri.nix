@@ -12,6 +12,8 @@
     xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
     input = {
+      # Lets the power key be bound below. logind must ignore it too, see modules/nixos/niri.nix.
+      power-key-handling.enable = false;
       touchpad = {
         tap = true;
         click-method = "clickfinger";
@@ -105,6 +107,12 @@
       // {
         "Mod+Shift+Slash".action = show-hotkey-overlay;
         "Mod+G".action = toggle-overview;
+        "XF86PowerOff".action.spawn = [
+          (lib.getExe config.programs.noctalia.package)
+          "msg"
+          "panel-toggle"
+          "session"
+        ];
 
         "Mod+Return".action.spawn = lib.getExe config.programs.ghostty.package;
         "Mod+D".action.spawn = lib.getExe config.programs.fuzzel.package;
@@ -113,13 +121,13 @@
           "wpctl"
           "set-volume"
           "@DEFAULT_AUDIO_SINK@"
-          "0.1+"
+          "0.05+"
         ];
         "XF86AudioLowerVolume" = lockedSpawn [
           "wpctl"
           "set-volume"
           "@DEFAULT_AUDIO_SINK@"
-          "0.1-"
+          "0.05-"
         ];
         "XF86AudioMute" = lockedSpawn [
           "wpctl"
@@ -136,12 +144,12 @@
         "XF86MonBrightnessUp" = lockedSpawn [
           brightnessctl
           "set"
-          "+10%"
+          "+5%"
         ];
         "XF86MonBrightnessDown" = lockedSpawn [
           brightnessctl
           "set"
-          "10%-"
+          "5%-"
         ];
 
         "Mod+Shift+Q".action = close-window;
