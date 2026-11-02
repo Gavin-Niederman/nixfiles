@@ -9,6 +9,7 @@
     ./nix-ld.nix
     ./plymouth.nix
     ./steam.nix
+    ./tailscale.nix
     ./users.nix
   ];
 }

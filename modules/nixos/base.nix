@@ -15,7 +15,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   services.printing.enable = true;
-  programs.firefox.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [

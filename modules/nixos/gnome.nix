@@ -47,21 +47,19 @@
       evolution-data-server.enable = true; # Calendar, Contacts
       glib-networking.enable = true; # TLS
     };
-    services.geoclue2.enable = true; # Maps, Weather
     fonts.packages = [ pkgs.adwaita-fonts ];
 
     # The GNOME portal's file chooser needs nautilus, so use the GTK one.
     xdg.portal = {
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      # This replaces niri-portals.conf from the niri package, so repeat its values.
+      # This replaces niri-portals.conf from the niri package. GTK stays as the
+      # fallback for interfaces the GNOME portal lacks, like Inhibit and Email.
       config.niri = {
         default = [
           "gnome"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.Access" = [ "gtk" ];
         "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-        "org.freedesktop.impl.portal.Notification" = [ "gtk" ];
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
     };
