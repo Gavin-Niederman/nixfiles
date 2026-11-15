@@ -27,6 +27,7 @@
     # File manager, replacing nautilus.
     environment.systemPackages = with pkgs; [
       nemo
+      file-roller
       adwaita-icon-theme
     ];
 

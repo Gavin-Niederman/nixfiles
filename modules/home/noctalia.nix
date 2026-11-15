@@ -28,8 +28,8 @@
         concave_edge_corners = true;
 
         start = [
-          "launcher"
           "workspaces"
+          "tray"
         ];
         center = [
           "clipboard"
@@ -39,7 +39,6 @@
           "bluetooth"
         ];
         end = [
-          "tray"
           "notifications"
           "volume"
           "brightness"
@@ -51,6 +50,12 @@
 
       widget = {
         network.show_label = false;
+        workspaces = {
+          show_labels = false;
+          focused_color = "#89dceb"; # Catppuccin Mocha sky
+          occupied_color = "on_surface";
+          empty_color = "on_surface";
+        };
         battery = {
           type = "battery";
           display_mode = "graphic";

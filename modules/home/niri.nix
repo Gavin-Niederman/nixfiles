@@ -14,6 +14,7 @@
     input = {
       # Lets the power key be bound below. logind must ignore it too, see modules/nixos/niri.nix.
       power-key-handling.enable = false;
+      keyboard.xkb.options = "compose:caps";
       touchpad = {
         tap = true;
         click-method = "clickfinger";

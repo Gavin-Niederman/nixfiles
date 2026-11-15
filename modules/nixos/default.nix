@@ -3,8 +3,10 @@
     ./audio.nix
     ./base.nix
     ./bitwarden.nix
+    ./docker.nix
     ./gnome.nix
     ./greeter.nix
+    ./kdeconnect.nix
     ./niri.nix
     ./nh.nix
     ./nix-ld.nix
