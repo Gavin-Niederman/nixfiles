@@ -27,6 +27,9 @@
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Keeps its own nixpkgs so the package matches what sonora.cachix.org built.
+    sonora.url = "github:sonorahq/sonora/nightly";
   };
 
   outputs =

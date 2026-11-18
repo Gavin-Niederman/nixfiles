@@ -10,6 +10,8 @@
   };
 
   networking.networkmanager.enable = true;
+  # NetworkManager hands DNS to resolved, which owns /etc/resolv.conf.
+  services.resolved.enable = true;
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";

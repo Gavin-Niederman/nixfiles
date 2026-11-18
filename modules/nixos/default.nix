@@ -1,19 +1,9 @@
 {
   imports = [
-    ./audio.nix
-    ./base.nix
-    ./bitwarden.nix
-    ./docker.nix
-    ./gnome.nix
-    ./greeter.nix
-    ./kdeconnect.nix
-    ./niri.nix
-    ./nh.nix
-    ./nix-ld.nix
-    ./nix-registry.nix
-    ./plymouth.nix
-    ./steam.nix
-    ./tailscale.nix
-    ./users.nix
+    ./apps # programs that need system-level setup
+    ./desktop # compositor, greeter and GNOME services
+    ./nix # tooling for Nix itself
+    ./services # background daemons
+    ./system # boot, hardware, users
   ];
 }

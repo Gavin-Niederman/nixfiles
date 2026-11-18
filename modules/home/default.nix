@@ -1,22 +1,8 @@
 {
   imports = [
-    ./browser.nix
-    ./btop.nix
-    ./compose.nix
-    ./cursors.nix
-    ./discord.nix
-    ./feishin.nix
-    ./figma.nix
-    ./fonts.nix
-    ./gimp.nix
-    ./git.nix
-    ./launcher.nix
-    ./kdeconnect.nix
-    ./niri.nix
-    ./noctalia.nix
-    ./obs.nix
-    ./signal.nix
-    ./terminal.nix
+    ./apps # graphical applications
+    ./cli # command-line tools
+    ./desktop # compositor, shell, terminal and look and feel
   ];
 
   home = {

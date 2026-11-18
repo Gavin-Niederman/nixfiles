@@ -12,7 +12,7 @@
     xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
     input = {
-      # Lets the power key be bound below. logind must ignore it too, see modules/nixos/niri.nix.
+      # Lets the power key be bound below. logind must ignore it too, see modules/nixos/desktop/niri.nix.
       power-key-handling.enable = false;
       keyboard.xkb.options = "compose:caps";
       touchpad = {

@@ -1,10 +1,12 @@
 {
   # Custom Compose sequences, on top of the locale defaults. Caps Lock is the
-  # Compose key, see niri.nix. Read by libxkbcommon (Wayland apps) and GTK.
+  # Compose key, see niri.nix. Read by libxkbcommon (Wayland apps), GTK and
+  # Fcitx5 (input-method.nix).
   home.file.".XCompose".text = ''
     include "%L"
 
     # Set operators
+    <Multi_key> <O> <slash> : "∅" U2205 # EMPTY SET, replaces Ø
     <Multi_key> <parenleft> <equal> <equal> : "∈" U2208 # ELEMENT OF
     <Multi_key> <parenleft> <equal> <slash> : "∉" U2209 # NOT AN ELEMENT OF
     <Multi_key> <parenright> <equal> <equal> : "∋" U220B # CONTAINS AS MEMBER
