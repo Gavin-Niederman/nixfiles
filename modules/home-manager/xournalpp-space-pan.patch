@@ -1,0 +1,64 @@
+Hold space to pan.
+
+Plain space used to scroll one screen down. Instead, pressing space switches
+to the hand tool for as long as it is held and restores the previous tool on
+release, like Rnote and most drawing apps. Shift+space still scrolls up.
+
+--- a/src/core/gui/XournalView.h
++++ b/src/core/gui/XournalView.h
+@@ -22,6 +22,7 @@
+ #include <glib.h>     // for gboolean
+ #include <gtk/gtk.h>  // for GtkWidget, GtkAllocation
+ 
++#include "control/ToolEnums.h"             // for ToolType
+ #include "control/zoom/ZoomListener.h"     // for ZoomListener
+ #include "gui/inputdevices/InputEvents.h"  // for KeyEvent
+ #include "model/DocumentChangeType.h"      // for DocumentChangeType
+@@ -175,6 +176,8 @@
+     std::vector<std::unique_ptr<XojPageView>> viewPages;
+ 
+     Control* control = nullptr;
++    /// Tool to restore when space (hold to pan) is released; TOOL_NONE if none.
++    ToolType spacePanPreviousTool = TOOL_NONE;
+ 
+     size_t currentPage = 0;
+     size_t lastSelectedPage = npos;
+--- a/src/core/gui/XournalView.cpp
++++ b/src/core/gui/XournalView.cpp
+@@ -216,14 +216,19 @@
+     }
+ 
+     if (keyval == GDK_KEY_space) {
+-        GtkAllocation alloc = {0};
+-        gtk_widget_get_allocation(gtk_widget_get_parent(this->widget), &alloc);
+-        int windowHeight = alloc.height - scrollKeySize;
+-
+         if (!state) {
+-            layout->scrollRelative(0, windowHeight);
++            // Hold space to pan: temporarily switch to the hand tool; restored in
++            // onKeyReleaseEvent. Key repeat re-enters here, hence the TOOL_NONE check.
++            ToolHandler* th = control->getToolHandler();
++            if (this->spacePanPreviousTool == TOOL_NONE && th->getToolType() != TOOL_HAND) {
++                this->spacePanPreviousTool = th->getToolType();
++                th->selectTool(TOOL_HAND);
++            }
+             return true;
+         }
++        GtkAllocation alloc = {0};
++        gtk_widget_get_allocation(gtk_widget_get_parent(this->widget), &alloc);
++        int windowHeight = alloc.height - scrollKeySize;
+         if (state == GDK_SHIFT_MASK) {
+             layout->scrollRelative(0, -windowHeight);
+             return true;
+@@ -341,6 +346,11 @@
+ auto XournalView::getRepaintHandler() const -> RepaintHandler* { return this->repaintHandler.get(); }
+ 
+ auto XournalView::onKeyReleaseEvent(const KeyEvent& event) -> bool {
++    if (event.keyval == GDK_KEY_space && this->spacePanPreviousTool != TOOL_NONE) {
++        control->getToolHandler()->selectTool(this->spacePanPreviousTool);
++        this->spacePanPreviousTool = TOOL_NONE;
++        return true;
++    }
+     size_t p = getCurrentPage();
+     if (p != npos && p < this->viewPages.size()) {
+         auto& v = this->viewPages[p];

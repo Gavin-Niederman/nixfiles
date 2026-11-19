@@ -21,7 +21,7 @@
     enable = true;
     keyboards.all.settings = {
       main = {
-        capslock = "leftmeta";
+        capslock = "compose";
       };
     };
   };

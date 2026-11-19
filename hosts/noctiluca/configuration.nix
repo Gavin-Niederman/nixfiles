@@ -13,8 +13,6 @@
       hostName = "noctiluca";
     };
 
-    programs.steam.enable = true;
-
     time.timeZone = "America/Los_Angeles";
     # This fixes a bug where windows will default to GMT
     time.hardwareClockInLocalTime = true;
@@ -29,6 +27,12 @@
       open = false;
       # This driver version stops my pc from hanging during startup
       package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
+    };
+    # Keep the compiled shader cache instead of letting the driver prune it,
+    # and raise its size cap; avoids re-stuttering through shader compilation.
+    environment.sessionVariables = {
+      __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = "1";
+      __GL_SHADER_DISK_CACHE_SIZE = "10000000000";
     };
 
     hardware.monitors = {

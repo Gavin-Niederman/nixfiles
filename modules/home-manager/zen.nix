@@ -31,6 +31,16 @@
       };
     };
     profiles.default = {
+      settings = {
+        # Transparent window background (niri blurs behind it, see niri.nix)
+        "zen.widget.linux.transparency" = true;
+        # Translucent/frosted toolbar, sidebar, and popups
+        "zen.theme.acrylic-elements" = true;
+        # Keep the window transparent when unfocused
+        "zen.view.grey-out-inactive-windows" = false;
+        # Hardware video decode via VA-API (driver set up in hosts/latia)
+        "media.ffmpeg.vaapi.enabled" = true;
+      };
       search = {
         force = true;
         default = "ddg";

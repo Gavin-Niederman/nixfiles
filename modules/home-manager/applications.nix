@@ -1,24 +1,41 @@
 { pkgs, ... }:
 
 {
-  home.packages = [ pkgs.rustup pkgs.clang pkgs.thunderbird pkgs.rnote ];
+  home.packages = [
+    pkgs.rustup
+    pkgs.clang
+    pkgs.thunderbird
+    pkgs.vesktop
+    # Handwriting / pen notes (xournalpp lives in xournalpp.nix)
+    pkgs.rnote
+    pkgs.saber
+  ];
 
-  programs.firefox = { enable = true; };
+  programs.firefox = {
+    enable = true;
+    # Keep the pre-26.05 profile location; moving it would orphan the existing profile.
+    configPath = ".mozilla/firefox";
+  };
   programs.kitty = {
     enable = true;
     font.name = "FiraCode Nerd Font Mono";
-    catppuccin.enable = true;
+    # Acrylic look: translucent background, niri blurs behind it (see niri.nix)
+    settings = {
+      background_opacity = "0.7";
+      dynamic_background_opacity = true;
+    };
   };
   programs.fuzzel = {
     enable = true;
-    catppuccin.enable = true;
   };
 
   programs.git = {
     enable = true;
 
-    userEmail = "gavinniederman@gmail.com";
-    userName = "Gavin-Niederman";
+    settings.user = {
+      email = "gavinniederman@gmail.com";
+      name = "Gavin-Niederman";
+    };
   };
   programs.gh.enable = true;
 

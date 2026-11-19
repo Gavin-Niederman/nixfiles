@@ -22,13 +22,16 @@
       // fuck if i know
       spawn-at-startup "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
 
-      // start ballad
-      spawn-at-startup "${pkgs.ballad}/bin/ballad-shell" 
+      // start ballad (temporarily disabled while trying out noctalia)
+      // spawn-at-startup "${pkgs.ballad}/bin/ballad-shell"
 
-      // enable the swww daemon
-      spawn-at-startup "${pkgs.swww}/bin/swww-daemon"
+      // start noctalia
+      spawn-at-startup "${lib.getExe config.programs.noctalia.package}"
+
+      // enable the awww daemon
+      spawn-at-startup "${pkgs.awww}/bin/awww-daemon"
       // Set a cool wallpaper
-      spawn-at-startup "${pkgs.swww}/bin/swww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_catppuccin_macchiato.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
+      spawn-at-startup "${pkgs.awww}/bin/awww" "img" "${config.home.homeDirectory}/Wallpapers/dragons_catppuccin_macchiato.png" "-t" "wipe" "--transition-angle" "45" "--transition-duration" "1" "--transition-fps" "60"
 
       // Remove horrendous window decorations
       prefer-no-csd
@@ -69,9 +72,60 @@
           clip-to-geometry true
       }
 
+      // Zen (zen.nix), Zed (editor.nix), kitty (applications.nix), Vesktop
+      // (~/.config/vesktop/settings) and every GTK app (theme.nix) have
+      // translucent window backgrounds, so blur + grain whatever is behind
+      // every window rather than keeping a list of app-ids. Behind an opaque
+      // window the effect is invisible (and culled where the surface reports
+      // an opaque region); games are excluded anyway since they are always
+      // opaque and fullscreen.
+      window-rule {
+          exclude app-id=r#"^steam_app_\d+$"#
+          exclude app-id="gamescope"
+
+          // Otherwise niri paints the focus ring as a solid rectangle behind
+          // the (CSD) window, and it shows through the translucent surface.
+          draw-border-with-background false
+
+          background-effect {
+              blur true
+              noise 0.1
+              xray false
+          }
+      }
+
+      // Zen draws its own noise texture over the blur.
+      window-rule {
+          match app-id="^zen-beta$"
+
+          background-effect {
+              noise 0
+          }
+      }
+
       window-rule {
           match app-id="krita"
           exclude title="^Krita"
+
+          open-floating true
+      }
+
+      // Games: no rounded corners or clipping (avoids cropped edges and
+      // needless compositing work on fullscreen surfaces).
+      window-rule {
+          match app-id=r#"^steam_app_\d+$"#
+          match app-id="gamescope"
+
+          geometry-corner-radius 0
+          clip-to-geometry false
+      }
+
+      // Steam popups (friends list, notifications, etc) should float rather
+      // than getting a whole tiling column.
+      window-rule {
+          match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+          match app-id="steam" title="^Friends List$"
+          match app-id="steam" title="^Steam Settings$"
 
           open-floating true
       }
@@ -100,9 +154,10 @@
                   // You can set rules, model, layout, variant and options.
                   // For more information, see xkeyboard-config(7).
 
-                  // For example:
-                  // layout "us,ru"
-                  // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+                  // keyd remaps capslock to KEY_COMPOSE, which is the physical Menu key.
+                  // Without this option xkb hands apps a plain Menu keysym (context menus
+                  // pop open) instead of Multi_key, so compose sequences never start.
+                  options "compose:menu"
               }
           }
 
@@ -167,10 +222,17 @@
           Mod+Shift+Slash { show-hotkey-overlay; }
 
           Mod+Return { spawn "${pkgs.kitty}/bin/kitty"; }
-          Mod+D { spawn "${pkgs.fuzzel}/bin/fuzzel"; }
+          // Mod+D { spawn "${pkgs.fuzzel}/bin/fuzzel"; }
+          Mod+D { spawn "${lib.getExe config.programs.noctalia.package}" "msg" "panel-toggle" "launcher"; }
+          Mod+S { spawn "${lib.getExe config.programs.noctalia.package}" "msg" "panel-toggle" "control-center"; }
 
-          //TODO: Add a screen locker to ballad
-          // XF86PowerOff { spawn "ags" "-r" "App.openWindow('logout-menu')"; }
+          // Power key opens noctalia's session panel (lock/suspend/logout/
+          // reboot/shutdown) instead of acting immediately. Nothing else
+          // claims the key: disable-power-key-handling above drops niri's
+          // built-in suspend, and logind has HandlePowerKey=ignore (boot.nix).
+          // Deliberately not allow-when-locked, so a locked machine does not
+          // open a session panel underneath the lockscreen.
+          XF86PowerOff { spawn "${lib.getExe config.programs.noctalia.package}" "msg" "panel-toggle" "session"; }
 
           // Example volume keys mappings for PipeWire & WirePlumber.
           // The allow-when-locked=true property makes them work even when the session is locked.

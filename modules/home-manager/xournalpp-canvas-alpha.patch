@@ -1,0 +1,124 @@
+Acrylic canvas.
+
+1. The area around pages is painted with cairo_set_source_rgbi, which forces
+   alpha to 1.0. Use the ARGB variant, and paint with CAIRO_OPERATOR_SOURCE so
+   a translucent colour replaces the buffer instead of stacking on every
+   repaint.
+2. On screen only, paint the page background (paper colour and ruling) at
+   reduced opacity. dontRenderEditingStroke is false only for the on-screen
+   render path (RenderJob); previews, printing, image and PDF export all pass
+   true and keep an opaque page.
+3. Partial re-renders of the page buffer composite a freshly rendered
+   rectangle over the old pixels; with translucent paper that stacks opacity
+   (visible as darker rectangles). Replace the pixels instead, over exactly
+   the mask's pixel-aligned extent: clearing the page-unit rectangle first
+   leaves anti-aliased seams (hairlines) at fractional edges.
+
+--- a/src/core/gui/widgets/XournalWidget.cpp
++++ b/src/core/gui/widgets/XournalWidget.cpp
+@@ -262,8 +262,15 @@
+ 
+     // Draw background
+     Settings* settings = xournal->view->getControl()->getSettings();
+-    Util::cairo_set_source_rgbi(cr, settings->getBackgroundColor());
++    // Patched: honour the alpha of the background colour, and paint it with
++    // CAIRO_OPERATOR_SOURCE so it replaces (clears) rather than composites
++    // over whatever the buffer held before; a translucent colour would
++    // otherwise stack on every repaint.
++    cairo_save(cr);
++    cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
++    Util::cairo_set_source_argb(cr, settings->getBackgroundColor());
+     cairo_paint(cr);
++    cairo_restore(cr);
+ 
+     // Add a padding for the shadow of the pages
+     xoj::util::Rectangle<double> clippingRect(x1 - 10, y1 - 10, x2 - x1 + 20, y2 - y1 + 20);
+--- a/src/core/view/DocumentView.cpp
++++ b/src/core/view/DocumentView.cpp
+@@ -63,7 +63,17 @@
+  */
+ void DocumentView::drawBackground(xoj::view::BackgroundFlags bgFlags) const {
+     auto bgView = xoj::view::BackgroundView::createForPage(page, bgFlags, pdfCache);
++    if (this->dontRenderEditingStroke) {
++        // Export / print / preview: opaque paper.
++        bgView->draw(cr);
++        return;
++    }
++    // Patched: acrylic paper on screen. The window background already
++    // carries ~70% opacity underneath, so keep this low.
++    cairo_push_group(cr);
+     bgView->draw(cr);
++    cairo_pop_group_to_source(cr);
++    cairo_paint_with_alpha(cr, 0.4);
+ }
+ 
+ void DocumentView::drawPage(ConstPageRef page, cairo_t* cr, bool dontRenderEditingStroke,
+--- a/src/core/control/jobs/RenderJob.cpp
++++ b/src/core/control/jobs/RenderJob.cpp
+@@ -57,7 +57,10 @@
+         // creation a shared prt may also be suffice.
+         XOJ_CPP20_UNLIKELY return;
+     }
+-    newMask.paintTo(view->buffer.get());
++    // The paper is translucent on screen, so compositing the re-rendered
++    // rectangle over the old pixels would stack opacity. Replace them instead,
++    // over exactly the mask's (pixel-aligned) extent so no seams show.
++    newMask.replaceTo(view->buffer.get());
+ }
+ 
+ void RenderJob::run() {
+--- a/src/core/view/Mask.h
++++ b/src/core/view/Mask.h
+@@ -61,6 +61,14 @@
+      * @brief Paint the content of the surface to the target cairo context
+      */
+     void paintToWithAlpha(cairo_t* targetCr, uint8_t alpha) const;
++
++    /**
++     * @brief Copy the mask onto the target, *replacing* (CAIRO_OPERATOR_SOURCE) the
++     * target's pixels over exactly the mask's extent. Unlike paintTo(), nothing of
++     * the previous content survives underneath, which matters when the mask is
++     * translucent.
++     */
++    void replaceTo(cairo_t* targetCr) const;
+     /**
+      * @brief Erase all the surface's content
+      */
+@@ -86,6 +94,9 @@
+     xoj::util::CairoSPtr cr;
+     int xOffset = 0;
+     int yOffset = 0;
++    /// Surface size in device space (see constructorImpl)
++    int width = 0;
++    int height = 0;
+     double zoom = 1.0;
+ };
+ };  // namespace xoj::view
+--- a/src/core/view/Mask.cpp
++++ b/src/core/view/Mask.cpp
+@@ -65,6 +65,8 @@
+ 
+     const int width = ceil_cast<int>(extent.maxX * zoom) - xOffset;
+     const int height = ceil_cast<int>(extent.maxY * zoom) - yOffset;
++    this->width = width;
++    this->height = height;
+ 
+     /*
+      * Create the most suitable kind of surface.
+@@ -125,6 +127,16 @@
+     cairo_paint_with_alpha(targetCr, alpha / 255.0);
+ }
+ 
++void Mask::replaceTo(cairo_t* targetCr) const {
++    xoj_assert(isInitialized());
++    xoj::util::CairoSaveGuard guard(targetCr);
++    cairo_scale(targetCr, 1. / zoom, 1. / zoom);
++    cairo_set_source_surface(targetCr, cairo_get_target(const_cast<cairo_t*>(cr.get())), xOffset, yOffset);
++    cairo_set_operator(targetCr, CAIRO_OPERATOR_SOURCE);
++    cairo_rectangle(targetCr, xOffset, yOffset, width, height);
++    cairo_fill(targetCr);
++}
++
+ void Mask::wipe() {
+     xoj_assert(isInitialized());
+     xoj::util::CairoSaveGuard saveGuard(cr.get());

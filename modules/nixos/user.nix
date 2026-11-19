@@ -11,6 +11,9 @@
       shell = pkgs.nushell;
     };
   };
+  # Puts nushell in /etc/shells. pkexec (used by e.g. OBS to modprobe
+  # v4l2loopback) refuses to run when $SHELL is not listed there.
+  environment.shells = [ pkgs.nushell ];
   security.sudo.wheelNeedsPassword = false;
 
   home-manager = {

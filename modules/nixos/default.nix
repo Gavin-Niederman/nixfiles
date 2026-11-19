@@ -21,6 +21,8 @@
     # Remote devices configuration (e.g. printers kde connect)
     ./devices.nix
     ./locate.nix
+    # Steam, Proton, GameMode, controllers
+    ./gaming.nix
   ];
 
   # The version of nixpkgs that we are using to configure the system.

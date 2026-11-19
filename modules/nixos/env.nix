@@ -46,15 +46,20 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+    # keyd sends KEY_COMPOSE for capslock; this makes xkb emit Multi_key
+    # rather than the Menu keysym. Mirrors the niri xkb options.
+    options = "compose:menu";
   };
 
   environment.systemPackages =
-    [ pkgs.xdg-utils pkgs.niri-unstable pkgs.nemo ];
+    [ pkgs.xdg-utils pkgs.niri-unstable pkgs.nemo pkgs.nemo-fileroller pkgs.file-roller ];
   # XDG makes everything better
   xdg = {
     autostart.enable = true;
     menus.enable = true;
     mime.enable = true;
+    # VS Code's desktop file also claims inode/directory; pin nemo.
+    mime.defaultApplications."inode/directory" = "nemo.desktop";
     icons.enable = true;
   };
 
@@ -71,12 +76,25 @@
     ];
 
     configPackages = [ pkgs.niri-stable ];
-    config.common = {
-      "org.freedesktop.portal.Secret" = [ "gnome-keyring" ];
+    # The niri package ships its own `niri-portals.conf` (default=gnome;gtk).
+    # xdg-desktop-portal prefers a `<desktop>-portals.conf` from any search
+    # dir over a generic `portals.conf`, so `config.common` alone is ignored
+    # under niri and the gnome portal ends up delegating FileChooser to the
+    # (uninstalled) Nautilus. Writing `config.niri` puts our preferences in
+    # /etc/xdg, which is searched before the package's share dir.
+    # Keys must use the backend (`impl`) interface names; the frontend
+    # names (`org.freedesktop.portal.*`) are silently ignored.
+    config = let
+      preferences = {
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
 
-      "org.freedesktop.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
 
-      default = "wlr";
+        default = "wlr";
+      };
+    in {
+      common = preferences;
+      niri = preferences;
     };
   };
 

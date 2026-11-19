@@ -17,9 +17,29 @@
       };
       output = { ... }: {
         options = {
-          output = mkOption { type = types.str; };
-          position = mkOption { type = types.submodule vec2; default = null; };
-          mode = mkOption { type = types.submodule mode; default = null; };
+          output = mkOption {
+            type = types.str;
+            description = ''
+              Either a connector name ("eDP-1") or the full
+              "<make> <model> <serial>" string that `niri msg outputs`
+              prints. The latter follows the display between ports, which
+              matters for anything that gets unplugged.
+            '';
+          };
+          position = mkOption {
+            type = types.nullOr (types.submodule vec2);
+            default = null;
+          };
+          mode = mkOption {
+            type = types.nullOr (types.submodule mode);
+            default = null;
+          };
+          # Pin this whenever `position` is pinned: positions are in logical
+          # pixels, so a scale change silently moves every other output.
+          scale = mkOption {
+            type = types.nullOr types.float;
+            default = null;
+          };
         };
       };
     in {
@@ -41,6 +61,7 @@
         output "${m.output}" {
           ${strings.optionalString (m.mode != null) ''mode "${toString m.mode.size.x}x${toString m.mode.size.y}@${m.mode.refreshRate}"''}
           ${strings.optionalString (m.position != null) ''position x=${toString m.position.x} y=${toString m.position.y}''}
+          ${strings.optionalString (m.scale != null) ''scale ${toString m.scale}''}
         }
       '';
     in mkIf cfg.enable {

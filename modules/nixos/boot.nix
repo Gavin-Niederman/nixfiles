@@ -34,9 +34,13 @@ in {
     };
   };
   boot = {
+    # v4l2loopback for the OBS virtual camera. Loaded at boot so OBS does not
+    # need to modprobe it (via pkexec) at runtime. video_nr=10 keeps it clear
+    # of the real webcam, which takes /dev/video0 and /dev/video1.
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    kernelModules = [ "v4l2loopback" ];
     extraModprobeConfig = ''
-      options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+      options v4l2loopback devices=1 video_nr=10 card_label="OBS Cam" exclusive_caps=1
     '';
   };
 
@@ -55,7 +59,7 @@ in {
     ${pkgs.niri-unstable}/bin/niri-session
     nu
   '';
-  services.logind = { powerKey = "ignore"; };
+  services.logind.settings.Login.HandlePowerKey = "ignore";
 
   virtualisation.docker.enable = true;
   users.extraGroups.docker.members = [ "gavin" ];

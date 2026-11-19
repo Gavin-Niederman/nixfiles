@@ -13,7 +13,9 @@
 
     # Niri (a wayland compositor/scrollable wm)
     niri = {
-      url = "github:sodiboo/niri-flake";
+      # TODO: switch back to github:sodiboo/niri-flake once
+      # https://github.com/sodiboo/niri-flake/pull/1853 (libdisplay-info fix) merges
+      url = "github:bugeats/niri-flake/update-libdisplay-info";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -23,7 +25,16 @@
     };
 
     # My personal DE
-    ballad.url = "github:gavin-niederman/ballad";
+    ballad = {
+      url = "github:gavin-niederman/ballad";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Noctalia shell (trying it out in place of ballad)
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Catpuccin themes
     catppuccin.url = "github:catppuccin/nix";
@@ -36,8 +47,8 @@
     frc-nix.url = "github:frc4451/frc-nix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ballad, catppuccin
-    , zen, frc-nix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixneovim, niri, ballad, noctalia
+    , catppuccin, zen, frc-nix, ... }@inputs:
     let
       inherit (self) outputs;
 
@@ -51,6 +62,17 @@
         niri.overlays.niri
         # Get extra neovim plugins in pkgs
         nixneovim.overlays.default
+        # nixpkgs now require-checks every Lua module of a vim plugin at build
+        # time. The plugin set pinned by nixneovim (2024) does not declare its
+        # dependencies, so those checks fail. Disable them for that set only.
+        (final: prev: {
+          vimExtraPlugins = prev.vimExtraPlugins.extend (_: prevPlugins:
+            final.lib.mapAttrs (_: p:
+              if final.lib.isDerivation p then
+                p.overrideAttrs { doCheck = false; }
+              else
+                p) prevPlugins);
+        })
         (final: prev: {
           direnv-vim = final.callPackage ./pkgs/direnv-vim.nix { };
           ballad = ballad.packages.${system}.default;
@@ -75,9 +97,11 @@
             nixneovim.nixosModules.default
             home-manager-modules.default
             # Catppuccin themes
-            catppuccin.homeManagerModules.catppuccin
+            catppuccin.homeModules.catppuccin
             # Zen browser
             zen.homeModules.beta
+            # Noctalia shell
+            noctalia.homeModules.default
           ];
         }
       ];
